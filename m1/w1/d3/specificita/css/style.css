@@ -1,0 +1,28 @@
+#main-header .list-item a{
+    text-decoration:none;
+    color: #000000;
+}
+
+#main-header a{
+    text-decoration:none;
+    color: red;
+}
+
+a{
+    color:blue;
+}
+
+h1, h2, h3, h4, h5, h6{
+    color: aqua;
+}
+
+div.sfondo-blu{
+    background-color: red
+}
+div.sfondo-blu.testo-grassetto{
+    font-weight:bold;
+}
+
+.sfondo-blu, .testo-grassetto{
+    height:50px;
+}

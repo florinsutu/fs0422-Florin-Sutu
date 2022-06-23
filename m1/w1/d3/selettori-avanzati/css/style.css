@@ -1,0 +1,37 @@
+blockquote + p {
+    color:red;
+}
+
+span ~ b{
+    color:blue
+}
+
+button{
+    background-color:red;
+}
+
+button:hover{
+    background-color:yellow;
+    border:none;
+    transition: background-color 1s;
+}
+
+ul li:not(.escluso){
+    text-decoration: overline;
+}
+
+ul li:last-child{
+    color: purple;
+}
+
+ul li:nth-of-type(3){
+    background-color:red;
+}
+
+table tr:nth-of-type(even){
+    background-color:grey;
+}
+
+table tr td::after{
+    content:"@"
+}
