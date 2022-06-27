@@ -1,0 +1,26 @@
+@media print{
+
+    header {
+        display: none;
+    }
+    iframe, section, aside, footer, .toTop, .social {
+        display: none;
+    }
+    main{
+        font-family: Arial;
+        font-size: 17.5pt;
+        box-shadow: none;
+        font-weight: 600;
+    }
+    h1{
+        font-size:20pt;
+        font-weight: 700;
+    }
+    th{
+        color:black;
+    }   
+    h1 + p{
+        color: #c3c3c3;
+        font-weight: 500;
+    }
+}
