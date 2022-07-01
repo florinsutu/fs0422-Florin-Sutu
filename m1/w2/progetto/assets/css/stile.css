@@ -1,0 +1,179 @@
+/* IMPOSTAZIONI GENERALI */
+html{
+    font-size: 62.5%;
+ }
+ 
+body{
+    font-family: 'Fira Sans', sans-serif;
+    font-size:1.5rem;
+}
+
+h1{
+    font-size: 4rem;
+    line-height:1;
+    margin:20px;
+}
+h2{
+    font-size: 3.5rem;
+    line-height: 1;
+    margin:20px;
+}
+
+h4{
+    font-size: 2.5rem;
+    margin:20px;
+}
+
+p{
+    line-height: 1.8;
+}
+
+.button{
+    display: inline-block;
+    line-height: 2;
+    color:white;
+    padding: 10px;
+    background-color: blue;
+    background: linear-gradient(90deg, #6cc1e2 0%, #392f7a);
+    
+}
+*{box-sizing: border-box;}
+/* HEADER */
+
+header nav li {
+    list-style: none;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+header nav li a {
+    color:black;
+    text-decoration: none;
+}
+
+header{
+        display:flex;
+        justify-content: space-between;
+        background-color: white;
+        padding: 20px;
+        box-shadow: 0px 4px 4px #d3d3d3;
+        
+}
+
+/* MAIN */
+
+main :not(.box1) {
+    text-align: center;
+    padding:0 20px;
+    
+}
+
+
+.box1{
+    background-image: url(../images/banner.jpg);
+    background-position: center;
+    background-size: cover;
+    color: white;
+}
+
+.box1 .button{
+    margin: 10 auto;
+}
+
+.box1 .button a{
+    color:white;
+    text-decoration: none;
+}
+
+.box1 h1, .box1 p{
+    width:80%;
+    margin: 0 auto;
+}
+
+.box2 .icona-titolo-testo{
+    padding: 20px;
+}
+
+
+
+.box3{
+    color:white;
+    background-color: #0c0633;
+    margin-bottom: 30px;;
+
+}
+.box3 h2, .box3 p{
+    padding-top:20px;
+}
+.box3 h2, .box3 p, .box3 div{
+    margin:20px;
+}
+
+
+
+ img{
+    width:100%;
+    max-width: 426px;
+}
+
+.icona-titolo-testo{
+    
+    
+}
+.icona-titolo-testo i{
+    color:#e42424
+}
+
+
+/* FOOTER */
+
+footer{
+    margin-top: 30px;
+    padding:20px;
+    background-color: rgb(238,238,238);
+}
+footer p{
+    line-height: 1;
+}
+
+footer h4{
+    font-size:2rem;
+    margin: 1em 0;
+}
+footer nav li {
+    list-style: none;
+    display: inline-block;
+    margin-right: 10px;
+    
+}
+footer i{
+    color:#e42424
+}
+
+/* RESPONSIVE */
+
+@media screen and (min-width:480px) {
+    .box4{
+        display: flex;
+        justify-content:space-evenly;
+    }
+    .box4 img{
+     width:50%;
+       
+        
+    }
+
+
+    .box2{
+        display:flex;
+        flex-direction: row;
+    }
+    
+}
+
+
+
+
+/* Contatti*/
+
+
