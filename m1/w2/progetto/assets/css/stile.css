@@ -29,6 +29,7 @@ p{
 }
 
 .button{
+    text-decoration: none;
     display: inline-block;
     line-height: 2;
     color:white;
@@ -71,18 +72,10 @@ main :not(.box1) {
 
 .box1{
     background-image: url(../images/banner.jpg);
-    background-position: center;
+    background-position: center center;
     background-size: cover;
     color: white;
-}
-
-.box1 .button{
-    margin: 10 auto;
-}
-
-.box1 .button a{
-    color:white;
-    text-decoration: none;
+    text-shadow: 0px 0px 3px black;
 }
 
 .box1 h1, .box1 p{
@@ -116,15 +109,59 @@ main :not(.box1) {
     max-width: 426px;
 }
 
-.icona-titolo-testo{
-    
-    
-}
+
 .icona-titolo-testo i{
-    color:#e42424
+    color:#e42424;
+    font-size:2em;
 }
 
+.box6{
+    margin:20px;
+}
 
+.contatti fieldset{
+    display:flex;
+    flex-direction:column;    
+}
+
+.contatti input {
+    height: 50px;
+    margin:5px;
+}
+
+.contatti textarea{
+    margin:5px;
+}
+
+table {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto 1em;
+}
+caption {
+    font-size: 2.5rem;
+}
+tbody tr:nth-child(odd) {
+    background-color: #d2dce7;
+}
+
+@media screen and (max-width:768px) {
+
+    /* OK, guardando la soluzione capisco come è stata fatta la tabella, ma utilizzare content: attr(title) per inserire nella versione mobile il titolo come un ulteriore colonna è qualcosa che non mi sarei mai immaginato :\  */
+    
+    thead {display: none;}
+    td {
+        display: flex;
+        text-align: left;
+        padding: 5px;
+    }
+    td::before {
+        content: attr(title);
+        font-weight: bold;
+        min-width: 120px;
+        padding-right: 5px;
+    }
+}
 /* FOOTER */
 
 footer{
@@ -146,21 +183,35 @@ footer nav li {
     margin-right: 10px;
     
 }
+
+footer fieldset {
+    display: flex;
+    flex-direction: column;
+
+}
+
+footer input {
+    font-size: 2em;
+    padding:5px;
+    width: 100%;
+}
 footer i{
-    color:#e42424
+    color:#e42424;
+    font-size:2em;
 }
 
 /* RESPONSIVE */
 
-@media screen and (min-width:480px) {
-    .box4{
+@media screen and (min-width:768px) {
+
+    html{font-size: 70%;}
+    .box4, .box6{
         display: flex;
         justify-content:space-evenly;
     }
     .box4 img{
      width:50%;
-       
-        
+          
     }
 
 
@@ -168,9 +219,28 @@ footer i{
         display:flex;
         flex-direction: row;
     }
+
+  
+    
+    .box5, .box7{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    th {
+        background-color: rgb(95, 130, 163);
+        color: white;
+        text-transform: uppercase;
+    }
     
 }
 
+@media  screen and (min-width:1024px) {
+    
+    header, .box4, .box6, .box5, .box7{
+        justify-content: space-evenly;
+    }
+}
 
 
 
