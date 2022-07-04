@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <label>Base:</label><input type="number" id="base">
+    <label>Altezza:</label><input type="number" id="altezza">
+    <p></p>
+    <input type="button" onclick="Area()" value="Calcolo Area">
+    <input type="button" onclick="Perimetro()" value="Calcolo Perimetro">
+    <hr>
+    <div id="area"></div>
+    <hr>
+
+
+    <label>Numero lati:</label><input type="number" id="numero-lati">
+    <label>Lunghezza lati:</label><input type="number" id="lunghezza-lati">
+    <p></p>
+    <input type="button" onclick="AreaR()" value="Calcolo Area">
+    <input type="button" onclick="PerimetroR()" value="Calcolo Perimetro">
+    <hr>
+    <div id="areaR"></div>
+
+
+
+    <script>
+        function Area() {
+            var b = document.getElementById("base").valueAsNumber;
+            var h = document.getElementById("altezza").value*1;
+            var A = b * h;
+            console.log('La base è ' + typeof (b) + ' e l altezza è ' + typeof (h))
+        
+            document.getElementById("area").innerHTML = "L'area del rettangolo è: " + A;
+
+        }
+
+        function Perimetro(){
+            var b = document.getElementById("base").valueAsNumber;
+            var h = document.getElementById("altezza").value;
+            var P = b*2 + h*2
+            console.log(typeof(P))
+            document.getElementById("area").innerHTML = "Il perimetro del rettangolo è: " + P;
+        }
+
+        function AreaR() {
+            var n = document.getElementById("numero-lati").value;
+            var l = document.getElementById("lunghezza-lati").value;
+            var a = n-2;
+            console.log
+            var A = (n*l*a)/2
+            
+        
+            document.getElementById("areaR").innerHTML = "L'area del Poligono è: " + A;
+        }
+
+
+    </script>
+
+    <script src="js/index.js"></script>
+    <script src="js/naming.js"></script>
+    <script src="js/prova.js"></script>
+</body>
+
+</html>
