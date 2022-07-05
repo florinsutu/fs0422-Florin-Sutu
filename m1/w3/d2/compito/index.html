@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="tubero">patata</div>
+    <div class="tubero">altra patata</div>
+    <div class="tubero">sempre patata</div>
+
+    <ul id="prova">
+        <li>coso</li>
+    </ul>
+
+    <button onclick="mostra(this)">guarda in console.log</button>
+
+    <hr>
+    <br>
+    <br>
+    <h4>Al gigante mangiapatate piacciono solo le patate, prova a sfamarlo</h1>
+
+    <select name="" id="alimenti">
+        <option value="patata">patata</option>
+        <option value="pannocchia">pannocchia</option>
+        <option value="cavolo">cavolo</option>
+        <option value="cetriolo">cetriolo</option>
+        <option value="melanzana">melanzana</option>
+    </select>
+
+    
+    <button onclick="sfamare()">Sfama</button>
+
+    <input type="text" id="risposta">
+
+
+
+
+
+    <script>
+        var g = document.getElementsByClassName('tubero')[0].innerHTML; // ByClassName restituisce un array di oggetti, indicizzare tale array restituisce ciò che restituirebbe ById
+        console.log(g)
+
+        let p = document.querySelector('#prova')
+        console.log(p.innerHTML) // contenuto dell' ul
+        p.innerHTML  += '<li>coso</li>'
+        p.innerHTML  += '<li>coso</li>'
+        console.log(p.innerHTML)
+
+        /*function convertiInTuberi (){
+            let a =  document.querySelector('#prova')
+            document.write(a.innerHTML)
+            console.log(a)
+                        
+            return
+        }
+        convertiInTuberi() */
+
+        function mostra(contenuto){ //funzione che mostra in control.log il suo argomento, this dentro onclick dice di prendere tutto il pezzo di codice che sarà un oggetto
+            console.log(contenuto)
+            console.log(typeof(contenuto))
+            console.log(contenuto.innerHTML) //mostra il contenuto del tag
+        }
+
+        function sfamare(){
+            let display = document.getElementById('risposta')
+            console.log(display.value)
+            let alimento = document.getElementById('alimenti')
+
+            display.value = alimento.value
+            if(display.value != 'patata'){
+                display.value = 'che schifo '+alimento.value
+                display.style.backgroundColor = 'red'
+            }
+            else{
+                display.value = 'che buono'
+                display.style.backgroundColor = 'green'
+
+            }
+            
+        }
+
+
+
+
+
+    </script>
+
+
+   <!-- <script src="js/script.js"></script> -->
+</body>
+
+</html>
