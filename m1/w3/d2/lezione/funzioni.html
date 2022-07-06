@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+    <script>
+
+        function saluta (){
+            alert('ciao')
+        }
+    //saluta();
+
+    function ottieniSaluto(){
+        return 'ciao'
+    }
+
+    let saluto = ottieniSaluto()
+    console.log(saluto)
+
+    function salutaPro (testo){
+            alert(testo)
+        }
+
+    var b= 'assa'
+    //salutaPro(b);
+
+    function creaTag(testo, tag){
+        return '<' +tag+'>'+testo+'</'+tag+'>'
+    }
+
+    let grassetto = creaTag('prova', 'b')
+    console.log(grassetto)
+
+    document.write(creaTag('prova', 'b'))
+
+
+    </script>
+</body>
+</html>

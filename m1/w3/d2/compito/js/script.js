@@ -71,7 +71,7 @@ console.log(aa)
     console.log(bb)
     console.log(aa)
 }
-// console.log(bb) not defined
+// console.log(bb) // not defined
 
 {
     const AA = 45
@@ -79,7 +79,7 @@ console.log(aa)
 }
 
 console.log(aa)
-// console.log(AA) not defined
+// console.log(AA) // not defined
 
 
 let cc = true
@@ -92,3 +92,4 @@ console.log(aa + cc) //true viene convertito in numero (1)
 
 //document.write(cc+dd)
 
+console.log('mario' ==)
