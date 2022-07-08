@@ -1,0 +1,43 @@
+body{
+    text-align: center;
+}
+
+h1{
+
+    font-size:50px;
+    margin-bottom:50px;
+}
+
+button {
+    background-color: rgb(244, 77, 16);
+    color: black;
+    font-size: 22pt;
+    border: 3px solid black;
+    height: 40px;
+    width: 50px;
+    margin: 4px 0px
+
+}
+
+#display {
+
+    width: 204px;
+    background: white;
+    color: #eb7915;
+    font-size: 24pt;
+    border: black solid 2px;
+    height: 40px;
+    margin-bottom: 5px;
+}
+
+.barra {
+    width: 212px;
+}
+
+.container {  
+    margin: 0 auto;
+    width:250px;       
+    border: 5px solid black;
+    background-color:rgba(0, 0, 0, 0.9);
+    padding: 30px 10px
+}

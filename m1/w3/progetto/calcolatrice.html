@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcolatrice</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <h1>Calcolatrice in JS</h1>
+    <div class="container">
+        
+            <input id="display" placeholder="0" type="text">
+        
+        <div>
+            <button data-simbolo="7" onclick="mostra(this)">7</button>
+            <button data-simbolo="8" onclick="mostra(this)">8</button>
+            <button data-simbolo="9" onclick="mostra(this)">9</button>
+            <button data-simbolo="/" onclick="mostra(this)">/</button>
+        </div>
+        <div>
+            <button data-simbolo="4" onclick="mostra(this)">4</button>
+            <button data-simbolo="5" onclick="mostra(this)">5</button>
+            <button data-simbolo="6" onclick="mostra(this)">6</button>
+            <button data-simbolo="*" onclick="mostra(this)">X</button>
+        </div>
+        <div>
+            <button data-simbolo="1" onclick="mostra(this)">1</button>
+            <button data-simbolo="2" onclick="mostra(this)">2</button>
+            <button data-simbolo="3" onclick="mostra(this)">3</button>
+            <button data-simbolo="-" onclick="mostra(this)">-</button>
+        </div>
+        <div>
+            <button onclick="canc()">C</button>
+            <button data-simbolo="0" onclick="mostra(this)">0</button>
+            <button data--simbolo="." onclick="mostra(this)">.</button>
+            <button data-simbolo="+" onclick="mostra(this)">+</button>
+        </div>
+
+        <button class="barra" onclick="calcola()">=</button>
+    </div>
+
+
+
+<script src="js/script.js"></script>
+</body>
+
+</html>
