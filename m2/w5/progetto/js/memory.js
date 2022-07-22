@@ -5,18 +5,22 @@ let arrayAnimali = ['🐱', '🦉', '🐾', '🦁', '🦋', '🐛', '🐝', '�
 
 let arrayComparison = [];
 let arrayVictory = []
+let interval
+let iconsFind = document.getElementsByClassName('find')
+let modal = document.getElementById('modal')
+let timer = document.getElementsByClassName('timer')[0]
 
-let arrayShuffle = shuffle(arrayAnimali)
 let griglia = document.getElementById('griglia')
 
-function startGame(){
+function startGame() {
+
+    clearInterval(interval)
     avviaTimer()
-    let divs = griglia.getElementsByClassName('icon')
-    for(let div of divs){
-        griglia.removeChild()
-    }
-    console.log(divs)
-    for(let img of arrayShuffle){
+
+    let arrayShuffle = shuffle(arrayAnimali)
+    griglia.innerHTML = ''
+
+    for (let img of arrayShuffle) {
         let card = document.createElement('div')
         let icona = document.createElement('div')
         icona.innerHTML = img
@@ -25,6 +29,8 @@ function startGame(){
         griglia.append(card)
 
         icona.addEventListener('click', displayIcon)
+
+
     }
 
 }
@@ -35,10 +41,7 @@ document.body.onload = startGame();
 // mi serviranno alcune variabili 1. interval 2. una agganciata alla classe find 
 // 3. una agganciata al'id modal 4. una agganciata alla classe timer
 
-let interval
-let iconsFind = document.getElementsByClassName('find')
-let modal = document.getElementById('modal')
-let timer = document.getElementsByClassName('timer')[0]
+
 //una funzione che serve a mescolare in modo random gli elementi dell'array che viene passato 
 // (l'array contiene le icone degli animali)
 function shuffle(a) {
@@ -85,6 +88,16 @@ function displayIcon() {
 
     //mette/toglie la classe show
     this.classList.toggle("show");
+
+    /* =============================================
+    ================================================
+
+    Lo so che dicevi di non modificare questo codice, ma se si aspettano if e else per aggiungere disabled potrò cliccare due volte sulla stessa immagine e non è che vada proprio bene no?
+
+    ==================================================
+    ================================================= */
+    this.classList.add('disabled')
+
     //aggiunge l'oggetto su cui ha cliccato all'array del confronto
     arrayComparison.push(this);
 
@@ -93,26 +106,29 @@ function displayIcon() {
     if (len === 2) {
         //se sono uguali aggiunge la classe find
         if (arrayComparison[0].innerHTML === arrayComparison[1].innerHTML) {
-            arrayComparison[0].classList.add("find", "disabled");
-            arrayComparison[1].classList.add("find", "disabled");
+            arrayComparison[0].classList.add("find");
+            arrayComparison[1].classList.add("find");
 
+            // Altra piccola mia modifica 
             arrayVictory.push(arrayComparison[0]);
-            if(arrayVictory.length == (arrayAnimali.length/2)){
-               modale()
+            if (arrayVictory.length == (arrayAnimali.length / 2)) {
+                modale()
             }
-            
+
             arrayComparison = [];
-            
+
         } else {
             //altrimenti (ha sbagliato) aggiunge solo la classe disabled
-            icons.forEach(function(item) {
+            icons.forEach(function (item) {
                 item.classList.add('disabled');
             });
+
+
             // con il timeout rimuove  la classe show per nasconderli
-            setTimeout(function() {
+            setTimeout(function () {
                 arrayComparison[0].classList.remove("show");
                 arrayComparison[1].classList.remove("show");
-                icons.forEach(function(item) {
+                icons.forEach(function (item) {
                     item.classList.remove('disabled');
                     for (var i = 0; i < iconsFind.length; i++) {
                         iconsFind[i].classList.add("disabled");
@@ -132,10 +148,13 @@ function displayIcon() {
 
 // una funzione che calcola il tempo e aggiorna il contenitore sotto
 
-function modale(){
+function modale() {
+    arrayComparison = []; //per compensare il fatto che la chiamata non avrebbe probabilmente permesso questo riazzeramento
+    clearInterval(interval);
     modal.classList.add("active")
     let victoryTime = document.getElementById('tempoTrascorso')
     victoryTime.innerHTML = timer.innerHTML
+
 }
 
 function playAgain() {
@@ -143,16 +162,16 @@ function playAgain() {
     startGame()
 }
 
-function avviaTimer(){
+function avviaTimer() {
     let time = new Date()
 
     time.setMinutes(0)
     time.setSeconds(0)
 
-    setInterval(function(){
-        time.setSeconds(time.getSeconds()+1)
-        timer.innerHTML = 'Tempo: '+ time.getMinutes() +' min '+ time.getSeconds() +' sec'
-    },1000)
+    interval = setInterval(function () {
+        time.setSeconds(time.getSeconds() + 1)
+        timer.innerHTML = 'Tempo: ' + time.getMinutes() + ' min ' + time.getSeconds() + ' sec'
+    }, 1000)
 }
 
 
