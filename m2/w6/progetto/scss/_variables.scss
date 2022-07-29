@@ -1,0 +1,20 @@
+/* SCSS RGB */
+$indigo-dye: rgba(19, 64, 116, 1);
+$prussian-blue: rgba(19, 49, 92, 1);
+$oxford-blue: rgba(11, 37, 69, 1);
+$pewter-blue: rgba(141, 169, 196, 1);
+$mint-cream: rgba(238, 244, 237, 1);
+
+/* SCSS Gradient */
+$gradient-top: linear-gradient(0deg, #134074ff, #13315cff, #0b2545ff, #8da9c4ff, #eef4edff);
+$gradient-right: linear-gradient(90deg, #134074ff, #13315cff, #0b2545ff, #8da9c4ff, #eef4edff);
+$gradient-bottom: linear-gradient(180deg, #134074ff, #13315cff, #0b2545ff, #8da9c4ff, #eef4edff);
+$gradient-left: linear-gradient(270deg, #134074ff, #13315cff, #0b2545ff, #8da9c4ff, #eef4edff);
+$gradient-top-right: linear-gradient(45deg, #134074ff, #13315cff, #0b2545ff, #8da9c4ff, #eef4edff);
+$gradient-bottom-right: linear-gradient(135deg, #134074ff, #13315cff, #0b2545ff, #8da9c4ff, #eef4edff);
+$gradient-top-left: linear-gradient(225deg, #134074ff, #13315cff, #0b2545ff, #8da9c4ff, #eef4edff);
+$gradient-bottom-left: linear-gradient(315deg, #134074ff, #13315cff, #0b2545ff, #8da9c4ff, #eef4edff);
+$gradient-radial: radial-gradient(#134074ff, #13315cff, #0b2545ff, #8da9c4ff, #eef4edff);
+
+$primary: $oxford-blue;
+$secondary: $mint-cream;
