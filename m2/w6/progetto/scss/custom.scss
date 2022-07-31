@@ -2,6 +2,8 @@
 
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
 
+@import 'functions';
+
 @mixin font($prop, $val) {
     font-#{$prop}: $val;
 }
@@ -11,53 +13,59 @@
     @include font ('family', 'Helvetica');
 }
 
+.divisore{
+    height:300px;
+}
+
+.navbar {
+    .contrast {
+        color: contrast($oxford-blue);
+    }
+}
+
 #Home {
-    margin-top:0px;
+    margin-top: 0px;
     height: 1000px;
     background-image: url('../img/sezioneInEvidenza.jpg');
     background-position: center;
-
     background-size: cover;
 
     div {
         background-color: rgba(255, 255, 255, 0.4);
-        h1{
+
+        h1 {
             text-shadow: 1px 1px 4px white;
         }
+
         p {
-            color: $mint-cream;
-            text-shadow: 0px 0px 5px black;
-            font-size:2rem;
-            
+            color: contrast(rgba(255, 255, 255, 0.4));
+            text-shadow: 0px 0px 5px white;
+            font-size: 2rem;
         }
     }
 }
 
 #Partnership {
 
-    
-    div{
+    div {
         background-color: white;
     }
-    p{
+
+    p {
         font-size: 1.5rem;
         text-align: center;
-        
     }
 }
 
-#myCarousel,
-.carousel-inner,
+
 .carousel-item {
-    height: 525px;
-}
+    height: 775px;
 
-.frameImmagine {
-    width: 300px;
-    height: 300px;
-    background-image: url('../img/teatro.it-poco-piu-che-persone-EdoardoLeo.jpg')
-}
+    .imgCarousel {
+        max-width: 300px;
+    }
 
-.imgCarousel {
-    max-width: 300px;
+    @media screen and (min-width: 768px) {
+        height: 525px;
+    }
 }

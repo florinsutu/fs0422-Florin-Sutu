@@ -1,5 +1,3 @@
-/* SCSS RGB */
-/* SCSS Gradient */
 /*!
    * Bootstrap  v5.2.0 (https://getbootstrap.com/)
    * Copyright 2011-2022 The Bootstrap Authors
@@ -31,7 +29,7 @@
   --bs-gray-800: #343a40;
   --bs-gray-900: #212529;
   --bs-primary: #0b2545;
-  --bs-secondary: #eef4ed;
+  --bs-secondary: #6c757d;
   --bs-success: #198754;
   --bs-info: #0dcaf0;
   --bs-warning: #ffc107;
@@ -39,7 +37,7 @@
   --bs-light: #f8f9fa;
   --bs-dark: #212529;
   --bs-primary-rgb: 11, 37, 69;
-  --bs-secondary-rgb: 238, 244, 237;
+  --bs-secondary-rgb: 108, 117, 125;
   --bs-success-rgb: 25, 135, 84;
   --bs-info-rgb: 13, 202, 240;
   --bs-warning-rgb: 255, 193, 7;
@@ -1417,13 +1415,13 @@ progress {
 
 .table-secondary {
   --bs-table-color: #000;
-  --bs-table-bg: #fcfdfb;
-  --bs-table-border-color: #e3e4e2;
-  --bs-table-striped-bg: #eff0ee;
+  --bs-table-bg: #e2e3e5;
+  --bs-table-border-color: #cbccce;
+  --bs-table-striped-bg: #d7d8da;
   --bs-table-striped-color: #000;
-  --bs-table-active-bg: #e3e4e2;
+  --bs-table-active-bg: #cbccce;
   --bs-table-active-color: #000;
-  --bs-table-hover-bg: #e9eae8;
+  --bs-table-hover-bg: #d1d2d4;
   --bs-table-hover-color: #000;
   color: var(--bs-table-color);
   border-color: var(--bs-table-border-color); }
@@ -2244,20 +2242,20 @@ textarea.form-control-lg {
   --bs-btn-disabled-border-color: #0b2545; }
 
 .btn-secondary {
-  --bs-btn-color: #000;
-  --bs-btn-bg: #eef4ed;
-  --bs-btn-border-color: #eef4ed;
-  --bs-btn-hover-color: #000;
-  --bs-btn-hover-bg: #f1f6f0;
-  --bs-btn-hover-border-color: #f0f5ef;
-  --bs-btn-focus-shadow-rgb: 202, 207, 201;
-  --bs-btn-active-color: #000;
-  --bs-btn-active-bg: #f1f6f1;
-  --bs-btn-active-border-color: #f0f5ef;
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #6c757d;
+  --bs-btn-border-color: #6c757d;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #5c636a;
+  --bs-btn-hover-border-color: #565e64;
+  --bs-btn-focus-shadow-rgb: 130, 138, 145;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #565e64;
+  --bs-btn-active-border-color: #51585e;
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  --bs-btn-disabled-color: #000;
-  --bs-btn-disabled-bg: #eef4ed;
-  --bs-btn-disabled-border-color: #eef4ed; }
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #6c757d;
+  --bs-btn-disabled-border-color: #6c757d; }
 
 .btn-success {
   --bs-btn-color: #fff;
@@ -2372,19 +2370,19 @@ textarea.form-control-lg {
   --bs-gradient: none; }
 
 .btn-outline-secondary {
-  --bs-btn-color: #eef4ed;
-  --bs-btn-border-color: #eef4ed;
-  --bs-btn-hover-color: #000;
-  --bs-btn-hover-bg: #eef4ed;
-  --bs-btn-hover-border-color: #eef4ed;
-  --bs-btn-focus-shadow-rgb: 238, 244, 237;
-  --bs-btn-active-color: #000;
-  --bs-btn-active-bg: #eef4ed;
-  --bs-btn-active-border-color: #eef4ed;
+  --bs-btn-color: #6c757d;
+  --bs-btn-border-color: #6c757d;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #6c757d;
+  --bs-btn-hover-border-color: #6c757d;
+  --bs-btn-focus-shadow-rgb: 108, 117, 125;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #6c757d;
+  --bs-btn-active-border-color: #6c757d;
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  --bs-btn-disabled-color: #eef4ed;
+  --bs-btn-disabled-color: #6c757d;
   --bs-btn-disabled-bg: transparent;
-  --bs-btn-disabled-border-color: #eef4ed;
+  --bs-btn-disabled-border-color: #6c757d;
   --bs-gradient: none; }
 
 .btn-outline-success {
@@ -3772,11 +3770,11 @@ textarea.form-control-lg {
     color: #061221; }
 
 .alert-secondary {
-  --bs-alert-color: #5f625f;
-  --bs-alert-bg: #fcfdfb;
-  --bs-alert-border-color: #fafcfa; }
+  --bs-alert-color: #41464b;
+  --bs-alert-bg: #e2e3e5;
+  --bs-alert-border-color: #d3d6d8; }
   .alert-secondary .alert-link {
-    color: #4c4e4c; }
+    color: #34383c; }
 
 .alert-success {
   --bs-alert-color: #0f5132;
@@ -4063,15 +4061,15 @@ textarea.form-control-lg {
     border-color: #071629; }
 
 .list-group-item-secondary {
-  color: #5f625f;
-  background-color: #fcfdfb; }
+  color: #41464b;
+  background-color: #e2e3e5; }
   .list-group-item-secondary.list-group-item-action:hover, .list-group-item-secondary.list-group-item-action:focus {
-    color: #5f625f;
-    background-color: #e3e4e2; }
+    color: #41464b;
+    background-color: #cbccce; }
   .list-group-item-secondary.list-group-item-action.active {
     color: #fff;
-    background-color: #5f625f;
-    border-color: #5f625f; }
+    background-color: #41464b;
+    border-color: #41464b; }
 
 .list-group-item-success {
   color: #0f5132;
@@ -5381,8 +5379,8 @@ textarea.form-control-lg {
   background-color: RGBA(11, 37, 69, var(--bs-bg-opacity, 1)) !important; }
 
 .text-bg-secondary {
-  color: #000 !important;
-  background-color: RGBA(238, 244, 237, var(--bs-bg-opacity, 1)) !important; }
+  color: #fff !important;
+  background-color: RGBA(108, 117, 125, var(--bs-bg-opacity, 1)) !important; }
 
 .text-bg-success {
   color: #fff !important;
@@ -5414,9 +5412,9 @@ textarea.form-control-lg {
     color: #091e37 !important; }
 
 .link-secondary {
-  color: #eef4ed !important; }
+  color: #6c757d !important; }
   .link-secondary:hover, .link-secondary:focus {
-    color: #f1f6f1 !important; }
+    color: #565e64 !important; }
 
 .link-success {
   color: #198754 !important; }
@@ -8374,6 +8372,12 @@ textarea.form-control-lg {
   font-size: 1rem;
   font-family: "Helvetica"; }
 
+.divisore {
+  height: 300px; }
+
+.navbar .contrast {
+  color: white; }
+
 #Home {
   margin-top: 0px;
   height: 1000px;
@@ -8385,8 +8389,8 @@ textarea.form-control-lg {
     #Home div h1, #Home div .h1 {
       text-shadow: 1px 1px 4px white; }
     #Home div p {
-      color: #eef4ed;
-      text-shadow: 0px 0px 5px black;
+      color: black;
+      text-shadow: 0px 0px 5px white;
       font-size: 2rem; }
 
 #Partnership div {
@@ -8396,15 +8400,10 @@ textarea.form-control-lg {
   font-size: 1.5rem;
   text-align: center; }
 
-#myCarousel,
-.carousel-inner,
 .carousel-item {
-  height: 525px; }
-
-.frameImmagine {
-  width: 300px;
-  height: 300px;
-  background-image: url("../img/teatro.it-poco-piu-che-persone-EdoardoLeo.jpg"); }
-
-.imgCarousel {
-  max-width: 300px; }
+  height: 775px; }
+  .carousel-item .imgCarousel {
+    max-width: 300px; }
+  @media screen and (min-width: 768px) {
+    .carousel-item {
+      height: 525px; } }
