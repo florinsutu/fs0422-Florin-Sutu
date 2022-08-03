@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+
+
+    <script>
+
+        let pizze = ['margherita', 'diavola', 'capricciosa'];
+
+        pizze.forEach((pizza, indice) => {
+
+            document.write(indice + ' ' + pizza + '<br>')
+        })
+
+        document.write('<hr>')
+
+        let pizzeBold = pizze.map(pizza => '<b>' + pizza + '<b>')
+
+        pizzeBold.forEach((pizza, indice) => {
+
+            document.write(indice + ' ' + pizza + '<br>')
+        })
+
+        function somma(){}
+    </script>
+</body>
+
+</html>

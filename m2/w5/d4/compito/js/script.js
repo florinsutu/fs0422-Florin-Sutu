@@ -43,7 +43,7 @@ addToDoButton.addEventListener('click', function(){
 //         console.log(formato + 'diocane');
 
 //             for(let box of toDoList){
-//                 console.log(box.getAttribute('checked') + ' dioboia');
+//                 console.log(box.getAttribute('checked'));
 //                 if(box.getAttribute('checked') == null){
 //                     box.parentNode.style = formato;
 //                 }
