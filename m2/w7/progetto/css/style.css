@@ -1,0 +1,48 @@
+#grigliaUtenti {
+  margin: 20px auto; }
+  #grigliaUtenti div {
+    margin-bottom: 50px;
+    overflow: auto; }
+    #grigliaUtenti div img {
+      width: 100%;
+      height: auto; }
+    #grigliaUtenti div ul {
+      padding: 10px;
+      font-size: 1.8rem;
+      line-height: 1.5; }
+      #grigliaUtenti div ul span {
+        font-weight: bold; }
+  @media screen and (min-width: 526px) {
+    #grigliaUtenti {
+      max-width: 526px; } }
+  @media screen and (min-width: 768px) {
+    #grigliaUtenti {
+      max-width: 100%; }
+      #grigliaUtenti div {
+        display: flex;
+        width: 100%;
+        height: 300px;
+        margin-bottom: 30px; }
+        #grigliaUtenti div img {
+          width: auto;
+          margin-right: 2rem; } }
+  @media screen and (min-width: 1024px) {
+    #grigliaUtenti {
+      max-width: 1024px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around; } }
+  @media screen and (min-width: 1440px) {
+    #grigliaUtenti {
+      max-width: 1700px; }
+      #grigliaUtenti div {
+        width: 45%; } }
+
+.Male {
+  background-color: cornflowerblue; }
+
+.Female {
+  background-color: pink; }
+
+.Unspecified {
+  background-color: lightgray; }
