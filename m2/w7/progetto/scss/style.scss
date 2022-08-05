@@ -20,12 +20,13 @@
             }
         }
     }
-  @media screen and (min-width: 526px) {
-    max-width:526px;
-  }
+
+    @media screen and (min-width: 526px) {
+        max-width: 526px;
+    }
 
     @media screen and (min-width: 768px) {
-    max-width:100%;
+        max-width: 100%;
 
         div {
             display: flex;
