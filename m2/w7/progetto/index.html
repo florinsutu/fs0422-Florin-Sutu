@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,14 +9,28 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    
+
+    <form id="formUtenti">
+        <input name="name" type="text" placeholder="name">
+        <input name="surname" type="text" placeholder="surname">
+        <input name="age" type="text" placeholder="age">
+        <select name="gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Unspecified" selected="selected">Other</option>
+        </select>
+        <input name="email" type="text" placeholder="email">
+        <button id="button">Crea Utente</button>
+    </form>
 
     <section id="grigliaUtenti">
-        
-</section>
+
+    </section>
 
 
-<script src="js/script.js"></script>
+    <script src="js/script.js"></script>
 </body>
+
 </html>

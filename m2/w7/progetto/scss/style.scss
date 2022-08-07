@@ -1,3 +1,16 @@
+#formUtenti{
+    display:flex;
+    flex-direction:column;
+    padding:10px;
+    margin:0 auto;
+    max-width:500px;
+
+    input, select,button{
+        padding:5px;
+        font-size:1.5rem;
+    }
+}
+
 #grigliaUtenti {
     margin: 20px auto;
 
@@ -52,7 +65,7 @@
         max-width: 1700px;
 
         div {
-            width: 45%;
+            width: 47%;
         }
     }
 }
