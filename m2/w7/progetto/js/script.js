@@ -63,6 +63,7 @@ class DisplayUsers {
 
         // if (!(this.container.classList.contains("Male" || "Female"))) mi sembrava più bello ma non funziona
         // if (this.container.classList == "") è più corto ma obbliga a non assegnare nessuna classe al container per funzionare e non mi piace
+        
         if (!(this.container.classList.contains("Male") || this.container.classList.contains("Female")))
             this.container.classList.add('Unspecified') //serve solo per json che non contengono "gender" tra le proprietà degli utenti
     }
@@ -96,5 +97,5 @@ button.addEventListener("click", function (e) {
 
 })
 
-
+// npm run extra2 per utilizzare il form
 let extra2 = new DisplayUsers('#grigliaUtenti', apiUtenti)

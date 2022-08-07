@@ -1,20 +1,10 @@
 {
   "users": [
     {
-      "gender": "Unspecified",
-      "id": 1
-    },
-    {
-      "name": "florin",
-      "surname": "sutu",
-      "age": "33",
+      "name": "Michele",
+      "surname": "Tedesco",
       "gender": "Male",
-      "email": "sergiusutu02@gmail.com",
-      "id": 2
-    },
-    {
-      "gender": "Unspecified",
-      "id": 3
+      "id": 1
     }
   ]
 }
