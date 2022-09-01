@@ -58,3 +58,5 @@ class Professionista extends Lavoratore {
 let lavo = new Professionista(45000);
 lavo.getTasseInps()
 console.table(lavo)
+
+console.log(lavo.getTasseInps())
