@@ -116,7 +116,7 @@ console.log('')
 console.log('|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||')
 console.log('')
 
-class ThirdtUser implements ISmartphone {
+class ThirdUser implements ISmartphone {
     carica: number;
     numeroChiamate: number;
     costoPerMinuto: number = 0.20;
@@ -145,7 +145,7 @@ class ThirdtUser implements ISmartphone {
 
 }
 
-let user3 = new FirstUser(1000);
+let user3 = new ThirdUser(1000);
 console.log(user3)
 
 user3.ricarica(10)
