@@ -12,3 +12,19 @@ function combina(input1: StrNum, input2: StrNum): StrNum {
     }
 }
 
+type Admin = {
+    name: string,
+    privileges: string[]
+}
+
+type Employee = {
+    startDate: Date,
+    skills: string
+}
+
+let amministratore:Admin = {
+    name: 'Rossana',
+    privileges: ['access']
+}
+
+type PromotedEmployee = Admin & Employee
