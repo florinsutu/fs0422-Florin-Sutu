@@ -14,8 +14,9 @@ interface ISmartphone { //si, la traccia dice "di nome Smartphone", però è un'
 
 }
 
+// è solo per leggibilità nel console.log
 console.log('')
-console.log('|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||')
+console.log('')
 console.log('')
 
 class FirstUser implements ISmartphone {
@@ -64,7 +65,7 @@ console.table(user1)
 
 
 console.log('')
-console.log('|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||')
+console.log('')
 console.log('')
 
 
@@ -113,7 +114,7 @@ user2.azzeraChiamate()
 console.table(user2)
 
 console.log('')
-console.log('|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||')
+console.log('')
 console.log('')
 
 class ThirdUser implements ISmartphone {

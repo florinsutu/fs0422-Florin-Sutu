@@ -1,6 +1,7 @@
 "use strict";
+// è solo per leggibilità nel console.log
 console.log('');
-console.log('|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||');
+console.log('');
 console.log('');
 class FirstUser {
     constructor(carica, numeroChiamate = 0) {
@@ -36,7 +37,7 @@ user1.chiamata(100);
 user1.azzeraChiamate();
 console.table(user1);
 console.log('');
-console.log('|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||');
+console.log('');
 console.log('');
 class SecondUser {
     constructor(carica, numeroChiamate = 0) {
@@ -72,9 +73,9 @@ user2.chiamata(100);
 user2.azzeraChiamate();
 console.table(user2);
 console.log('');
-console.log('|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||');
 console.log('');
-class ThirdtUser {
+console.log('');
+class ThirdUser {
     constructor(carica, numeroChiamate = 0) {
         this.costoPerMinuto = 0.20;
         this.carica = carica;
@@ -97,7 +98,7 @@ class ThirdtUser {
         this.numeroChiamate = 0;
     }
 }
-let user3 = new FirstUser(1000);
+let user3 = new ThirdUser(1000);
 console.log(user3);
 user3.ricarica(10);
 console.log(`La somma disponibile per le chiamate è di ${user3.numero404()}€`);
