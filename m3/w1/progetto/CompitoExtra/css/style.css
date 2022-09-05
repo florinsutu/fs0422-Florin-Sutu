@@ -1,0 +1,33 @@
+*{
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size:1.2rem;
+}
+
+.userDiv{
+    max-width: 900px;
+    display:flex;
+    justify-content: space-between;
+    
+    border: 1px solid black;
+    padding: 10px;
+    margin:20px 0px
+}
+
+.dataDiv{
+    margin-right:30px;
+}
+
+.dataDiv>div{
+    font-weight: 600;
+}
+
+.buttonDiv, .inputDiv{
+    display:flex;
+    flex-direction: column;
+    
+}
+
+button{
+    margin-left:10px;
+   
+}
