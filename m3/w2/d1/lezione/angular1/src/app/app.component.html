@@ -1,0 +1,8 @@
+<h1 [style.color]="titleColor">{{ title }}</h1>
+
+<button (click)="toggle()"
+[innerText]="mostra ? 'Nascondi' : 'Mostra'"
+class="btn btn-primary">
+  Mostra/Nascondi
+</button>
+<div *ngIf="mostra">prova</div>
