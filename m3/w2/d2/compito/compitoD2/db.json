@@ -1,0 +1,22 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "body": "prova testo",
+      "title": "Prova",
+      "active": true
+    },
+    {
+      "id": 2,
+      "body": "2 prova testo",
+      "title": "Prova 2",
+      "active": false
+    },
+    {
+      "title": "prova3",
+      "body": "ciao",
+      "active": true,
+      "id": 3
+    }
+  ]
+}

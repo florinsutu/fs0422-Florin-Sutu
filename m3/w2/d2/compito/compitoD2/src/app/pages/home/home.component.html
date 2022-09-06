@@ -1,0 +1,11 @@
+<h1>{{ title }}</h1>
+
+<div class="container my-5">
+<h2>Crea Post</h2>
+  <form action="">
+    <input type="text" class="form-control" [(ngModel)] = "newPost.title" name="title" placeholder="Titolo post">
+    <input type="text" class="form-control" [(ngModel)] = "newPost.body" name="body" placeholder="Contenuto Post">
+    <button (click) = "addNewPost()" name="addNewPost" class="btn btn-primary">Post</button>
+  </form>
+
+</div>
