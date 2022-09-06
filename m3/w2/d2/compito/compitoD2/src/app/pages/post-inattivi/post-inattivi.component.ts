@@ -10,12 +10,9 @@ export class PostInattiviComponent implements OnInit {
 
   constructor() { }
 
-
   ngOnInit(): void {
     this.getPosts();
   }
-
-  posts: Post[] = [];
 
   inactivePosts:Post[] = []
 
@@ -23,7 +20,6 @@ export class PostInattiviComponent implements OnInit {
     fetch("http://localhost:3000/posts")
     .then(response => response.json())
     .then(response => {
-      this.posts = response
       this.inactivePosts = response.filter((posts:Post) => posts.active == false);
     })
   }
