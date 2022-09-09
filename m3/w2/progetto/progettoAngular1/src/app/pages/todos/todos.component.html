@@ -1,0 +1,19 @@
+<p>todos works!</p>
+
+
+<form action="">
+  <input type="text" placeholder="insert new task">
+  <button (click)="addToDo()">Create task</button>
+</form>
+
+<div *ngIf="allToDoes.length == 0">Loading ...</div>
+<div *ngFor="let todo of allToDoes">
+  <span>{{todo.title}}</span>
+  <button>Completed</button>
+</div>
+
+<!-- ricorda index
+-->
+
+
+

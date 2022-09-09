@@ -1,0 +1,11 @@
+<div>
+
+  <ul>
+    <li *ngFor="let route of routes"><a [routerLink]="route.url">{{route.text}}</a></li>
+  </ul>
+
+  <form>
+    <input type="search" placeholder="Search..." />
+  </form>
+
+</div>
