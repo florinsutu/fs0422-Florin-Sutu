@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { TodosComponent } from './pages/todos/todos.component';
 import { CompletedTodosComponent } from './pages/completed-todos/completed-todos.component';
 import { HeaderComponent } from './sections/header/header.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { HeaderComponent } from './sections/header/header.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

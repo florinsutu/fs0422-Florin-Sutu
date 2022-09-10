@@ -2,18 +2,23 @@
 
 
 <form action="">
-  <input type="text" placeholder="insert new task">
+  <input [(ngModel)]="currentToDo.title" type="text" name="title" placeholder="insert new task">
   <button (click)="addToDo()">Create task</button>
+  <button (click)="editToDo(currentToDo)">Edit task</button>
 </form>
 
+
 <div *ngIf="allToDoes.length == 0">Loading ...</div>
+
 <div *ngFor="let todo of allToDoes">
-  <span>{{todo.title}}</span>
-  <button>Completed</button>
+  <div [ngStyle]="{'background': todo.completed ? 'green' : 'white'}">
+    <span>{{todo.title}}</span>
+    <button (click)="addToCompleted(todo)">Completed</button>
+    <button (click)="addToEdit(todo)">Edit</button>
+    <button (click)="deleteToDo(todo)">Delete</button>
+  </div>
 </div>
 
 <!-- ricorda index
+  //non la migliore soluzione quel loading
 -->
-
-
-

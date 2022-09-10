@@ -8,34 +8,72 @@ export class TodosService {
 
   constructor() { }
 
-  allToDoes:Todo[] = [];
+  toDoUrl: string = 'http://localhost:3000/todos'
 
-  toDoUrl:string =   'http://localhost:3000/todos'
+  getAllToDoes(): Promise<Todo[]> {
 
-  getAllToDoes():Promise<Todo[]> {
-
-    return new Promise<Todo[]>((resolve, reject) => {
+    return new Promise<Todo[]>((resolve) => {
       setTimeout(() => {
-        resolve(fetch(this.toDoUrl).then(res => res.json()))
-      },2000)
-  })
-}
-
-  getToDoById(id:number):Todo|boolean {
-    return this.allToDoes.find((todo:Todo) => todo.id === id) || false;
+        resolve(fetch(this.toDoUrl)
+          .then(res => res.json()))
+      }, 2000)
+    })
   }
 
-  addToDo(todo:Todo):void {
-    todo = Object.assign({}, todo)
-    this.allToDoes.push(todo)
+  getToDoById(id: number) {
+
   }
 
-  deleteToDo(id:number):void{  //da sistemare in seguito
-      this.allToDoes = this.allToDoes.filter((todo:Todo) => todo.id != id)
+  addToDo(todo: Todo): Promise<Todo> {
+
+    let options = {
+      method: 'POST',
+      body: JSON.stringify(todo),
+      headers: { "content-type": "application/json" }
+    }
+
+    return new Promise<Todo>((resolve) => {
+      setTimeout(() => {
+        resolve(fetch(this.toDoUrl, options)
+          .then(res => res.json()))
+      }, 2000)
+    })
+
   }
 
-  editToDo(todo:Todo):void {
-    let index = this.allToDoes.findIndex((todo:Todo) => todo.id == todo.id)
-    this.allToDoes.splice(index, 1, todo)
+  deleteToDo(todo: Todo): Promise<Todo> {  //da sistemare in seguito
+
+    let options = {
+      method: 'DELETE',
+      headers: { "content-type": "application/json" }
+    }
+
+    return new Promise<Todo>((resolve) => {
+      setTimeout(() => {
+        resolve(fetch(this.toDoUrl + '/' + todo.id, options)
+          .then(() => todo)) //per rispettare la traccia che chiedeva la Promise per ogni metodo della CRUD
+      }, 2000)
+    })
+
+  }
+
+  editToDo(todo: Todo): Promise<Todo> {
+
+    let options = {
+      method: 'PATCH',
+      body: JSON.stringify({
+        title: todo.title,
+        completed: todo.completed
+      }),
+      headers: { "content-type": "application/json" }
+    }
+
+    return new Promise<Todo>((resolve) => {
+      setTimeout(() => {
+        resolve(fetch(this.toDoUrl + '/' + todo.id, options)
+          .then(res => res.json()))
+      }, 2000)
+    })
+
   }
 }

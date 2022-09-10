@@ -1,9 +1,14 @@
 {
-  "todos":[
+  "todos": [
     {
-      "id": 1,
-      "title": "ciao",
-      "completed": false
+      "completed": false,
+      "title": "prova",
+      "id": 1
+    },
+    {
+      "completed": false,
+      "title": "prova2",
+      "id": 2
     }
   ]
 }
