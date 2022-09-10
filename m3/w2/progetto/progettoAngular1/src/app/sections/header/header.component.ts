@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
   routes:IRoutes[] = [
     {
       text: 'All Tasks',
-      url: ['']
+      url: ['/']
     },
     {
       text: 'Completed Tasks',

@@ -1,24 +1,27 @@
-<p>todos works!</p>
 
 
-<form action="">
-  <input [(ngModel)]="currentToDo.title" type="text" name="title" placeholder="insert new task">
-  <button (click)="addToDo()">Create task</button>
-  <button (click)="editToDo(currentToDo)">Edit task</button>
-</form>
+
+<app-todo-form
+  (onNewTodoCreated)="addToDo($event)"
+  (onEditTodo)="editToDo($event)"
+  [currentToDo]="currentToDo">
+</app-todo-form>
 
 
 <div *ngIf="allToDoes.length == 0">Loading ...</div>
 
-<div *ngFor="let todo of allToDoes">
-  <div [ngStyle]="{'background': todo.completed ? 'green' : 'white'}">
-    <span>{{todo.title}}</span>
-    <button (click)="addToCompleted(todo)">Completed</button>
-    <button (click)="addToEdit(todo)">Edit</button>
-    <button (click)="deleteToDo(todo)">Delete</button>
-  </div>
-</div>
 
-<!-- ricorda index
-  //non la migliore soluzione quel loading
+<app-todo-list
+  (onAddToEdit)="addToEdit($event)"
+  (onAddToCompleted)="addToCompleted($event)"
+  (onDelete)="deleteToDo($event)"
+  [toDoList]="allToDoes">
+</app-todo-list>
+
+
+
+
+<!--
+  non la migliore soluzione quel loading
+  togli onInit dove non serve
 -->

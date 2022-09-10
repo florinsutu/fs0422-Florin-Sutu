@@ -7,6 +7,8 @@ import { TodosComponent } from './pages/todos/todos.component';
 import { CompletedTodosComponent } from './pages/completed-todos/completed-todos.component';
 import { HeaderComponent } from './sections/header/header.component';
 import { FormsModule } from '@angular/forms';
+import { TodoFormComponent } from './sections/todo-form/todo-form.component';
+import { TodoListComponent } from './sections/todo-list/todo-list.component';
 
 
 @NgModule({
@@ -14,7 +16,9 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     TodosComponent,
     CompletedTodosComponent,
-    HeaderComponent
+    HeaderComponent,
+    TodoFormComponent,
+    TodoListComponent
   ],
   imports: [
     BrowserModule,

@@ -1,1 +1,6 @@
-<p>completed-todos works!</p>
+<app-todo-list
+  (onAddToEdit)="addToEdit($event)"
+  (onAddToCompleted)="addToCompleted($event)"
+  (onDelete)="deleteToDo($event)"
+  [toDoList]="completedToDoes">
+</app-todo-list>

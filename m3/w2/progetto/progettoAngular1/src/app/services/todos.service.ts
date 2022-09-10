@@ -51,7 +51,7 @@ export class TodosService {
     return new Promise<Todo>((resolve) => {
       setTimeout(() => {
         resolve(fetch(this.toDoUrl + '/' + todo.id, options)
-          .then(() => todo)) //per rispettare la traccia che chiedeva la Promise per ogni metodo della CRUD
+          .then(() => todo))
       }, 2000)
     })
 
