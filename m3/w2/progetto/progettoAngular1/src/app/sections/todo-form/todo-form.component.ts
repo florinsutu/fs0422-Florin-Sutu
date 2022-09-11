@@ -1,15 +1,14 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Todo } from 'src/app/models/todo';
-import { TodosService } from 'src/app/services/todos.service';
 
 @Component({
   selector: 'app-todo-form',
   templateUrl: './todo-form.component.html',
   styleUrls: ['./todo-form.component.scss']
 })
-export class TodoFormComponent {
+export class TodoFormComponent{
 
-  constructor(private todoSvc: TodosService) { }
+  constructor() { }
 
   @Output() onNewTodoCreated = new EventEmitter();
 

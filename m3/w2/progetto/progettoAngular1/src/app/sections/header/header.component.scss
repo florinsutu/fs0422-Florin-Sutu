@@ -38,7 +38,18 @@
 .navbar a:hover {
   background:#8CA6DB;
   color: black;
-  border-radius:5px;
+
+}
+
+@media screen and (min-width: 615px) {
+ .navbar{
+  #trapezoid{
+    a{
+      padding:23px 30px;
+    }
+  }
+ }
+
 }
 
 

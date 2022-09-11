@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 type IRoutes = {
   text: string;
@@ -10,12 +10,9 @@ type IRoutes = {
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
   routes:IRoutes[] = [
     {
