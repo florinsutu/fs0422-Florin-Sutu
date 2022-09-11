@@ -1,0 +1,51 @@
+.todo {
+  color: white;
+  margin: 20px auto;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.2);
+
+    .TodoOperations {
+
+      button {
+        color: white;
+        padding: 15px 10px;
+        background-color: rgba(0, 0, 0, 0);
+        border: none;
+        font-size: 20px;
+
+
+      }
+
+      button:hover {
+        background-color: rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+      }
+    }
+  }
+}
+
+.TodoTitle {
+
+  .TodoNum {
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    padding: 15px;
+    border-right: 1px solid rgba(0, 0, 0, 0.4);
+    margin-right: 15px
+  }
+}
+
+.completed {
+  transition: all 0.3s ease;
+
+  .TodoNum {
+    background-color: #73aa218f;
+    transition: all 0.3s ease;
+  }
+
+}

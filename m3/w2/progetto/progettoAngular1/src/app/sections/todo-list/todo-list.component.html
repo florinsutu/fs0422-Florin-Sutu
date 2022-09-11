@@ -1,10 +1,18 @@
+<section id="TodoList">
+  <div class="todo" *ngFor="let todo of toDoList; let i = index">
+    <div class="container" [class.completed]="todo.completed">
 
-<div *ngFor="let todo of toDoList; let i = index">
-  <div [ngStyle]="{'background': todo.completed ? 'green' : 'white'}">
-    <span>#{{i+1}}</span>
-    <span>{{todo.title}}</span>
-    <button (click)="addToCompleted(todo)">Completed</button>
-  <button (click)="sendTodo(todo)">Edit</button>
-  <button (click)="deleteTodo(todo)">Delete</button>
+      <div class="TodoTitle">
+        <span class="TodoNum">#{{i+1}}</span>
+        <span>{{todo.title}}</span>
+      </div>
+
+      <div class="TodoOperations">
+        <button (click)="addToCompleted(todo)">Completed</button>
+        <button [routerLink]="['/']" (click)="sendTodo(todo)">Edit</button>
+        <button (click)="deleteTodo(todo)">Delete</button>
+      </div>
+
+    </div>
   </div>
-</div>
+</section>

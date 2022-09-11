@@ -1,0 +1,16 @@
+input{
+  margin-right:10px;
+}
+
+input, button {
+  background-color: rgba(255, 255, 255, 0.6);
+  padding:10px;
+  font-size: 20px;
+  border:none;
+
+}
+
+button:hover{
+  background-color: rgba(0,0,0,0);
+  transition: all 0.3s ease;
+}

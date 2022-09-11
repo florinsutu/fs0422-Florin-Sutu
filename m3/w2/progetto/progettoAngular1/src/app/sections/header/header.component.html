@@ -1,11 +1,12 @@
-<div>
 
-  <ul>
-    <li *ngFor="let route of routes"><a [routerLink]="route.url">{{route.text}}</a></li>
-  </ul>
 
-  <form>
-    <input type="search" placeholder="Search..." />
-  </form>
 
-</div>
+
+  <nav class="navbar">
+    <div id="trapezoid">
+        <li *ngFor="let route of routes"><a [routerLink]="route.url">{{route.text}}</a></li>
+    </div>
+  </nav>
+
+
+
