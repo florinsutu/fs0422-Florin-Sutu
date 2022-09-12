@@ -1,21 +1,14 @@
 
 
-
-<app-todo-form
-  (onNewTodoCreated)="addToDo($event)"
-  (onEditTodo)="editToDo($event)"
-  [currentToDo]="currentToDo">
+<app-todo-form (onNewTodoCreated)="addToDo($event)" (onEditTodo)="editToDo($event)" [currentToDo]="currentToDo">
 </app-todo-form>
 
+<section>
+  <div class="loader" *ngIf="allToDoes.length == 0"></div>
+</section>
 
-<div *ngIf="allToDoes.length == 0">Loading ...</div>
-
-
-<app-todo-list
-  (onAddToEdit)="addToEdit($event)"
-  (onAddToCompleted)="addToCompleted($event)"
-  (onDelete)="deleteToDo($event)"
-  [toDoList]="allToDoes">
+<app-todo-list (onAddToEdit)="addToEdit($event)" (onAddToCompleted)="addToCompleted($event)"
+  (onDelete)="deleteToDo($event)" [toDoList]="allToDoes">
 </app-todo-list>
 
 

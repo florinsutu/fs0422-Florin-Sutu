@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from 'src/app/models/todo';
 import { TodosService } from 'src/app/services/todos.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-completed-todos',
@@ -38,6 +39,14 @@ export class CompletedTodosComponent implements OnInit {
       this.todoSvc.deleteToDo(todo)
       .then(res => {
         this.completedToDoes = this.completedToDoes.filter((todo: Todo) => todo.id != res.id)
+
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Task Deleated',
+          showConfirmButton: false,
+          timer: 2000
+        })
       })
     }
   }

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Todo } from 'src/app/models/todo';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-todo-form',
@@ -20,11 +21,25 @@ export class TodoFormComponent{
   editTodo(): void {
     this.onEditTodo.emit(this.currentToDo)
     this.refreshInput()
+    Swal.fire({
+      position: 'top-end',
+      icon: 'info',
+      title: 'Processing Request',
+      showConfirmButton: false,
+      timer: 2000
+    })
   }
 
   sendTodo(): void {
    this.onNewTodoCreated.emit(this.currentToDo);
    this.refreshInput()
+   Swal.fire({
+    position: 'top-end',
+    icon: 'info',
+    title: 'Processing Request',
+    showConfirmButton: false,
+    timer: 2000
+  })
   }
 
   refreshInput(): void {
