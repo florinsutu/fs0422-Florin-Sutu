@@ -1,0 +1,9 @@
+<h1>Crea Nuovo Utente</h1>
+<form action="">
+  <input [(ngModel)]="newUser.name" type="text" name="nome" placeholder="Nome" class="form-control">
+  <input [(ngModel)]="newUser.lastname" type="text" name="cognome" placeholder="Cognome" class="form-control">
+
+  <label for="active">Attivo?</label>
+  <input type="checkbox" name="active" id="active">
+  <button (click)="save()">Salva</button>
+</form>

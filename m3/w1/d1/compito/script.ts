@@ -63,7 +63,6 @@ button?.addEventListener('click', (e) => {
 reset?.addEventListener("click", (e) => {
     e.preventDefault();
     let resultDisplay = document.querySelector('#result') as HTMLElement;
-    let childToKill = document.querySelectorAll('#result p')
 
     while (resultDisplay.firstChild) {
         resultDisplay.removeChild(resultDisplay.firstChild);
