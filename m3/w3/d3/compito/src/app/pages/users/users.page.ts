@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../models/user';
-import { UsersService } from '../users.service';
+import { User } from '../../models/user';
+import { UsersService } from './users.service';
+
 
 @Component({
   template: `

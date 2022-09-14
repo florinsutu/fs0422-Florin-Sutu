@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { User } from './models/user';
+import { User } from '../../models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
-  private users:User[] =[
+  users:User[] =[
     {
       email:'c@fff.com',
       id:1,

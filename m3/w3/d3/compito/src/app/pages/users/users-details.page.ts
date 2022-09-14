@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { User } from '../models/user';
-import { UsersService } from '../users.service';
+import { User } from '../../models/user';
+import { UsersService } from './users.service';
 
 @Component({
+  selector: 'app-users-details',
   template: `
     <ng-container *ngIf="user; else elseTemplate">
       <h3>{{user.name}}</h3>

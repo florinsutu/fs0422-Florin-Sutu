@@ -11,8 +11,12 @@ import { PostCardComponent } from './components/post-card.component';
 import { MaiuscoloPipe } from './pipes/maiuscolo.pipe';
 import { HighlightDirective } from './directives/highlight.directive';
 import { PostDetailsPage } from './pages/post-details.page';
-import { UsersPage } from './pages/users.page';
-import { UsersDetailsPage } from './pages/users-details.page';
+import { UsersPage } from './pages/users/users.page';
+import { UsersDetailsPage } from './pages/users/users-details.page';
+import { UsersRoutingModule } from './pages/users/users-routing.module';
+import { CardComponent } from './shared/card.component';
+import { SharedModule } from './shared/shared.module';
+import { AuthGuard } from './auth.guard';
 
 const routes:Route[] = [
   {
@@ -25,7 +29,8 @@ const routes:Route[] = [
   },
   {
     path:"inactive-posts",
-    component:InactivePostsPage
+    component:InactivePostsPage,
+    canActivate: [AuthGuard]
   },
   {
     path:"active-posts/:id",
@@ -37,13 +42,7 @@ const routes:Route[] = [
   },
   {
     path:"users",
-    component:UsersPage,
-    children:[
-      {
-        path:":id",
-        component:UsersDetailsPage
-      }
-    ]
+    loadChildren: () => import("./pages/users/users.module").then((m) => m.UsersModule)
   },
   {
     path:"**",
@@ -59,17 +58,18 @@ const routes:Route[] = [
     ActivePostsPage,
     InactivePostsPage,
     PostCardComponent,
-    MaiuscoloPipe,
     HighlightDirective,
-    PostDetailsPage,
-    UsersPage,
-    UsersDetailsPage
+    PostDetailsPage
+    
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    UsersRoutingModule,
+    SharedModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [RouterModule]
 })
 export class AppModule { }
