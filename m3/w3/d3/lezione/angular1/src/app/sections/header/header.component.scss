@@ -1,0 +1,64 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  display:flex;
+  overflow:hidden;
+  justify-content: center;
+  height: 70px;
+
+  #trapezoid {
+    border: 80px solid rgba(0,0,0,0);
+    border-top: 0 solid;
+    border-bottom: 70px solid rgba(1, 1, 1, .4);
+    transform: rotateX(180deg);
+    width: 700px;
+    display:flex;
+    justify-content: center;
+
+    li{
+      list-style: none;
+    }
+
+    a{
+       transform: rotateX(180deg);
+       float:left;
+       font-size: 20px;
+       color: white;
+       text-align: center;
+       padding: 10px 20px;
+       text-decoration: none;
+       text-transform: uppercase;
+       letter-spacing: 4px;
+       transition: all 0.5s ease;
+     }
+  }
+}
+
+.navbar a:hover {
+  background:#8CA6DB;
+  color: black;
+
+}
+
+@media screen and (min-width: 655px) {
+ .navbar{
+  #trapezoid{
+    a{
+      padding:20px;
+    }
+  }
+ }
+}
+
+@media screen and (min-width: 1024px) {
+  .navbar{
+   #trapezoid{
+     a{
+       padding:20px 40px;
+     }
+   }
+  }
+ }
+
+
+
