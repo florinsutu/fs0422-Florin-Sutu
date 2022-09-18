@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-register',
@@ -30,7 +31,13 @@ export class RegisterComponent implements OnInit {
   submit(){
     this.authSvc.register(this.form.value)
     .subscribe(res => {
-      alert(`User ${res.user.name} registered successfully`)
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: `User ${res.user.name} registered successfully`,
+        showConfirmButton: false,
+        timer: 2000
+      })
       this.form.reset();
       this.router.navigate(['/']);
     })

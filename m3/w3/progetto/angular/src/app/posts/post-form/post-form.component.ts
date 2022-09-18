@@ -32,5 +32,6 @@ export class PostFormComponent implements OnInit {
   @Output() onEditPost= new EventEmitter()
 
   @Input() currentPost!: Post
+  @Input() formAction!: string
 
 }

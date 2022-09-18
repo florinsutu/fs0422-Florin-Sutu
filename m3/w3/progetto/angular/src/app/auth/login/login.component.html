@@ -1,9 +1,11 @@
+<section>
+
 <mat-card>
   <mat-card-title>Login</mat-card-title>
   <mat-card-content>
-      <form [formGroup]="form" (ngSubmit)="login()" autocomplete="off">
+      <form class="example-form" [formGroup]="form" (ngSubmit)="login()" autocomplete="off">
           <div>
-              <mat-form-field appearance="legacy">
+              <mat-form-field class="example-full-width" appearance="legacy">
                   <mat-label>Email Address:</mat-label>
                   <input matInput type="email" formControlName="email" placeholder="Your email">
                   <mat-icon matSuffix>mail_outline</mat-icon>
@@ -14,7 +16,7 @@
           </div>
 
           <div>
-              <mat-form-field appearance="standard">
+              <mat-form-field class="example-full-width" appearance="standard">
                   <mat-label>Password </mat-label>
                   <input matInput [type]="flag ? 'password' : 'text'" placeholder="Enter your password"
                       formControlName="password">
@@ -34,11 +36,19 @@
   </mat-card-content>
 </mat-card>
 
-<div>
-  <p>Non sei ancora registrato?</p>
-  <a class=" btn btn-lg btn-warning" [routerLink]="['/register']"> Registrati</a>
-</div>
-<div>
-  <p>Altrimenti prosegui come ospite</p>
-  <a class=" btn btn-lg btn-warning" [routerLink]="['/site']">Vai al Sito</a>
-</div>
+<mat-card>
+  <mat-card-content>
+    <div>
+      <p>Non sei ancora registrato?</p>
+      <a mat-raised-button color="primary" [routerLink]="['/register']"> Registrati</a>
+    </div>
+    <div>
+      <p>Altrimenti prosegui come ospite</p>
+      <a mat-raised-button color="primary" [routerLink]="['/site']">Vai al Sito</a>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+</section>
+
+

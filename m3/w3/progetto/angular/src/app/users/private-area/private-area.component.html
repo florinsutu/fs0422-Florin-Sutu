@@ -1,11 +1,26 @@
-<div class="container">
 
-  <form >
-    <input type="text" [(ngModel)]="currentUser.name" name="name">
+<mat-card>
+  <mat-card-content>
 
-    <input type="email" [(ngModel)]="currentUser.email" name="email">
+    <form class="example-form">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Username</mat-label>
+        <input matInput appearance="standard" type="text" [(ngModel)]="currentUser.name" name="name"
+          placeholder="Name">
+      </mat-form-field>
 
-<button (click)="editProfile()">Modifica</button>
-  </form>
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput appearance="standard" type="email" [(ngModel)]="currentUser.email" name="email"
+          placeholder="Email">
+      </mat-form-field>
+    </form>
 
-</div>
+    <button mat-raised-button (click)="editProfile()">Edit Profile</button>
+    <button mat-raised-button (click)="deleteProfile()">Delete Profile</button>
+
+
+
+  </mat-card-content>
+</mat-card>
+

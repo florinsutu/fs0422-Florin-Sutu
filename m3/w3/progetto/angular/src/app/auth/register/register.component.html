@@ -1,10 +1,14 @@
+<section>
+
+
+
 <mat-card>
   <mat-card-title>Register</mat-card-title>
   <mat-card-content>
-    <form [formGroup]="form" (ngSubmit)="submit()" autocomplete="off">
+    <form class="example-form" [formGroup]="form" (ngSubmit)="submit()" autocomplete="off">
 
       <div>
-        <mat-form-field appearance="legacy">
+        <mat-form-field class="example-full-width" appearance="legacy">
           <mat-label>Username</mat-label>
           <input matInput type="text" formControlName="name" placeholder="Your username">
           <mat-icon matSuffix>person</mat-icon>
@@ -14,7 +18,7 @@
       </div>
 
       <div>
-        <mat-form-field appearance="legacy">
+        <mat-form-field class="example-full-width" appearance="legacy">
           <mat-label>Email Address:</mat-label>
           <input matInput type="email" formControlName="email" placeholder="Your email">
           <mat-icon matSuffix>mail_outline</mat-icon>
@@ -25,7 +29,7 @@
       </div>
 
       <div>
-        <mat-form-field appearance="standard">
+        <mat-form-field class="example-full-width" appearance="standard">
           <mat-label>Password </mat-label>
           <input matInput [type]="flag ? 'password' : 'text'" placeholder="Enter your password"
             formControlName="password">
@@ -44,3 +48,5 @@
     </form>
   </mat-card-content>
 </mat-card>
+
+</section>

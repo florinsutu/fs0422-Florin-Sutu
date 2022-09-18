@@ -1,8 +1,11 @@
-<app-post-form (onNewPostCreated)="addPost($event)" (onEditPost)="editPost($event)" [currentPost]="currentPost">
+<app-post-form *ngIf="currentUser"
+ (onNewPostCreated)="addPost($event)" (onEditPost)="editPost($event)"
+ [currentPost]="currentPost"
+ [formAction]="formAction">
 </app-post-form>
 
 
 
 <app-post-list (onAddToEdit)="addToEdit($event)" (onLike)="like($event)"
-  (onDelete)="deletePost($event)" [postList]="posts">
+  (onDelete)="deletePost($event)" [postList]="posts" [currentUser]="currentUser">
 </app-post-list>

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import Swal from 'sweetalert2'
 
 
 
@@ -28,11 +29,24 @@ export class LoginComponent implements OnInit {
     alert('SUCCESS!! :-)\n\n' + JSON.stringify(form.value, null, 4));
   }
 
-  login(){
+  login() {
     this.authSvc.login(this.form.value)
-    .subscribe(res => {
-      this.authSvc.saveAccessData(res)
-      this.router.navigate(['/site'])
-    })
+      .subscribe({
+        next: res => {
+          this.authSvc.saveAccessData(res)
+          this.router.navigate(['/site'])
+        },
+        error: error => {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: 'This user does not exist',
+            showConfirmButton: false,
+            timer: 2000
+          })
+        }
+      })
   }
 }
+
+

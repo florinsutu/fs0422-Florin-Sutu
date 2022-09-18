@@ -15,6 +15,7 @@ export class PostListComponent implements OnInit {
   userList: User[] = []
 
   @Input() postList!: Post[]
+  @Input() currentUser!: User | null
 
   @Output() onAddToEdit = new EventEmitter()
   @Output() onLike = new EventEmitter()

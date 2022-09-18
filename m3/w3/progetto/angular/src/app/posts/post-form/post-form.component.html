@@ -1,8 +1,23 @@
-<section id="TodoForm">
-  <form class="form-control">
-    <input class="form-control" [(ngModel)]="currentPost.title" type="text" name="title" placeholder="Title">
-    <input class="form-control" [(ngModel)]="currentPost.content" type="text" name="content" placeholder="Content">
-    <button class="btn btn-primary" (click)="sendPost()">Create task</button>
-    <button class="btn btn-primary" (click)="editPost()">Edit task</button>
-  </form>
-  </section>
+<mat-card>
+  <mat-card-content>
+
+    <form class="example-form">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Post Title</mat-label>
+        <input matInput appearance="standard" [(ngModel)]="currentPost.title" type="text" name="title"
+          placeholder="Title">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Post content</mat-label>
+        <textarea matInput appearance="standard" [(ngModel)]="currentPost.content" type="text" name="content"
+          placeholder="Content"></textarea>
+      </mat-form-field>
+    </form>
+
+    <button *ngIf=" formAction == 'create' " mat-raised-button (click)="sendPost()">Create Post</button>
+    <button *ngIf=" formAction == 'edit' " mat-raised-button (click)="editPost()">Edit Post</button>
+
+
+  </mat-card-content>
+</mat-card>

@@ -3,6 +3,7 @@ import { Post } from '../class/post';
 import { User } from '../class/user';
 import { AuthService } from '../services/auth.service';
 import { PostService } from '../services/post.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-posts',
@@ -12,8 +13,8 @@ import { PostService } from '../services/post.service';
 export class PostsComponent implements OnInit {
 
   currentPost: Post = new Post('', '');
-  currentUser: User | null = this.authSvc.getLoggedUser()
-  formAction:string = 'create'
+  currentUser!: User | null
+  formAction: string = 'create'
 
   apiUrl: string = 'http://localhost:3000/post'
 
@@ -23,6 +24,7 @@ export class PostsComponent implements OnInit {
   likesNum: number = 0;
 
   ngOnInit(): void {
+    this.currentUser = this.authSvc.getLoggedUser()
     this.postSvc.getAllPosts().subscribe(
       {
         next: res => {
@@ -31,14 +33,21 @@ export class PostsComponent implements OnInit {
         },
         error: error => console.log(error)
       }
-      )
-    }
+    )
+  }
 
-    deletePost(post: Post): void {
-      this.postSvc.deletePost(post).subscribe(res => {
-        let index: number = this.posts.findIndex(p => p.id === post.id)
-        this.posts.splice(index, 1);
+  deletePost(post: Post): void {
+    this.postSvc.deletePost(post).subscribe(res => {
+      let index: number = this.posts.findIndex(p => p.id === post.id)
+      this.posts.splice(index, 1);
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Post Deleated',
+        showConfirmButton: false,
+        timer: 2000
       })
+    })
   }
 
   like(post: Post): void {
@@ -55,6 +64,13 @@ export class PostsComponent implements OnInit {
     this.postSvc.addPost(post).subscribe(res => {
       this.posts.push(res)
       this.currentPost = new Post('', '')
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'New Post Created',
+        showConfirmButton: false,
+        timer: 2000
+      })
     })
   }
 
@@ -63,12 +79,20 @@ export class PostsComponent implements OnInit {
     this.postSvc.editPost(post).subscribe(res => {
       let index = this.posts.findIndex((todo: Post) => todo.id == res.id)
       this.posts.splice(index, 1, post)
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Post Edited',
+        showConfirmButton: false,
+        timer: 2000
+      })
     })
   }
 
   addToEdit(todo: Post): void {
     todo = Object.assign({}, todo)
     this.currentPost = todo
+    this.formAction = 'edit'
   }
 
 }

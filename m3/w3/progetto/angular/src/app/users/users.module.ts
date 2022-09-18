@@ -5,6 +5,8 @@ import { UsersRoutingModule } from './users-routing.module';
 import { UsersComponent } from './users.component';
 import { PrivateAreaComponent } from './private-area/private-area.component';
 import { FormsModule } from '@angular/forms';
+import { NgMaterialModule } from '../ng-material/ng-material.module';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     UsersRoutingModule,
-    FormsModule
+    FormsModule,
+    NgMaterialModule,
+    SweetAlert2Module
   ]
 })
 export class UsersModule { }
