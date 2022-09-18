@@ -1,0 +1,64 @@
+{
+  "users": [
+    {
+      "email": "sergiusutu02@gmail.com",
+      "password": "$2a$10$T3AVZI/0Y6KjgFOFs4WJSeEf0xrLdOSC5ycC95hsn52kH2LWo6C0O",
+      "name": "Sergiu",
+      "id": 1
+    },
+    {
+      "email": "landry@icase4.com",
+      "password": "$2a$10$YW8UgvA.ojRwx8l4/Z4sCuhW5d8KW6eMj3cOzrVDkO2kDKOuTwfA6",
+      "name": "Alberto",
+      "id": 3
+    },
+    {
+      "email": "davide.dds.dalsanto@gmail.com",
+      "password": "$2a$10$RZCes21rkbeWo9jatQvnKezi6h/p.5QD63JUOAsMRf2S9Sx4I2ZHi",
+      "name": "DDS2",
+      "id": 4
+    },
+    {
+      "email": "aaa@111",
+      "password": "$2a$10$Cz0QNtE4TbfaVpJrsiKloOiPTgEJyiipz/qPHF6BwnBpgdlkIsZD2",
+      "name": "viorelinobello",
+      "id": 5
+    },
+    {
+      "email": "fsutu96@gmail.com",
+      "password": "$2a$10$v6KD58r2KumYmLEjfcKHFee9r4BIzzLXrDBZjAjJil5vINzOtXFKC",
+      "name": "Florin",
+      "id": 6
+    }
+  ],
+  "posts": [
+    {
+      "title": "prova",
+      "content": "rtx",
+      "like": false,
+      "userId": 1,
+      "id": 1
+    },
+    {
+      "title": "perchè",
+      "content": "rtx",
+      "like": false,
+      "userId": 4,
+      "id": 3
+    },
+    {
+      "title": "prova422222",
+      "content": "rtx",
+      "like": false,
+      "userId": 5,
+      "id": 4
+    },
+    {
+      "title": "prova3",
+      "content": "rtx",
+      "like": false,
+      "userId": 5,
+      "id": 5
+    }
+  ]
+}

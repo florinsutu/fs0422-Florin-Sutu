@@ -1,0 +1,8 @@
+<app-post-form (onNewPostCreated)="addPost($event)" (onEditPost)="editPost($event)" [currentPost]="currentPost">
+</app-post-form>
+
+
+
+<app-post-list (onAddToEdit)="addToEdit($event)" (onLike)="like($event)"
+  (onDelete)="deletePost($event)" [postList]="posts">
+</app-post-list>

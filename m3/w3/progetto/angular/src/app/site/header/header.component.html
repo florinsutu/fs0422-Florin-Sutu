@@ -1,0 +1,20 @@
+
+<mat-toolbar color="primary">
+
+  <div>
+    <a mat-raised-button [routerLink]="['/site']">Home</a>
+    <a mat-button [routerLink]="['/site/users']">Users</a>
+  </div>
+
+   <div *ngIf="checkLog()">
+    <span>Benvenuto {{user.name}}</span>
+    <a mat-raised-button  color="basic" (click)="logOut()" [routerLink]="['/']">Logout</a>
+    <a mat-flat-button [routerLink]="['users/personal-area']"> La tua area</a>
+  </div>
+
+   <div *ngIf="!checkLog()" class="text-end">
+    <a mat-button [routerLink]="['/']">Login</a>
+    <a mat-button [routerLink]="['/register']">Sign-up</a>
+  </div>
+ </mat-toolbar>
+
