@@ -7,12 +7,12 @@ type AuthResponse = {
   user:User
 }
 
- interface ILogin {
+ type Login = {
   email: string,
   password: string
 }
 
- interface IRegister {
+ type Register = {
   name:string,
   email: string,
   password: string
@@ -27,12 +27,12 @@ export class AuthService {
 
   apiUrl:string = 'http://localhost:3000'
 
-  register(registerData:IRegister){
+  register(registerData:Register){
     return this.http.post<AuthResponse>(this.apiUrl+'/register', registerData)
   }
 
 
-  login(loginData:ILogin){
+  login(loginData:Login){
     return this.http.post<AuthResponse>(this.apiUrl+'/login', loginData)
   }
 
