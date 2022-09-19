@@ -6,13 +6,14 @@ type AuthResponse = {
   accessToken: string,
   user:User
 }
+//me ne sono accorto dopo, però so che non ha senso usare interface
 
- type Login = {
+ interface ILogin {
   email: string,
   password: string
 }
 
- type Register = {
+ interface IRegister {
   name:string,
   email: string,
   password: string
@@ -27,12 +28,12 @@ export class AuthService {
 
   apiUrl:string = 'http://localhost:3000'
 
-  register(registerData:Register){
+  register(registerData:IRegister){
     return this.http.post<AuthResponse>(this.apiUrl+'/register', registerData)
   }
 
 
-  login(loginData:Login){
+  login(loginData:ILogin){
     return this.http.post<AuthResponse>(this.apiUrl+'/login', loginData)
   }
 
