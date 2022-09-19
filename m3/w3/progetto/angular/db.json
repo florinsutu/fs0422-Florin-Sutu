@@ -9,7 +9,7 @@
     {
       "email": "fsutu96@gmail.com",
       "password": "$2a$10$v0GIwHqEDsGuLZCR3IruP.FEHoS4qRsTeUjYi7lco4ps1C78kra9e",
-      "name": "Florin",
+      "name": "Florin ",
       "id": 2
     },
     {
@@ -37,7 +37,7 @@
     {
       "title": "secondo post",
       "content": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"",
-      "like": false,
+      "like": true,
       "userId": 2,
       "id": 4
     },
@@ -47,6 +47,13 @@
       "like": false,
       "userId": 3,
       "id": 5
+    },
+    {
+      "title": "Post",
+      "content": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"",
+      "like": false,
+      "userId": 2,
+      "id": 6
     }
   ]
 }

@@ -1,10 +1,10 @@
 
-<mat-card *ngFor="let user of users; let i = index">
+<mat-card class="user" *ngFor="let user of users; let i = index">
 
   <mat-card-header>
-    <div mat-card-avatar class="example-header-image"><span>#{{i+1}}</span></div>
-    <mat-card-title>{{user.name}}</mat-card-title>
-    <mat-card-subtitle>{{user.email}}</mat-card-subtitle>
+    <div mat-card-avatar><span>#{{i+1}}</span></div>
+    <mat-card-title>Name: {{user.name}}</mat-card-title>
+    <mat-card-subtitle>email: {{user.email}}</mat-card-subtitle>
   </mat-card-header>
 
 </mat-card>

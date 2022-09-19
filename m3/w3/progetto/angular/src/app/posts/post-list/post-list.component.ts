@@ -40,7 +40,7 @@ export class PostListComponent implements OnInit {
     this.onDelete.emit(post)
   }
   like(post: Post) {
-    this.onLike.emit(post)
+    this.onLike.emit(post) //però di fatto non è implementato, è solo lì per bellezza
   }
   sendPost(post: Post) {
     this.onAddToEdit.emit(post)

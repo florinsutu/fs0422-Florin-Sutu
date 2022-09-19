@@ -3,11 +3,9 @@ export class Post {
   userId:number | undefined;
   title:string;
   content:string;
-  like:boolean
 
-  constructor(title:string, content:string, like:boolean = false) {
+  constructor(title:string, content:string) {
     this.title = title;
     this.content = content;
-    this.like = like;
   }
 }

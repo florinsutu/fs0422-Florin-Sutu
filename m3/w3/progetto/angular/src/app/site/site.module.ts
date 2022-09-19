@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SiteRoutingModule } from './site-routing.module';
 import { SiteComponent } from './site.component';
 import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
+
 import { NgMaterialModule } from '../ng-material/ng-material.module';
 
 
@@ -12,7 +12,6 @@ import { NgMaterialModule } from '../ng-material/ng-material.module';
   declarations: [
     SiteComponent,
     HeaderComponent,
-    FooterComponent
   ],
   imports: [
     CommonModule,

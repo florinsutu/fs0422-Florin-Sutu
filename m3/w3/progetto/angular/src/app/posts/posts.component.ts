@@ -21,7 +21,6 @@ export class PostsComponent implements OnInit {
   constructor(private postSvc: PostService, private authSvc: AuthService) { }
 
   posts: Post[] = [];
-  likesNum: number = 0;
 
   ngOnInit(): void {
     this.currentUser = this.authSvc.getLoggedUser()
@@ -29,7 +28,6 @@ export class PostsComponent implements OnInit {
       {
         next: res => {
           this.posts = res;
-          this.likesNum = this.posts.filter(p => p.like == true).length;
         },
         error: error => console.log(error)
       }
@@ -47,15 +45,6 @@ export class PostsComponent implements OnInit {
         showConfirmButton: false,
         timer: 2000
       })
-    })
-  }
-
-  like(post: Post): void {
-    post.like = !post.like;
-    this.postSvc.editPost(post).subscribe(res => {
-      let index: number = this.posts.findIndex(p => p.id === post.id)
-      this.posts.splice(index, 1, post);
-      this.likesNum = this.posts.filter(p => p.like == true).length;
     })
   }
 

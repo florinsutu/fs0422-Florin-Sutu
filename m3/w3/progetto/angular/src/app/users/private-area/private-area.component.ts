@@ -28,8 +28,15 @@ export class PrivateAreaComponent implements OnInit {
   editProfile() {
     this.userSvc.editUser(this.currentUser).subscribe(user => {
       this.currentUser = user
-      this.authSvc.logOut()
-      this.router.navigate(['/'])
+      Swal.fire({
+        title: 'Your Profile has been updated',
+        text: 'You will be redirected to login',
+        icon: 'success',
+        confirmButtonText: 'Ok'
+      }).then(() => {
+        this.authSvc.logOut()
+        this.router.navigate(['/'])
+      })
     })
 
   }
@@ -53,8 +60,7 @@ export class PrivateAreaComponent implements OnInit {
           }).then(() => {
             this.authSvc.logOut()
             this.router.navigate(['/'])
-          }
-          )
+          })
         })
       } else {
         Swal.fire({
