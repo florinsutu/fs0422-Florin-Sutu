@@ -19,7 +19,6 @@ public class Video extends Media implements Display, Sound {
 	@Override
 	public void reproduce() {
 		this.play(this.volume, this.length, this.brightness);
-
 	}
 
 	protected void play(int vol, int len, int bright) {
@@ -34,34 +33,51 @@ public class Video extends Media implements Display, Sound {
 		}
 
 		for (int j = 0; j < len; j++) {
-			System.out.println(this.title + '.' + this.extension.getExt() + v + b);
+			System.out.println(this.title + v + b);
 		}
 
 	}
 
 	@Override
 	public void increaseBrightness() {
-		this.brightness++;
+		if (this.brightness < 10) {
+			this.brightness++;
+		} else {
+			System.out.println("La luminosità è già al massimo");
+		}
 	}
 
 	@Override
 	public void decreaseBrightness() {
-		this.brightness--;
+		if (this.brightness > 1) {
+			this.brightness--;
+		} else {
+			System.out.println("La luminosità è già al minimo");
+		}
 	}
 
 	@Override
 	public void increaseVolume() {
-		this.volume++;
+		if(this.volume < 10) {
+			this.volume++;
+		}else {
+			System.out.println("Il volume è già al massimo");
+		}
 	}
 
 	@Override
 	public void decreaseVolume() {
-		this.volume--;
+		if(this.volume > 1) {
+			this.volume--;
+		}else {
+			System.out.println("Il volume è già al minimo");
+		}
 	}
 
 	@Override
 	public void setVolume(int vol) {
-		this.volume = vol;
+		if (vol > 0 && vol <= 10)
+			this.volume = vol;
 	}
 
 	@Override
@@ -71,7 +87,8 @@ public class Video extends Media implements Display, Sound {
 
 	@Override
 	public void setBrightness(int brigth) {
-		this.brightness = brigth;
+		if (brigth > 0 && brigth <= 10)
+			this.brightness = brigth;
 
 	}
 
