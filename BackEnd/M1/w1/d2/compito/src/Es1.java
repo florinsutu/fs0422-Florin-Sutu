@@ -26,10 +26,10 @@ public class Es1 {
 }
 
 class Rettangolo{
-    int altezza;
-    int larghezza;
+   private int altezza;
+   private int larghezza;
     
-    Rettangolo(int _altezza, int _larghezza){
+    public Rettangolo(int _altezza, int _larghezza){
         this.altezza = _altezza;
         this.larghezza = _larghezza;
     }
