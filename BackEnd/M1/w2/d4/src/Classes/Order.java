@@ -67,7 +67,7 @@ public class Order {
 	@Override
 	public String toString() {
 	
-		return "ciao";
+		return this.id + " " + this.products;
 	}
 
 }

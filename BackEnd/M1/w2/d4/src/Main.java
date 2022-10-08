@@ -76,7 +76,7 @@ public class Main {
 	
 		try {
 			BeatriceCart = new ArrayList<>(Arrays.asList(getProductByName("ilPrincipe"), getProductByName("crossbow")));
-			ClaudioCart = new ArrayList<>(Arrays.asList(getProductByName("girello"), getProductByName("fleshlight")));
+			ClaudioCart = new ArrayList<>(Arrays.asList(getProductByName("girello"), getProductByName("fleshLight")));
 			CarisioCart = new ArrayList<>(Arrays.asList(getProductByName("beardOil"), getProductByName("meinKampft")));
 
 		} catch (Exception e) {
@@ -104,10 +104,14 @@ public class Main {
 				.filter(n-> n.getCategory().equals(Categories.BABY))
 				.collect(Collectors.toList());
 		
+	
 		
-	allOrder.stream().filter(n -> n.getProducts().stream()
-			.anyMatch(p->p.getCategory().equals(Categories.BABY)))
-			.forEach(System.out::println);
+		
+	System.out.println("es2"+  allOrder.stream().filter(n -> n.getProducts().stream()
+			.anyMatch(p->p.getCategory().equals(Categories.BABY))).collect(Collectors.toList()));
+	
+	System.out.println("==================fine es2===============");
+			
 	
 	Map<List<Product>, List<Order>> groupByCategories = allOrder.stream().collect(Collectors.groupingBy(Order::getProducts));
 	
