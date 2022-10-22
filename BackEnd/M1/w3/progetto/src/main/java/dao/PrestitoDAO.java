@@ -23,97 +23,79 @@ import managment.Prestito;
 import managment.Utente;
 
 public class PrestitoDAO {
-	
-public static void save(Articolo articolo, Utente utente) {
-		
+
+	public static void save(Articolo articolo, Utente utente) {
+
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProjectM1W3");
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction t = em.getTransaction();
-        
-		Prestito p = new Prestito(articolo,utente);
-		
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction t = em.getTransaction();
+
+		Prestito p = new Prestito(articolo, utente);
+
 		t.begin();
 		em.persist(p);
 		t.commit();
-		
+
 		em.close();
 		emf.close();
 	}
-public static void metodoPerUtilizzareLaScadenza(Articolo articolo, Utente utente, LocalDate scadenza) {
-	
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProjectM1W3");
-    EntityManager em = emf.createEntityManager();
-    EntityTransaction t = em.getTransaction();
-    
-	Prestito p = new Prestito(articolo,utente);
-	p.setScadenza(scadenza);
-	
-	t.begin();
-	em.persist(p);
-	t.commit();
-	
-	em.close();
-	emf.close();
-}
 
-public static Prestito getById(int id) {
-	
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProjectM1W3");
-    EntityManager em = emf.createEntityManager();
+	public static void metodoPerUtilizzareLaScadenza(Articolo articolo, Utente utente, LocalDate scadenza) {
 
-	Prestito p = em.find(Prestito.class, id);
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProjectM1W3");
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction t = em.getTransaction();
 
-	em.close();
-	emf.close();
+		Prestito p = new Prestito(articolo, utente);
+		p.setScadenza(scadenza);
 
-	return p;
-}
+		t.begin();
+		em.persist(p);
+		t.commit();
 
-//public static void getByCard(Utente id) {
+		em.close();
+		emf.close();
+	}
+
+	public static Prestito getById(int id) {
+
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProjectM1W3");
+		EntityManager em = emf.createEntityManager();
+
+		Prestito p = em.find(Prestito.class, id);
+
+		em.close();
+		emf.close();
+
+		return p;
+	}
+
+	public static void getByCard(int tessera) {
 //	
 //	// SELECT p.name, a.city FROM Person p JOIN p.address a WHERE name = :n
 //	
-//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProjectM1W3");
-//    EntityManager em = emf.createEntityManager();
-//    
-//	CriteriaBuilder cb = em.getCriteriaBuilder();
-//
-//	CriteriaQuery<Object[]> cq = cb.createQuery(Object[].class);
-//
-//	Root<Prestito> p = cq.from(Prestito.class);
-//
-//	ParameterExpression<String> param1 = cb.parameter(String.class);
-//
-//
-//	Expression<String> personName = p.get("name");
-//	
-//	Predicate pd1 = cb.equal(personName, param1);
-//
-//	Join<Person, Address> a = p.join("address", JoinType.LEFT);
-//	
-//    
-//    Query q = em.createQuery(
-//    		"SELECT p FROM Prestito p JOIN p.articolo WHERE utente = :id ",Articolo.class
-//    		);
-//    q.setParameter("id", id);
-//    
-//    System.out.println(q.getResultList());
-//    
-//
-//	
-//}
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProjectM1W3");
+		EntityManager em = emf.createEntityManager();
+   
+		Query q = em.createQuery("SELECT p FROM Prestito p WHERE p.utente.tessera = :tessera ", Prestito.class);
+		q.setParameter("tessera", tessera);
 
-public static List<Prestito> getAllExpiredDeadlines() {
-	
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProjectM1W3");
-    EntityManager em = emf.createEntityManager();
-    
-    Query q = em.createQuery(
-    		"SELECT p FROM Prestito p WHERE p.restituito IS NULL AND p.scadenza <= CURRENT_DATE ",Prestito.class
-    		);
-    
-	return q.getResultList();
-	
-}
+		System.out.println(q.getResultList());
+//    
+//
+//	
+	}
+
+	public static List<Prestito> getAllExpiredDeadlines() {
+
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProjectM1W3");
+		EntityManager em = emf.createEntityManager();
+
+		Query q = em.createQuery("SELECT p FROM Prestito p WHERE p.restituito IS NULL AND p.scadenza <= CURRENT_DATE ",
+				Prestito.class);
+
+		return q.getResultList();
+
+	}
 
 }

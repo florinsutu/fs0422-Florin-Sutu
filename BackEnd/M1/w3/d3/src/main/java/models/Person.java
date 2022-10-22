@@ -4,13 +4,18 @@ package models;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -33,6 +38,12 @@ public class Person implements Serializable {
 	//private List<Partecipazione> inizialmente =  new List<>();
 	@OneToMany(mappedBy="person")
 	private List<Partecipazione> partecipazioni = new ArrayList<>() ;
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "students_notes",
+		joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "note_id")
+	)
+	private Set<GaraDiAtletica> atlets;
 	
 	public Person() {}
 

@@ -1,10 +1,22 @@
 package DAO;
 
+import java.util.List;
+
+//- getPartiteVinteInCasa
+//- getPartiteVinteInTrasferta
+//- getPartitePareggiate
+
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.ParameterExpression;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 import models.Location;
 import models.PartitaDiCalcio;
@@ -35,6 +47,99 @@ public class PartitaDiCalcioDAO {
         
         em.close();
         emf.close();
+		
+	}
+	
+	public static void getPartiteVinteInCasa(String squadra) {
+
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("Homework_W3D3_");
+		EntityManager em = emf.createEntityManager();
+
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<PartitaDiCalcio> cq = cb.createQuery(PartitaDiCalcio.class);
+		Root<PartitaDiCalcio> p = cq.from(PartitaDiCalcio.class);
+		ParameterExpression<String> param = cb.parameter(String.class);
+
+		Predicate pd1 = cb.equal(p.get("squadra_vincente"), squadra);
+		Predicate pd2 = cb.equal(p.get("squadra_casa"), squadra);
+
+		cq.select(p).where(cb.and(pd1, pd2));
+
+		Query q = em.createQuery(cq);
+	
+
+		List<PartitaDiCalcio> list = q.getResultList();
+
+		for (PartitaDiCalcio person : list) {
+			System.out.println(person);
+		}
+
+		em.close();
+		emf.close();
+
+		
+	}
+	
+	public static void getPartiteVinteInTrasferta(String squadra) {
+
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("Homework_W3D3_");
+		EntityManager em = emf.createEntityManager();
+
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<PartitaDiCalcio> cq = cb.createQuery(PartitaDiCalcio.class);
+		Root<PartitaDiCalcio> p = cq.from(PartitaDiCalcio.class);
+		ParameterExpression<String> param = cb.parameter(String.class);
+
+		Predicate pd1 = cb.equal(p.get("squadra_vincente"), squadra);
+		Predicate pd2 = cb.equal(p.get("squadra_ospite"), squadra);
+
+		cq.select(p).where(cb.and(pd1, pd2));
+
+		Query q = em.createQuery(cq);
+	
+
+		List<PartitaDiCalcio> list = q.getResultList();
+
+		for (PartitaDiCalcio person : list) {
+			System.out.println(person);
+		}
+
+		em.close();
+		emf.close();
+
+		
+	}
+	
+	public static void getPartitePareggiate(String squadra) {
+
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("Homework_W3D3_");
+		EntityManager em = emf.createEntityManager();
+
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<PartitaDiCalcio> cq = cb.createQuery(PartitaDiCalcio.class);
+		Root<PartitaDiCalcio> p = cq.from(PartitaDiCalcio.class);
+		ParameterExpression<String> param = cb.parameter(String.class);
+
+		Predicate pd1 = cb.equal(p.get("squadra_vincente"), "pareggio");
+		Predicate pd2 = cb.equal(p.get("squadra_casa"), squadra);
+		Predicate pd3 = cb.equal(p.get("squadra_ospite"), squadra);
+		Predicate pd4= cb.or(pd2,pd3);
+		 
+
+		cq.select(p).where(cb.and(pd1, pd4));
+
+		Query q = em.createQuery(cq);
+	
+
+		List<PartitaDiCalcio> list = q.getResultList();
+
+		for (PartitaDiCalcio person : list) {
+			System.out.println(person);
+		}
+
+		em.close();
+		emf.close();
+
 		
 	}
 	

@@ -1,11 +1,17 @@
 package models;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class GaraDiAtletica extends Evento {
 
-	private String set_atleti;
+	@ManyToMany(mappedBy="atlets")
+	private Set<Person> set_atleti = new HashSet<>();
+	
 	private String atleta_vincitore;
 	
 	public GaraDiAtletica() {}
@@ -18,17 +24,16 @@ public class GaraDiAtletica extends Evento {
 	}
 	
 
+	public String getAtleta_vincitore() {
+		return atleta_vincitore;
+	}
 
-	public String getSet_atleti() {
+	public Set<Person> getSet_atleti() {
 		return set_atleti;
 	}
 
-	public void setSet_atleti(String set_atleti) {
-		this.set_atleti = set_atleti;
-	}
-
-	public String getAtleta_vincitore() {
-		return atleta_vincitore;
+	public void setSet_atleti(Person atleta) {
+		this.set_atleti.add(atleta);
 	}
 
 	public void setAtleta_vincitore(String atleta_vincitore) {

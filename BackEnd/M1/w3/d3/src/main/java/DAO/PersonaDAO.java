@@ -1,19 +1,16 @@
 package DAO;
 
-import java.util.Collections;
-import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
-import models.Evento;
+import models.GaraDiAtletica;
 import models.Gender;
-import models.Location;
-import models.Partecipazione;
+
 import models.Person;
-import models.TipoEvento;
 
 //- save
 //- getById
@@ -21,6 +18,40 @@ import models.TipoEvento;
 //- refresh
 
 public class PersonaDAO {
+	
+	public static void corri(Person p, GaraDiAtletica g ) {
+		
+//		public static void updatePersonById(int id, String newName) {
+//			
+//			Query q = em.createQuery(
+//					"UPDATE Person p SET name = :n WHERE p.id = :id"
+//					);
+//			
+//			t.begin();	
+		
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("Homework_W3D3_");
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction t = em.getTransaction();
+        
+        
+     
+        
+        t.begin();
+       
+        t.commit();
+        em.close();
+        emf.close();
+	}
+	
+//	 public void addPhone(Phone phone) {
+//	        if (!getPhones().contains(phone)) {
+//	            getPhones().add(phone);
+//	            if (phone.getProfessor() != null) {
+//	                phone.getProfessor().getPhones().remove(phone);
+//	            }
+//	            phone.setProfessor(this);
+//	        }
+//	    }
 	
 
 	
