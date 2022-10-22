@@ -1,0 +1,1 @@
+[ISBN: 100001, Titolo: L'isola del tesoro, Autore: Stevenson, ISBN: 100002, Titolo: 1984, Autore: Orwell, ISBN: 100003, Titolo: Al faro, Autore: Woolf, ISBN: 100004, Titolo: David Copperfield, Autore: Dickens, ISBN: 200001, Titolo: rivista1, Periodicità: MENSILE]
