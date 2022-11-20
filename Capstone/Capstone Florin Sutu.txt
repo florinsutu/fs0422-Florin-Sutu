@@ -1,0 +1,13 @@
+Social Network 
+
+User caratterizzati da username, stato (online/offline con true/false),privacy(profilo pubblico o privato), immagine di profilo(opzionale);
+ personalizzabile con descrizioni personali, informazioni di contatto e così via (probabilmente un'altra entità racchiuderà questi dati)
+
+Possibilità di inviare post con o senza immagini, a cui gli altri utenti potranno commentare ed esprimere apprezzamento o meno
+
+Possibilità di seguire un altro utente per rimanere visualizzare nella pagina principale i loro post
+
+Implementazione di un Chat privata con un altro utente
+
+
+
