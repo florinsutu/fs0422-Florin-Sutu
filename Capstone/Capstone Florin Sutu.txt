@@ -9,5 +9,9 @@ Possibilità di seguire un altro utente per rimanere visualizzare nella pagina p
 
 Implementazione di un Chat privata con un altro utente
 
+Extra
+
+Implementazione gioco degli scacchi tra utenti
+
 
 
