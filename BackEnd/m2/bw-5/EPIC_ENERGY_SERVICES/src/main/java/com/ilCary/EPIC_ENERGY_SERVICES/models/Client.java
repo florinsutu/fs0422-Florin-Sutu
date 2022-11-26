@@ -18,6 +18,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.lang.Nullable;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
@@ -53,7 +55,6 @@ public class Client {
 	@Column(unique = true, nullable = false)
 	private String email;
 	
-
 	@OneToOne(cascade= {
 			CascadeType.MERGE,
 			CascadeType.PERSIST,
@@ -73,7 +74,6 @@ public class Client {
 
 	@Enumerated(EnumType.STRING)
 	private ClientType type;
-
 	private LocalDate dataInserimento;
 	private LocalDate dataUltimoContatto;
 	private Double fatturatoAnnuale;
