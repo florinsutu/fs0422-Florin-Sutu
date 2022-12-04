@@ -1,0 +1,55 @@
+<mat-card>
+  <mat-card-content>
+
+    <form class="example-form">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Post Title</mat-label>
+        <input matInput appearance="standard" [(ngModel)]="currentPost.title" type="text" name="title"
+          placeholder="Title">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Post content</mat-label>
+        <textarea matInput appearance="standard" [(ngModel)]="currentPost.text" type="text" name="content"
+          placeholder="Content"></textarea>
+      </mat-form-field>
+    </form>
+
+    <button *ngIf=" formAction == 'create' " mat-raised-button (click)="sendPost()">Create Post</button>
+    <button *ngIf=" formAction == 'edit' " mat-raised-button (click)="editPost()">Edit Post</button>
+
+
+  </mat-card-content>
+</mat-card>
+
+
+<!-- <mat-toolbar color="primary">
+  <button mat-raised-button>Home</button>
+  <button mat-raised-button>Add new Product</button>
+</mat-toolbar> -->
+
+<mat-card>
+  <mat-card-content>
+
+    <form class="example-form">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Post Title</mat-label>
+        <input matInput appearance="standard" [(ngModel)]="currentPost.title" type="text" name="title"
+          placeholder="Title">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Post content</mat-label>
+        <textarea matInput appearance="standard" [(ngModel)]="currentPost.text" type="text" name="text"
+          placeholder="Text"></textarea>
+      </mat-form-field>
+    </form>
+
+    <button *ngIf=" formAction == 'create' " mat-raised-button (click)="sendPost()">Create Post</button>
+    <button *ngIf=" formAction == 'edit' " mat-raised-button (click)="editPost()">Edit Post</button>
+
+
+  </mat-card-content>
+</mat-card>
+
+<input type="file" value="select" #selectFile (change)="onFileSelected($event)">

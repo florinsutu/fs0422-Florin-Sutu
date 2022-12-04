@@ -7,7 +7,7 @@
             <div>
                 <mat-form-field class="example-full-width" appearance="legacy">
                     <mat-label>Username:</mat-label>
-                    <input matInput type="email" formControlName="username" placeholder="Your username">
+                    <input matInput type="username" formControlName="username" placeholder="Your username">
                     <mat-icon matSuffix>mail_outline</mat-icon>
                     <mat-hint>Input the fully qualified email address</mat-hint>
                     <mat-error *ngIf="form.controls['username'].errors?.['required']">Email is required</mat-error>

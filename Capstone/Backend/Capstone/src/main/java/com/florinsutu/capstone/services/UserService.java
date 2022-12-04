@@ -22,8 +22,8 @@ public class UserService {
         return repository.save(x);
     }
 
-    public Page<User> getAll(Pageable p) {
-        return repository.findAll(p);
+    public List<User> getAll() {
+        return repository.findAll();
     }
 
     public User getById(Long id) {
@@ -42,14 +42,24 @@ public class UserService {
     
   // ---------------------------- Paging --------------------------------  
     
-//	public Page<User> getAllAndPaginate(Pageable p){
-//		Page<User> pe = ur.findAll(p);
-//		return pe;
-//	}
+	public Page<User> getAllAndPaginate(Pageable p){
+		Page<User> pe = repository.findAll(p);
+		return pe;
+	}
     
-//    public Page<User> getByNameAndPaginate(String n, Pageable p){
-//		return repository.findByNameAndPaginate(n, p);
-//	}
+    public Page<User> getByNameAndPaginate(String n, Pageable p){
+		return repository.findByNameAndPaginate(n, p);
+	}
+    
+  // -------------------------- Filter ----------------------------
+    
+    public List<User> getAllFollowers(Long id){
+    	return repository.getFollowers(id);
+    }
+    
+    public List<User> getAllFollowed(Long id){
+    	return repository.getFollowed(id);
+    }
 
     
 }

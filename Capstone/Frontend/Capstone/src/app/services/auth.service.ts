@@ -1,14 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { AuthResponse } from '../models/auth-response';
 import { User } from '../models/user';
-
-type AuthResponse = {
-  token: string,
-  id:number,
-  username:string,
-  roles:string[],
-  data:Date
-}
 
  type ILogin = {
   username: string,
@@ -16,7 +10,7 @@ type AuthResponse = {
 }
 
  type IRegister = {
-  name:string,
+  username:string,
   email: string,
   password: string
 }
@@ -28,30 +22,27 @@ export class AuthService {
 
   constructor(private http:HttpClient) { }
 
-  apiUrl:string = 'http://localhost:8080/auth'
+  apiUrl:string = 'http://localhost:8080'
 
-  register(registerData:IRegister){
-    return this.http.post<AuthResponse>(this.apiUrl+'/register', registerData)
+  register(registerData:IRegister):Observable<User>{
+    return this.http.post<User>(this.apiUrl+'/api/users/register', registerData)
   }
 
-
-  login(loginData:ILogin){
-    return this.http.post<AuthResponse>(this.apiUrl+'/login', loginData)
+  login(loginData:ILogin):Observable<AuthResponse>{
+    return this.http.post<AuthResponse>(this.apiUrl+'/auth/login', loginData)
   }
 
   isUserLogged():boolean{
     return localStorage.getItem('access') != null
   }
 
-  getLoggedUser():User{
+  getAccessData():AuthResponse{
     let db = localStorage.getItem('access')
-    return db ? JSON.parse(db).user : null
+    return db ? JSON.parse(db) : null
   }
 
   getAccessToken():string{
     let db = localStorage.getItem('access')
-    console.log(db);
-
     return db ? JSON.parse(db).accessToken : null
   }
 
@@ -59,7 +50,7 @@ export class AuthService {
     localStorage.setItem('access',JSON.stringify(data))
   }
 
-  logOut(){
+  logOut():void{
     localStorage.removeItem('access')
   }
 

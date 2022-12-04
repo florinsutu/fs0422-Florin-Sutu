@@ -1,49 +1,31 @@
-package com.florinsutu.capstone.security;
+//package com.florinsutu.capstone.security;
+//
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.context.annotation.Configuration;
+//import org.springframework.web.servlet.config.annotation.CorsRegistry;
+//import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+//import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-
-////@Configuration
+//@Configuration
 //public class MyCrossOriginConfig {
-//  
-//  @SuppressWarnings("deprecation")
-//@Bean
-//  public WebMvcConfigurer corsConfigurer() {
-//      
+//
+//	@SuppressWarnings("deprecation")
+//	@Bean
+//	public WebMvcConfigurer corsConfigurer() {
+//	  
 //      return new WebMvcConfigurerAdapter() {
 //          @Override
 //          public void addCorsMappings(CorsRegistry registry) {
-//              registry.addMapping("/**");
-//          }
+//              registry.addMapping("/api/**")
+//                  .allowedOrigins("http://localhost:4200/")
+//                  .allowedMethods("GET", "POST", "PUT", "DELETE")
+//                  .allowedHeaders("h1", "h2")
+//                  .allowCredentials(false)
+//                  .maxAge(3600);
+//	      }
+//	  
 //      };
-//      
-//  }
+//	}
 //}
-//v2 - control
-
-@Configuration
-public class MyCrossOriginConfig {
-
-	@SuppressWarnings("deprecation")
-	@Bean
-	public WebMvcConfigurer corsConfigurer() {
-	  
-      return new WebMvcConfigurerAdapter() {
-          @Override
-          public void addCorsMappings(CorsRegistry registry) {
-              registry.addMapping("/api/**")
-                  .allowedOrigins("http://127.0.0.1:5500/")
-                  .allowedMethods("GET", "POST")
-                  .allowedHeaders("h1", "h2")
-                  .allowCredentials(false)
-                  .maxAge(3600);
-	      }
-	  
-      };
-	}
-}

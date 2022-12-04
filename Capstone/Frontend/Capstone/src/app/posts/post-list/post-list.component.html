@@ -1,0 +1,23 @@
+
+<mat-card class="post" *ngFor="let post of postList; let i = index">
+
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"><span>#{{i+1}}</span></div>
+    <mat-card-title>{{findAuthor(post.author.id)}}</mat-card-title>
+    <mat-card-subtitle>{{post.title}}</mat-card-subtitle>
+  </mat-card-header>
+
+  <img mat-card-image>
+  <mat-card-content>
+    <p>
+      {{post.text}}
+    </p>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button *ngIf="(currentUser?.id != post.author.id) && (currentUser != null) " mat-button (click)="like(post)">Like</button>
+    <button *ngIf="currentUser?.id == post.author.id" mat-button (click)="sendPost(post)">Edit</button>
+    <button *ngIf="currentUser?.id == post.author.id" mat-button (click)="deletePost(post)">Delete</button>
+  </mat-card-actions>
+
+</mat-card>

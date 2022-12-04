@@ -1,0 +1,40 @@
+<!-- <mat-toolbar color="primary">
+
+  <div>
+    <a mat-button [routerLink]="['/site']">Home</a>
+    <a *ngIf="checkLog()" mat-button [routerLink]="['/site/users']">Users</a>
+  </div>
+
+   <div *ngIf="checkLog()">
+    <span>Benvenuto {{loggedUser.username}}</span>
+    <a mat-button (click)="logOut()" [routerLink]="['/']">Logout</a>
+    <a mat-button [routerLink]="['profile']"> La tua area</a>
+  </div>
+
+   <div *ngIf="!checkLog()" class="text-end">
+    <a mat-button [routerLink]="['/']">Login</a>
+    <a mat-button [routerLink]="['/register']">Sign-up</a>
+  </div>
+</mat-toolbar> -->
+
+
+
+<mat-toolbar class="mat-elevation-z8">
+  <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="toggleSidenav()">
+      <mat-icon *ngIf="!sidenav.opened">
+          menu
+      </mat-icon>
+      <mat-icon *ngIf="sidenav.opened">
+          close
+      </mat-icon>
+  </button>
+  <div *ngIf="checkLog()">
+    <span>Benvenuto {{loggedUser.username}}</span>
+<!--     <a mat-button (click)="logOut()" [routerLink]="['/']">Logout</a> -->
+<!--     <a mat-button [routerLink]="['profile']"> La tua area</a> -->
+  </div>
+</mat-toolbar>
+
+
+
+

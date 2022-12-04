@@ -24,6 +24,7 @@ import com.florinsutu.capstone.services.UserService;
 
 @RestController
 @RequestMapping("auth")
+@CrossOrigin(origins = "http://localhost:4200/")
 public class AuthController {
 
 	@Autowired
@@ -37,7 +38,6 @@ public class AuthController {
 	
 
 	@PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE)
-	@CrossOrigin("*")
 	public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
 
 		Authentication authentication = authenticationManager.authenticate(

@@ -1,17 +1,19 @@
-export class User {
-  id!:number;
+export interface User {
+  
+  id:number;
   username:string;
   email:string;
   password:string;
-  nome:string;
-  cognome:string;
-  active:boolean = true;
+  active:boolean;
+  roles: Array<string>;
 
-  constructor(username:string, email:string, password:string, nome:string, cognome:string){
-    this.username = username;
-    this.email = email;
-    this.password = password;
-    this.nome = nome;
-    this.cognome = cognome;
-  }
+  name:string;
+  lastname:string;
+  description:string;
+  isOnline: boolean;
+  isPrivate: boolean;
+
+  followers: Array<User>;
+  followed: Array<User>;
+
 }

@@ -23,12 +23,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  saveDetails(form: any) {
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(form.value, null, 4));
-  }
-
   login() {
-console.log(this.form.value);
 
     this.authSvc.login(this.form.value)
       .subscribe({

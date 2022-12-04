@@ -1,11 +1,14 @@
 package com.florinsutu.capstone.models;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -32,11 +35,16 @@ public class Message {
     
     private String text;
     
-    @OneToOne
+    @ManyToOne
     private User sender;
     
-    @OneToOne
+    @ManyToOne
     private User receiver;
+    
+    //TODO perchè mi salva localdate e non localdatetime? magari aggiungiamo ricerca messaggi in un lasso di tempo
+    private LocalDateTime date;
+    
+    private Boolean edited;
     
     
     
