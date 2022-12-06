@@ -1,0 +1,24 @@
+<p>chat works!</p>
+
+<div *ngFor="let message of messageList">
+  <mat-card [ngClass]="{'receiver': assignRole(message.receiver.id), 'sender': assignRole(message.sender.id)}">
+    <mat-card-content>{{message.text}}</mat-card-content>
+  </mat-card>
+</div>
+
+<mat-card>
+  <mat-card-content>
+
+    <form class="example-form">
+
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Post content</mat-label>
+        <textarea matInput appearance="standard" [(ngModel)]="currentMessage.text" type="text" name="content"
+          placeholder="Content"></textarea>
+      </mat-form-field>
+    </form>
+
+    <button mat-raised-button (click)="sendMessage()">Create Post</button>
+
+  </mat-card-content>
+</mat-card>

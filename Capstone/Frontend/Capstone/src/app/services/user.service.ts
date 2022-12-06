@@ -2,11 +2,16 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../models/user';
+import { UserUpdate } from '../models/user-update';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+
+  editProfilePic(id:number, userPic: FormData) {
+    return this.http.put<User>(this.apiUrl+"/"+id+"/updateProfilePic", userPic)
+  }
 
   constructor(private http:HttpClient) { }
 
@@ -22,11 +27,11 @@ export class UserService {
 
  // non serve un post in questo caso: equivale al register in authService
 
-  editUser(user:User):Observable<User>{
-    return this.http.patch<User>(this.apiUrl + '/' + user.id, user)
+  editUser(user:UserUpdate):Observable<User>{
+    return this.http.put<User>(this.apiUrl + '/' + user.id, user)
   }
 
-  deleteUser(user:User):Observable<User>{
+  deleteUser(user:User){
     return this.http.delete<User>(this.apiUrl + '/' + user.id)
   }
 

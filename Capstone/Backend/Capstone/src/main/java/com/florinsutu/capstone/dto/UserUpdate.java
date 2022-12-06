@@ -6,7 +6,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserUpdate {
-
+	
+	private Long id;
 	private String name;
 	private String lastname;
 	private String username;

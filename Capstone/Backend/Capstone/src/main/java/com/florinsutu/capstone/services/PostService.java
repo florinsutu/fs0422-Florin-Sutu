@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.florinsutu.capstone.exceptions.NotFoundException;
 import com.florinsutu.capstone.models.Post;
@@ -41,6 +42,12 @@ public class PostService {
         repository.deleteById(id);
     }
     
+    @Transactional
+    public void deleteByAuthorId(Long id) {
+		repository.deleteByAuthorId(id);
+	}
+    
+    
   // ---------------------------- Paging --------------------------------  
     
 	public Page<Post> getAllAndPaginate(Pageable p){
@@ -54,8 +61,21 @@ public class PostService {
 		return repository.findByAuthor(author, p);
 	}
 	
+	public List<Post> getByAuthorId(Long id){
+		return repository.findByAuthorId(id);
+	}
+	
 	public List<User> getPostLikers(Long id){
 		return repository.getPostLikers(id);
 	}
+
+	public void deletePostList(List<Post> userPosts) {
+		for(Post p : userPosts) {
+			repository.deleteById(p.getId());
+		}
+		
+	}
+	
+	
 	
 }

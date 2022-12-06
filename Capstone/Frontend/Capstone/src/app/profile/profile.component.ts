@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AuthResponse } from '../models/auth-response';
 import { User } from '../models/user';
+import { UserUpdate } from '../models/user-update';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
 
@@ -15,7 +16,7 @@ export class ProfileComponent implements OnInit {
 
   loggedUser!: AuthResponse
 
-  currentUser!: User;
+  currentUser: User = new User();
 
   constructor(
     private userSvc: UserService,
@@ -33,9 +34,47 @@ export class ProfileComponent implements OnInit {
   });
   }
 
+  onFileSelected(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    if (target.files) {
+      const file = target.files[0];
+      this.currentUser.image = file
+    }
+  }
+
+  prepareFormData(user: User): FormData {
+    const formData = new FormData();
+    if (user.image)
+      formData.append(
+        'imageFile',
+        user.image,
+        user.image?.name
+      )
+    return formData
+  }
+
+  editProfilePic() {
+    console.log(this.currentUser)
+    this.userSvc.editProfilePic(this.currentUser.id, this.prepareFormData(this.currentUser)).subscribe(user =>{
+      this.currentUser = user;
+    })
+  }
+
   editProfile() {
-    this.userSvc.editUser(this.currentUser).subscribe(user => {
-      console.log(this.currentUser)
+
+    let userUpdate: UserUpdate = {
+
+      id: this.currentUser.id,
+      name: this.currentUser.name,
+      lastname: this.currentUser.lastname,
+      username: this.currentUser.username,
+      password: this.currentUser.password,
+      email: this.currentUser.email,
+      descrpition: this.currentUser.description,
+      isPrivate: this.currentUser.isPrivate
+    }
+
+    this.userSvc.editUser(userUpdate).subscribe(user => {
       this.currentUser = user
       Swal.fire({
         title: 'Your Profile has been updated',
@@ -63,7 +102,7 @@ export class ProfileComponent implements OnInit {
         this.userSvc.deleteUser(this.currentUser).subscribe(user => {
           Swal.fire({
             title: 'Error!',
-            text: user.name + 'has been deleted',
+            text: 'User has been deleted',
             icon: 'success',
             confirmButtonText: 'Ok'
           }).then(() => {

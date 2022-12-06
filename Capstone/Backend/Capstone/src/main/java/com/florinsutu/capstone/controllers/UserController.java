@@ -1,5 +1,6 @@
 package com.florinsutu.capstone.controllers;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,19 +25,25 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.florinsutu.capstone.dto.RegisterDTO;
 import com.florinsutu.capstone.dto.UserUpdate;
+import com.florinsutu.capstone.models.Image;
+import com.florinsutu.capstone.models.Post;
 import com.florinsutu.capstone.models.Role;
 import com.florinsutu.capstone.models.RoleType;
 import com.florinsutu.capstone.models.User;
+import com.florinsutu.capstone.services.ImageService;
+import com.florinsutu.capstone.services.PostService;
 import com.florinsutu.capstone.services.RoleService;
 import com.florinsutu.capstone.services.UserService;
 
 @RestController
 @RequestMapping("/api/users")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController {
 
 	private final Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -48,6 +56,12 @@ public class UserController {
 
 	@Autowired
 	private RoleService roleService;
+	
+	@Autowired
+	private PostService postService;
+
+	@Autowired
+	private ImageService imageService;
 
 //---------------------------- Get ---------------------------------
 
@@ -141,6 +155,35 @@ public class UserController {
 		userService.save(user);
 		return user;
 	}
+	
+	@PutMapping(value="/{id}/updateProfilePic", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+	public User updateProfilePic(@PathVariable("id") Long id, @RequestPart("imageFile") MultipartFile file) {
+		
+		Image postImage = uploadImage(file);
+    	imageService.save(postImage);
+    	
+    	User user = userService.getById(id);
+    	user.setImage(postImage);
+		userService.save(user);
+		
+    	return user;
+	}
+	
+    public Image uploadImage(MultipartFile file) {
+    	
+    	try {
+			Image img = Image.builder()
+					.name(file.getOriginalFilename())
+					.type(file.getContentType())
+					.imgBytes(file.getBytes())
+					.build();
+			return img;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+    	
+    }
 
 	@PutMapping("/{id}/follow") // TODO non dovresti poter seguir te stesso
 	public User follow(@PathVariable("id") Long followerId, @RequestBody Long followedId) {
@@ -163,9 +206,11 @@ public class UserController {
 
 	@DeleteMapping("/{id}")
 //    @PreAuthorize("hasRole('ADMIN')")
-	public String deleteUserById(@PathVariable("id") Long id) {
+	public void deleteUserById(@PathVariable("id") Long id) {
+		List<Post> userPosts = postService.getByAuthorId(id);
+		postService.deletePostList(userPosts);
 		userService.deleteById(id);
-		return "User deleted successfully";
+//		return "User deleted successfully";
 	}
 
 	// ---------------------------- Tests --------------------------

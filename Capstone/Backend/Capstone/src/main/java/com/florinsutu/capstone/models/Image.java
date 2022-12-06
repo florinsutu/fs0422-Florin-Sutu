@@ -32,6 +32,7 @@ public class Image {
 	private Long id;
 	
 	private String name;
+	private String type;
 	
 	@Column(length=50000000) //TODO fare prove per vedere un valore sensato
 	private byte[] imgBytes;

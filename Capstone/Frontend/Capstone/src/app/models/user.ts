@@ -1,19 +1,20 @@
-export interface User {
-  
-  id:number;
-  username:string;
-  email:string;
-  password:string;
-  active:boolean;
-  roles: Array<string>;
+export class User {
 
-  name:string;
-  lastname:string;
-  description:string;
-  isOnline: boolean;
-  isPrivate: boolean;
+  id!:number;
+  username!:string;
+  email!:string;
+  password!:string;
+  active!:boolean;
+  roles!: Array<string>;
 
-  followers: Array<User>;
-  followed: Array<User>;
+  name!:string;
+  lastname!:string;
+  description!:string;
+  isOnline!: boolean;
+  isPrivate!: boolean;
+  image:any;
+
+  followers!: Array<User>;
+  followed!: Array<User>;
 
 }

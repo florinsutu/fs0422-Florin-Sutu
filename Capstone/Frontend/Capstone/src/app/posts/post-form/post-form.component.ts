@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AuthResponse } from 'src/app/models/auth-response';
-import { fileHandle } from 'src/app/models/file-model';
+import { FileHandle } from 'src/app/models/file-model';
 import { Post } from 'src/app/models/post';
 import { PostDto } from 'src/app/models/postDto';
 

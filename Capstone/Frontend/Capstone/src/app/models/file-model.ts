@@ -1,7 +1,7 @@
 import { SafeUrl } from "@angular/platform-browser";
 
-export interface fileHandle{
-  
+export interface FileHandle{
+
   file: File,
   url:SafeUrl
 }

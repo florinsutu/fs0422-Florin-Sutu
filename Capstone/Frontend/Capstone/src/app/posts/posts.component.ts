@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { map } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { AuthResponse } from '../models/auth-response';
 import { Post } from '../models/post';
 import { PostDto } from '../models/postDto';
 import { User } from '../models/user';
 import { AuthService } from '../services/auth.service';
+import { ImageProcessingService } from '../services/image-processing.service';
 import { PostService } from '../services/post.service';
 import { UserService } from '../services/user.service';
 
@@ -20,7 +22,11 @@ export class PostsComponent implements OnInit {
   formAction: string = 'create'
   userList: User[] = [];
 
-  constructor(private postSvc: PostService, private authSvc: AuthService, private userSvc: UserService) { }
+  constructor(
+    private postSvc: PostService,
+    private authSvc: AuthService,
+    private userSvc: UserService,
+    private imgSvc: ImageProcessingService) { }
 
   posts: Post[] = [];
 
@@ -30,20 +36,25 @@ export class PostsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.userSvc.getAllUsers().subscribe({
-      next: res => this.userList = res,
-      error: error => console.log(error)
-    })
+    this.userSvc.getAllUsers().subscribe(
+      {
+        next: res => this.userList = res,
+        error: error => console.log(error)
+      })
 
     if (this.checkLog())
       this.loggedUser = this.authSvc.getAccessData()
 
-    this.postSvc.getAllPosts().subscribe(
-      {
-        next: res => this.posts = res,
-        error: error => console.log(error)
-      }
-    )
+    this.postSvc.getAllPosts()
+      .pipe(
+        map((p: Post[], i) => p.map((post: Post) => this.imgSvc.createImages(post)))
+        )
+          .subscribe(
+            {
+              next: res => this.posts = res as Post[],
+              error: error => console.log(error)
+            }
+          )
 
   }
 
@@ -78,7 +89,6 @@ export class PostsComponent implements OnInit {
   }
 
   editPost(post: Post) {
-    console.log(post);
     this.postSvc.editPost(post).subscribe(res => {
       let index = this.posts.findIndex((todo: Post) => todo.id == res.id)
       this.posts.splice(index, 1, post)
@@ -107,12 +117,12 @@ export class PostsComponent implements OnInit {
       new Blob([JSON.stringify(post)], { type: 'application/json' })
     );
 
-    if(post.image)
-    formData.append(
-      'imageFile',
-      post.image,
-      post.image?.name
-    )
+    if (post.image)
+      formData.append(
+        'imageFile',
+        post.image,
+        post.image?.name
+      )
 
     return formData
 

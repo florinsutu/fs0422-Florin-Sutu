@@ -3,6 +3,13 @@
   <mat-card>
     <mat-card-content>
 
+      <input type="file" value="select" #selectFile (change)="onFileSelected($event)">
+      <button mat-raised-button (click)="editProfilePic()">Edit Profile Pic</button>
+<!--       <img mat-card-image [src]="currentUser.image"> -->
+
+
+
+
       <form class="example-form">
         <mat-form-field class="example-full-width" appearance="outline">
           <mat-label>Username</mat-label>
@@ -22,5 +29,8 @@
 
     </mat-card-content>
   </mat-card>
+
+
+
 
   </section>

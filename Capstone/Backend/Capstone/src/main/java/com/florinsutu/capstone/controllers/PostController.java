@@ -100,6 +100,7 @@ public class PostController {
     	imageService.save(postImage);
     	
         Post post = Post.builder()
+        		.title(dto.getTitle())
         		.text(dto.getText())
         		.author(userService.getById(dto.getAuthorId()))
         		.date(LocalDateTime.now())
@@ -117,6 +118,7 @@ public class PostController {
     	try {
 			Image img = Image.builder()
 					.name(file.getOriginalFilename())
+					.type(file.getContentType())
 					.imgBytes(file.getBytes())
 					.build();
 			return img;

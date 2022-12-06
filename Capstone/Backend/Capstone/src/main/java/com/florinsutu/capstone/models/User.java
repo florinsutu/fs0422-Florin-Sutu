@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -69,6 +71,9 @@ public class User {
     private Boolean isOnline;
     private Boolean isPrivate;
     private LocalDateTime registration;
+    
+    @OneToOne(cascade= CascadeType.ALL)
+    private Image image;
     
     @ManyToMany
     @JsonBackReference

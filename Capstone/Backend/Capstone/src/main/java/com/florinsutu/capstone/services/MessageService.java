@@ -58,5 +58,10 @@ public class MessageService {
 		Page<Message> pe = repository.findByReceiver(receiverId, p);
 		return pe;
 	}
+
+	public List<Message> getByChat(Long user1Id, Long user2Id) {
+		
+		return repository.findByChat(user1Id,user2Id);
+	}
 	
 }

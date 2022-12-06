@@ -28,10 +28,15 @@
           close
       </mat-icon>
   </button>
+
   <div *ngIf="checkLog()">
     <span>Benvenuto {{loggedUser.username}}</span>
-<!--     <a mat-button (click)="logOut()" [routerLink]="['/']">Logout</a> -->
-<!--     <a mat-button [routerLink]="['profile']"> La tua area</a> -->
+    <a mat-button (click)="logOut()" [routerLink]="['/']">Logout</a>
+  </div>
+
+  <div *ngIf="!checkLog()" class="text-end">
+    <a mat-button [routerLink]="['/']">Login</a>
+    <a mat-button [routerLink]="['/register']">Sign-up</a>
   </div>
 </mat-toolbar>
 
