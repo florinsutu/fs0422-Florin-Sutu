@@ -1,0 +1,63 @@
+section {
+  max-width: 500px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .form {
+    font-size: 1.4rem;
+
+    .form-field {
+      width: 100%;
+    }
+
+    button {
+      font-size: 1.2rem;
+    }
+  }
+
+}
+
+@media screen and (min-width: 500px) {
+  section {
+
+    mat-card {
+      margin-top: 50px;
+    }
+  }
+}
+
+@media screen and (min-width: 992px) {
+
+  section {
+    display: flex;
+    justify-content: center;
+    max-width: none;
+    flex-direction: row;
+
+    mat-card {
+      width: 500px;
+      margin: 100px 20px;
+
+      form {
+        min-width: 150px;
+        max-width: 500px;
+        width: 100%;
+
+        .form-field {
+          width: 100%;
+        }
+
+        button {
+          font-size: 1.4rem;
+        }
+
+        div {
+          margin: 5px;
+        }
+      }
+    }
+  }
+}
