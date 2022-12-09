@@ -1,23 +1,32 @@
-<mat-card>
+<mat-card class="mat-elevation-z10">
   <mat-card-content>
 
-    <form class="example-form">
-      <mat-form-field class="example-full-width" appearance="outline">
+    <form class="post-form" autocomplete="off">
+
+      <mat-form-field class="form-field" appearance="outline">
         <mat-label>Post Title</mat-label>
         <input matInput appearance="standard" [(ngModel)]="currentPost.title" type="text" name="title"
           placeholder="Title">
       </mat-form-field>
 
-      <mat-form-field class="example-full-width" appearance="outline">
+      <mat-form-field class="form-field" appearance="outline">
         <mat-label>Post content</mat-label>
         <textarea matInput appearance="standard" [(ngModel)]="currentPost.text" type="text" name="content"
           placeholder="Content"></textarea>
       </mat-form-field>
+
+      <label *ngIf=" formAction != 'edit' " class="custom-file-upload">
+        <span>Immagine</span>
+        <div class="preview" *ngIf="imgPreview">
+          <img [src]="imgPreview.url">
+        </div>
+        <input type="file" value="select" #selectFile (change)="onFileSelected($event)">
+      </label>
+
     </form>
 
     <button *ngIf=" formAction == 'create' " mat-raised-button (click)="sendPost()">Create Post</button>
     <button *ngIf=" formAction == 'edit' " mat-raised-button (click)="editPost()">Edit Post</button>
-
 
   </mat-card-content>
 </mat-card>
@@ -27,5 +36,3 @@
   <button mat-raised-button>Home</button>
   <button mat-raised-button>Add new Product</button>
 </mat-toolbar> -->
-
-<input type="file" value="select" #selectFile (change)="onFileSelected($event)">

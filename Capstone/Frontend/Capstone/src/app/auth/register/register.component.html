@@ -32,7 +32,7 @@
             <input matInput [type]="flag ? 'password' : 'text'" placeholder="Enter your password"
               formControlName="password">
             <mat-icon (click)="flag=!flag" matSuffix>{{ flag ? 'visibility' : 'visibility_off' }}</mat-icon>
-            <mat-error>Password is required</mat-error>
+            <mat-error *ngIf="!form.controls['password'].errors?.['minlength']">Password is required</mat-error>
             <mat-error *ngIf="form.controls['password'].errors?.['minlength']">
               Please enter more than 4 character
             </mat-error>

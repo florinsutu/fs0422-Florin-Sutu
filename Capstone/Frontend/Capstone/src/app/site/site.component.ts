@@ -1,9 +1,12 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
 import { map } from 'rxjs/operators';
 import { AuthResponse } from '../models/auth-response';
+import { Post } from '../models/post';
 import { User } from '../models/user';
+import { PostFormComponent } from '../posts/post-form/post-form.component';
 import { AuthService } from '../services/auth.service';
 import { ImageProcessingService } from '../services/image-processing.service';
 import { UserService } from '../services/user.service';
@@ -23,7 +26,9 @@ export class SiteComponent {
     private observer: BreakpointObserver,
     private authSvc: AuthService,
     private userSvc: UserService,
-    private imgSvc: ImageProcessingService) { }
+    private imgSvc: ImageProcessingService,
+    ) { }
+
 
     loggedUser!: AuthResponse
 
@@ -42,7 +47,7 @@ export class SiteComponent {
   }
 
   ngAfterViewInit() {
-    this.observer.observe(['(max-width: 800px)']).subscribe((res) => {
+    this.observer.observe(['(max-width: 992px)']).subscribe((res) => {
       if (res.matches) {
         this.sidenav.mode = 'over';
         this.sidenav.close();
@@ -56,4 +61,6 @@ export class SiteComponent {
   checkLog(): boolean {
     return this.authSvc.isUserLogged()
   }
+
+
 }

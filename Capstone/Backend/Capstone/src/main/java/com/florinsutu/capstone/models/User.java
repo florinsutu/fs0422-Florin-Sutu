@@ -73,6 +73,7 @@ public class User {
     private LocalDateTime registration;
     
     @OneToOne(cascade= CascadeType.ALL)
+    
     private Image image;
     
     @ManyToMany

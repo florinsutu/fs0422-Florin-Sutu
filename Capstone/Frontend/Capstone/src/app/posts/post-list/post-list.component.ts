@@ -1,3 +1,4 @@
+import { identifierName } from '@angular/compiler';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AuthResponse } from 'src/app/models/auth-response';
 import { Post } from 'src/app/models/post';
@@ -23,14 +24,20 @@ export class PostListComponent implements OnInit {
   @Output() onDelete = new EventEmitter()
 
   ngOnInit(): void {
-
+    console.log(this.userList);
   }
 
-  findAuthor(id: number | undefined): string {
+  isOwner(id: number): boolean {
+    if(this.currentUser)
+    return this.currentUser.id == id;
+    else return false;
+  }
+
+  findAuthor(id: number | undefined): User {
     let author = this.userList.find((user: User) => user.id == id)
     if (author)
-    return author.username
-    else return 'unknown author'
+    return author
+    else return new User();
   }
 
   deletePost(post: Post) {

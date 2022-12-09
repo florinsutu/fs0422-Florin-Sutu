@@ -5,7 +5,7 @@ import { PostsRoutingModule } from './posts-routing.module';
 import { PostsComponent } from './posts.component';
 import { PostFormComponent } from './post-form/post-form.component';
 import { NgMaterialModule } from '../ng-material/ng-material.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PostListComponent } from './post-list/post-list.component';
 
 
@@ -19,7 +19,8 @@ import { PostListComponent } from './post-list/post-list.component';
     CommonModule,
     PostsRoutingModule,
     FormsModule,
-    NgMaterialModule
+    NgMaterialModule,
+    ReactiveFormsModule
   ]
 })
 export class PostsModule { }

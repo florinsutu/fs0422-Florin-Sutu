@@ -1,9 +1,43 @@
-.example-form {
+
+.post-form {
   min-width: 150px;
   max-width: 500px;
   width: 100%;
 }
 
-.example-full-width {
+.form-field {
   width: 100%;
+}
+
+button{
+  color:white;
+  background-color: #004a9f;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+
+
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.preview{
+
+  img{
+    box-sizing: border-box;
+    padding-top:5px;
+    width:100%;
+  }
+
+}
+
+@media screen and (min-width:576){
+
 }

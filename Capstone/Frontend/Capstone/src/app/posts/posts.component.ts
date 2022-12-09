@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { map } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { AuthResponse } from '../models/auth-response';
@@ -21,12 +22,14 @@ export class PostsComponent implements OnInit {
   loggedUser!: AuthResponse
   formAction: string = 'create'
   userList: User[] = [];
+  showForm: boolean = false;
 
   constructor(
     private postSvc: PostService,
     private authSvc: AuthService,
     private userSvc: UserService,
-    private imgSvc: ImageProcessingService) { }
+    private imgSvc: ImageProcessingService,
+    ) { }
 
   posts: Post[] = [];
 
@@ -36,11 +39,16 @@ export class PostsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.userSvc.getAllUsers().subscribe(
-      {
-        next: res => this.userList = res,
-        error: error => console.log(error)
-      })
+    this.userSvc.getAllUsers()
+    .pipe(
+      map((p: User[], i) => p.map((post: User) => this.imgSvc.createImages(post)))
+      )
+        .subscribe(
+          {
+            next: res => this.userList = res as User[],
+            error: error => console.log(error)
+          }
+        )
 
     if (this.checkLog())
       this.loggedUser = this.authSvc.getAccessData()
@@ -106,6 +114,7 @@ export class PostsComponent implements OnInit {
     todo = Object.assign({}, todo)
     this.currentPost = todo
     this.formAction = 'edit'
+    this.showForm = true;
   }
 
   prepareFormDate(post: PostDto): FormData {
@@ -126,6 +135,11 @@ export class PostsComponent implements OnInit {
 
     return formData
 
+  }
+
+  toggleCreatePost(){
+    this.formAction = 'create'
+    this.showForm = !this.showForm;
   }
 
 }

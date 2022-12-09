@@ -1,4 +1,4 @@
-<app-post-form *ngIf="loggedUser"
+<app-post-form *ngIf="loggedUser && showForm"
  (onNewPostCreated)="addPost($event)" (onEditPost)="editPost($event)"
  [currentPost]="currentPost"
  [formAction]="formAction">
@@ -8,5 +8,12 @@
 <app-post-list (onAddToEdit)="addToEdit($event)"
   (onDelete)="deletePost($event)" [postList]="posts" [currentUser]="loggedUser" [userList]="userList">
 </app-post-list>
+
+
+  <button class="opener" mat-fab aria-label="Example icon button with a home icon" (click)="toggleCreatePost()">
+    <mat-icon>add</mat-icon>
+  </button>
+
+
 
 

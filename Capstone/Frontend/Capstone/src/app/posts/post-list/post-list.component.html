@@ -1,13 +1,81 @@
+<div class="post" *ngFor="let post of postList, let i = index">
 
-<mat-card class="post" *ngFor="let post of postList; let i = index">
+  <div class="post-header">
+    <img [src]="findAuthor(post.author.id).image.url" alt="user profile image">
+    <p class="username">{{post.author.username}}</p>
+  </div>
+
+  <img class="post-image" [src]="post.image.url" alt="">
+
+  <div class="post-content">
+
+    <div>
+      <span class="likes">{{post.likes.length}} likes</span>
+
+      <div>
+
+        <button mat-button *ngIf="isOwner(post.author.id)" (click)="deletePost(post)">
+          <mat-icon>delete_outline</mat-icon>
+        </button>
+
+        <button mat-button *ngIf="currentUser != null" (click)="like(post)">
+          <mat-icon>favorite_border</mat-icon>
+        </button>
+
+        <button mat-button *ngIf="currentUser != null">
+          <mat-icon>insert_comment</mat-icon>
+        </button>
+      </div>
+
+    </div>
+
+    <p class="description"><span>{{post.title}}</span> {{post.text}}</p>
+    <p class="post-time">{{post.date}}</p>
+
+  </div>
+
+  <div class="post-comment" *ngIf="currentUser != null">
+
+    <input type="text" class="comment-input" placeholder="Add a comment">
+    <button mat-raised-button>Send</button>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+<!-- <section>
+
+  <div *ngFor="let post of postList">
+
+    <p>{{post.author.username}}</p>
+
+    <img class="postImg" mat-card-image [src]="post.image.url">
+
+    <span>{{post.title}}</span>
+    <p>{{post.text}}</p>
+
+  </div> -->
+
+
+
+<!-- <mat-card class="post" *ngFor="let post of postList; let i = index">
 
   <mat-card-header>
-    <div mat-card-avatar class="example-header-image"><span>#{{i+1}}</span></div>
-    <mat-card-title>{{findAuthor(post.author.id)}}</mat-card-title>
+    <div mat-card-avatar class="example-header-image">
+      <img [src]="post.author.image.url">
+    </div>
+    <mat-card-title>{{post.author.username}}</mat-card-title>
     <mat-card-subtitle>{{post.title}}</mat-card-subtitle>
   </mat-card-header>
 
-  <img mat-card-image [src]="postList[i].image.url">
+    <img class="postImg" mat-card-image [src]="post.image.url">
+
   <mat-card-content>
     <p>
       {{post.text}}
@@ -15,11 +83,13 @@
   </mat-card-content>
 
   <mat-card-actions>
-    <button *ngIf="(currentUser?.id != post.author.id) && (currentUser != null) " mat-button (click)="like(post)">Like</button>
+    <button *ngIf="(currentUser?.id != post.author.id) && (currentUser != null) " mat-button
+      (click)="like(post)">Like</button>
     <button *ngIf="currentUser?.id == post.author.id" mat-button (click)="sendPost(post)">Edit</button>
     <button *ngIf="currentUser?.id == post.author.id" mat-button (click)="deletePost(post)">Delete</button>
   </mat-card-actions>
 
+  <img [src]="post.author.image.url"> -->
 
 
 <!--   <div class="commentWhole" *ngFor="let comment of allComments" >
@@ -44,4 +114,7 @@
 <button>&#8593;</button>
 </div> -->
 
-</mat-card>
+<!-- </mat-card> -->
+
+
+<!-- </section> -->

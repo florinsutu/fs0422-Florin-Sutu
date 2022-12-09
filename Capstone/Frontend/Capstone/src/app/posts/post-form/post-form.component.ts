@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { AuthResponse } from 'src/app/models/auth-response';
 import { FileHandle } from 'src/app/models/file-model';
 import { Post } from 'src/app/models/post';
@@ -11,7 +12,10 @@ import { PostDto } from 'src/app/models/postDto';
 })
 export class PostFormComponent {
 
-  constructor() { }
+  imgPreview!: FileHandle;
+
+  constructor(private sanitizer: DomSanitizer) { }
+
 
   @Input() currentPost!: PostDto
   @Input() currentUser!: AuthResponse
@@ -42,6 +46,11 @@ export class PostFormComponent {
     const target = event.target as HTMLInputElement;
     if (target.files) {
       const file = target.files[0];
+
+      this.imgPreview = {
+        file: file,
+        url: this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(file))
+      }
 
       this.currentPost.image = file
 
