@@ -1,14 +1,24 @@
 <section>
 
-  <mat-card>
+  <img *ngIf="currentUser.image" [src]="currentUser.image.url" class="avatar mat-elevation-z8"/>
+
+  <div id="bg">
+    <div id="avatar">
+      <h1>{{currentUser.username}}</h1>
+    </div>
+  </div>
+
+
+
+
+
+
+
+  <mat-card *ngIf="isOwner()">
     <mat-card-content>
 
       <input type="file" value="select" #selectFile (change)="onFileSelected($event)">
       <button mat-raised-button (click)="editProfilePic()">Edit Profile Pic</button>
-<!--       <img mat-card-image [src]="currentUser.image"> -->
-
-
-
 
       <form class="example-form">
         <mat-form-field class="example-full-width" appearance="outline">
@@ -29,8 +39,5 @@
 
     </mat-card-content>
   </mat-card>
-
-
-
 
   </section>

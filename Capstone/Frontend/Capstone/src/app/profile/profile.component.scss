@@ -1,0 +1,37 @@
+.avatar {
+  margin-top: 16px;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+}
+
+#bg{
+  background-image: url('https://picsum.photos/300');
+  height: 200px;
+  max-width: 500px;
+  margin: 0 auto;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  box-shadow: 1px 1px 25px 1px #2e2e2e;
+  border-radius:0px 0px 15px 15px ;
+ }
+
+
+ #avatar{
+   margin-bottom: -2rem;
+   width: 140px;
+   height: 100px;
+   background: linear-gradient(to right, #3c6fa3ec, #4ca2afda);
+   border-radius: 50%;
+   border-bottom: 3px solid #0000001c;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   box-shadow: 1px 1px 25px 1px #2e2e2e96;
+   h1{
+     color: #fff;
+   }
+  }

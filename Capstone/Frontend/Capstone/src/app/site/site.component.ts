@@ -1,12 +1,9 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
 import { map } from 'rxjs/operators';
 import { AuthResponse } from '../models/auth-response';
-import { Post } from '../models/post';
 import { User } from '../models/user';
-import { PostFormComponent } from '../posts/post-form/post-form.component';
 import { AuthService } from '../services/auth.service';
 import { ImageProcessingService } from '../services/image-processing.service';
 import { UserService } from '../services/user.service';

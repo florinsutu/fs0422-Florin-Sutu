@@ -3,7 +3,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AuthResponse } from 'src/app/models/auth-response';
 import { Post } from 'src/app/models/post';
 import { User } from 'src/app/models/user';
-import { ImageProcessingService } from 'src/app/services/image-processing.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({

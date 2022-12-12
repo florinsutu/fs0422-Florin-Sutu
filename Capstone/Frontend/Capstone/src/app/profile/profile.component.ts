@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { map } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { AuthResponse } from '../models/auth-response';
 import { User } from '../models/user';
 import { UserUpdate } from '../models/user-update';
 import { AuthService } from '../services/auth.service';
+import { ImageProcessingService } from '../services/image-processing.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -18,20 +20,34 @@ export class ProfileComponent implements OnInit {
 
   currentUser: User = new User();
 
+  isOwner() {
+    if (this.currentUser && this.loggedUser)
+      return this.currentUser.id == this.loggedUser.id;
+    else return false;
+  }
+
   constructor(
     private userSvc: UserService,
     private authSvc: AuthService,
-    private router: Router
+    private route: ActivatedRoute,
+    private router: Router,
+    private imgSvc: ImageProcessingService,
   ) { }
 
   ngOnInit(): void {
     this.loggedUser = this.authSvc.getAccessData()
-    this.userSvc.getUserById(String(this.loggedUser.id)).subscribe({
-    next: (res) => {
-      this.currentUser = res;
-    },
-    error: () => (console.log("user not found")),
-  });
+    let currentUserId = this.route.snapshot.paramMap.get('id')
+    if (currentUserId) {
+      this.userSvc.getUserById(currentUserId)
+      .pipe(
+        map((u: User, i) => this.imgSvc.createImages(u))
+      )
+        .subscribe({
+          next: res => this.currentUser = res as User,
+          error: () => (console.log("user not found")),
+        });
+    }
+
   }
 
   onFileSelected(event: Event): void {
@@ -55,7 +71,7 @@ export class ProfileComponent implements OnInit {
 
   editProfilePic() {
     console.log(this.currentUser)
-    this.userSvc.editProfilePic(this.currentUser.id, this.prepareFormData(this.currentUser)).subscribe(user =>{
+    this.userSvc.editProfilePic(this.currentUser.id, this.prepareFormData(this.currentUser)).subscribe(user => {
       this.currentUser = user;
     })
   }
