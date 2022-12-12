@@ -28,6 +28,7 @@ export class UserService {
  // non serve un post in questo caso: equivale al register in authService
 
   editUser(user:UserUpdate):Observable<User>{
+    console.log(user)
     return this.http.put<User>(this.apiUrl + '/' + user.id, user)
   }
 

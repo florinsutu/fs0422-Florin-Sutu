@@ -29,7 +29,7 @@ export class PostsComponent implements OnInit {
     private authSvc: AuthService,
     private userSvc: UserService,
     private imgSvc: ImageProcessingService,
-    ) { }
+  ) { }
 
   posts: Post[] = [];
 
@@ -40,15 +40,15 @@ export class PostsComponent implements OnInit {
   ngOnInit(): void {
 
     this.userSvc.getAllUsers()
-    .pipe(
-      map((p: User[], i) => p.map((post: User) => this.imgSvc.createImages(post)))
+      .pipe(
+        map((p: User[], i) => p.map((post: User) => this.imgSvc.createImages(post)))
       )
-        .subscribe(
-          {
-            next: res => this.userList = res as User[],
-            error: error => console.log(error)
-          }
-        )
+      .subscribe(
+        {
+          next: res => this.userList = res as User[],
+          error: error => console.log(error)
+        }
+      )
 
     if (this.checkLog())
       this.loggedUser = this.authSvc.getAccessData()
@@ -56,35 +56,42 @@ export class PostsComponent implements OnInit {
     this.postSvc.getAllPosts()
       .pipe(
         map((p: Post[], i) => p.map((post: Post) => this.imgSvc.createImages(post)))
-        )
-          .subscribe(
-            {
-              next: res => this.posts = res as Post[],
-              error: error => console.log(error)
-            }
-          )
+      )
+      .subscribe(
+        {
+          next: res => this.posts = res as Post[],
+          error: error => console.log(error)
+        }
+      )
 
   }
 
   deletePost(post: Post): void {
-    this.postSvc.deletePost(post).subscribe(res => {
-      let index: number = this.posts.findIndex(p => p.id === post.id)
-      this.posts.splice(index, 1);
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Post Deleated',
-        showConfirmButton: false,
-        timer: 2000
-      })
-    })
+    this.postSvc.deletePost(post).subscribe(
+      {
+        next: res => {
+          let index: number = this.posts.findIndex(p => p.id === post.id)
+          this.posts.splice(index, 1);
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Post Deleated',
+            showConfirmButton: false,
+            timer: 2000
+          })
+        },
+        error: error => console.log(error)
+      }
+    )
   }
 
   addPost(post: PostDto): void {
 
     post.authorId = this.loggedUser?.id
-    this.postSvc.addPost(this.prepareFormDate(post)).subscribe(res => {
-      this.posts.push(res)
+    this.postSvc.addPost(this.prepareFormDate(post)).pipe(
+      map((u: Post, i) => this.imgSvc.createImages(u))
+    ).subscribe(res => {
+      this.posts.push(res as Post)
       this.currentPost = new Post()
       Swal.fire({
         position: 'top-end',
@@ -137,7 +144,7 @@ export class PostsComponent implements OnInit {
 
   }
 
-  toggleCreatePost(){
+  toggleCreatePost() {
     this.formAction = 'create'
     this.showForm = !this.showForm;
   }

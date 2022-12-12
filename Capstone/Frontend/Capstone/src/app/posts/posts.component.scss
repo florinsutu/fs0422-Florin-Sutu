@@ -6,27 +6,17 @@
 }
 
 app-post-form{
-  position: fixed;
+  position:sticky;
   z-index: 1;
-  left:0;
-  right:0;
-
+  top:0;
 }
 
 
 @media screen and (min-width: 576px) {
-  app-post-form{
 
-    top:100px;
-    right:30px;
-    left:30px;
-  }
 }
 
 @media screen and (min-width: 992px) {
-  app-post-form{
 
-
-  }
 }
 

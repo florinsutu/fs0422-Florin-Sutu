@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './post-list.component.html',
   styleUrls: ['./post-list.component.scss']
 })
-export class PostListComponent implements OnInit {
+export class PostListComponent {
 
   constructor(private userSvc: UserService) { }
 
@@ -22,20 +22,16 @@ export class PostListComponent implements OnInit {
   @Output() onLike = new EventEmitter()
   @Output() onDelete = new EventEmitter()
 
-  ngOnInit(): void {
-    console.log(this.userList);
-  }
-
   isOwner(id: number): boolean {
-    if(this.currentUser)
-    return this.currentUser.id == id;
+    if (this.currentUser)
+      return this.currentUser.id == id;
     else return false;
   }
 
   findAuthor(id: number | undefined): User {
     let author = this.userList.find((user: User) => user.id == id)
     if (author)
-    return author
+      return author
     else return new User();
   }
 

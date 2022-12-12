@@ -17,6 +17,10 @@ export class PostService {
     return this.http.get<Post[]>(this.apiUrl)
   }
 
+  getAllPostsByAuthorId(id:number):Observable<Post[]>{
+    return this.http.get<Post[]>(this.apiUrl+"/author/"+id)
+  }
+
   addPost(post: FormData):Observable<Post>{
     return this.http.post<Post>(this.apiUrl, post)
   }

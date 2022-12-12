@@ -1,43 +1,103 @@
-<section>
+<!-- -------- Profile Section --------- -->
 
-  <img *ngIf="currentUser.image" [src]="currentUser.image.url" class="avatar mat-elevation-z8"/>
+<section *ngIf="!showForm" id="profile">
 
-  <div id="bg">
-    <div id="avatar">
-      <h1>{{currentUser.username}}</h1>
+  <div class="avatar">
+    <img *ngIf="currentUser.image" [src]="currentUser.image.url" class="mat-elevation-z8" />
+    <div><span>{{currentUser.username}}</span></div>
+  </div>
+
+  <div class="profile-stats">
+    <ul>
+      <li><span class="profile-stat-count">164</span> posts</li>
+      <li><span class="profile-stat-count">188</span> followers</li>
+      <li><span class="profile-stat-count">206</span> following</li>
+    </ul>
+  </div>
+
+  <div class="info">
+    <p *ngIf="currentUser.description"><span>About me: </span>{{currentUser.description}}</p>
+    <p *ngIf="currentUser.name">Name: <span>{{currentUser.name}}</span></p>
+    <p *ngIf="currentUser.lastname">Lastname: <span>{{currentUser.lastname}}</span></p>
+    <p *ngIf="currentUser.email">E-mail: <span>{{currentUser.email}}</span></p>
+    <p>Registration:<span>{{currentUser.registration}}</span></p>
+  </div>
+
+  <div class="actions" *ngIf="!isOwner()">
+    <button mat-raised-button (click)="followUser()">Follow</button>
+    <button mat-raised-button routerLink="/site/chat/{{currentUser.id}}">Message</button>
+  </div>
+
+  <div class="actions" *ngIf="isOwner()">
+    <button mat-raised-button (click)="toggleUpdateForm()">Edit Profile</button>
+    <button mat-raised-button (click)="deleteProfile()">Delete Profile</button>
+  </div>
+
+  <div class="gallery">
+    <div class="gallery-item" *ngFor="let post of userPosts, let i = index">
+      <img [src]="post.image.url" class="gallery-image" alt="">
     </div>
   </div>
 
+</section>
 
 
 
+<!-- ------------ Profile Update Form ------------- -->
 
-
-
-  <mat-card *ngIf="isOwner()">
+<section id="profile-form" *ngIf="isOwner() && showForm">
+  <mat-card>
     <mat-card-content>
 
-      <input type="file" value="select" #selectFile (change)="onFileSelected($event)">
+      <label class="custom-file-upload">
+        <span>Immagine</span>
+        <div class="preview" *ngIf="imgPreview">
+          <img [src]="imgPreview.url">
+        </div>
+        <input type="file" value="select" #selectFile (change)="onFileSelected($event)">
+      </label>
+
       <button mat-raised-button (click)="editProfilePic()">Edit Profile Pic</button>
 
-      <form class="example-form">
-        <mat-form-field class="example-full-width" appearance="outline">
+      <form class="update-form">
+        <mat-form-field class="form-field" appearance="outline">
           <mat-label>Username</mat-label>
           <input matInput appearance="standard" type="text" [(ngModel)]="currentUser.username" name="username"
-            placeholder="Name">
+            placeholder="Username">
         </mat-form-field>
 
-        <mat-form-field class="example-full-width" appearance="outline">
+        <mat-form-field class="form-field" appearance="outline">
           <mat-label>Email</mat-label>
           <input matInput appearance="standard" type="email" [(ngModel)]="currentUser.email" name="email"
             placeholder="Email">
         </mat-form-field>
+
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput appearance="standard" type="text" [(ngModel)]="currentUser.name" name="name"
+            placeholder="Name">
+        </mat-form-field>
+
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>Lastname</mat-label>
+          <input matInput appearance="standard" type="text" [(ngModel)]="currentUser.lastname" name="lastname"
+            placeholder="Lastname">
+        </mat-form-field>
+
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>User description</mat-label>
+          <textarea matInput appearance="standard" [(ngModel)]="currentUser.description" type="text" name="description"
+            placeholder="Content"></textarea>
+        </mat-form-field>
+
       </form>
 
-      <button mat-raised-button (click)="editProfile()">Edit Profile</button>
-      <button mat-raised-button (click)="deleteProfile()">Delete Profile</button>
+      <div>
+        <button mat-raised-button (click)="editProfile()">Save Changes</button>
+        <button mat-raised-button (click)="toggleUpdateForm()">Cancel </button>
+      </div>
 
     </mat-card-content>
   </mat-card>
 
-  </section>
+</section>

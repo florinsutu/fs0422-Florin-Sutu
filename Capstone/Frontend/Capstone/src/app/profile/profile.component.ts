@@ -1,12 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { AuthResponse } from '../models/auth-response';
+import { FileHandle } from '../models/file-model';
+import { Post } from '../models/post';
 import { User } from '../models/user';
 import { UserUpdate } from '../models/user-update';
 import { AuthService } from '../services/auth.service';
 import { ImageProcessingService } from '../services/image-processing.service';
+import { PostService } from '../services/post.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -17,8 +21,10 @@ import { UserService } from '../services/user.service';
 export class ProfileComponent implements OnInit {
 
   loggedUser!: AuthResponse
-
+  imgPreview!: FileHandle | null;
   currentUser: User = new User();
+  userPosts: Post[] = [];
+  showForm: boolean = false;
 
   isOwner() {
     if (this.currentUser && this.loggedUser)
@@ -32,6 +38,8 @@ export class ProfileComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private imgSvc: ImageProcessingService,
+    private sanitizer: DomSanitizer,
+    private postSvc: PostService
   ) { }
 
   ngOnInit(): void {
@@ -39,22 +47,38 @@ export class ProfileComponent implements OnInit {
     let currentUserId = this.route.snapshot.paramMap.get('id')
     if (currentUserId) {
       this.userSvc.getUserById(currentUserId)
-      .pipe(
-        map((u: User, i) => this.imgSvc.createImages(u))
-      )
+        .pipe(
+          map((u: User, i) => this.imgSvc.createImages(u))
+        )
         .subscribe({
-          next: res => this.currentUser = res as User,
+          next: res => {
+            this.currentUser = res as User
+
+            this.postSvc.getAllPostsByAuthorId(this.currentUser.id)
+              .pipe(
+                map((p: Post[], i) => p.map((post: Post) => this.imgSvc.createImages(post)))
+              )
+              .subscribe(
+                {
+                  next: res => this.userPosts = res as Post[],
+                  error: error => console.log(error)
+                }
+              )
+          },
           error: () => (console.log("user not found")),
         });
     }
-
   }
 
   onFileSelected(event: Event): void {
     const target = event.target as HTMLInputElement;
     if (target.files) {
       const file = target.files[0];
-      this.currentUser.image = file
+
+      this.imgPreview = {
+        file: file,
+        url: this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(file))
+      }
     }
   }
 
@@ -70,10 +94,28 @@ export class ProfileComponent implements OnInit {
   }
 
   editProfilePic() {
-    console.log(this.currentUser)
-    this.userSvc.editProfilePic(this.currentUser.id, this.prepareFormData(this.currentUser)).subscribe(user => {
-      this.currentUser = user;
-    })
+    if (this.imgPreview) {
+      this.currentUser.image = this.imgPreview.file;
+      this.userSvc.editProfilePic(this.currentUser.id, this.prepareFormData(this.currentUser)).pipe(
+        map((u: User, i) => this.imgSvc.createImages(u))
+      ).subscribe(user => {
+        this.currentUser = user as User;
+        this.imgPreview = null;
+        Swal.fire({
+          title: 'Your Profile Picture has been updated',
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        })
+      })
+    } else {
+      Swal.fire({
+        title: 'Error!',
+        text: 'You have to upload an Image before updating',
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      })
+    }
+
   }
 
   editProfile() {
@@ -86,7 +128,7 @@ export class ProfileComponent implements OnInit {
       username: this.currentUser.username,
       password: this.currentUser.password,
       email: this.currentUser.email,
-      descrpition: this.currentUser.description,
+      description: this.currentUser.description,
       isPrivate: this.currentUser.isPrivate
     }
 
@@ -135,5 +177,13 @@ export class ProfileComponent implements OnInit {
         })
       }
     });
+  }
+
+  toggleUpdateForm() {
+    this.showForm = !this.showForm;
+  }
+
+  followUser(){
+    
   }
 }

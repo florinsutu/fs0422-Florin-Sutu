@@ -51,10 +51,14 @@ export class PostFormComponent {
         file: file,
         url: this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(file))
       }
-
       this.currentPost.image = file
-
     }
+  }
+
+  isInvalid(): boolean {
+    if(this.currentPost.title&&this.currentPost.text&&this.currentPost.image)
+    return false;
+    else return true;
   }
 
 }

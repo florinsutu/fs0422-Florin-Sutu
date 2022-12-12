@@ -13,6 +13,7 @@ export class User {
   isOnline!: boolean;
   isPrivate!: boolean;
   image:any;
+  registration!:Date;
 
   followers!: Array<User>;
   followed!: Array<User>;

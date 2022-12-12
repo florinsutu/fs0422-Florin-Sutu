@@ -6,7 +6,7 @@ export interface UserUpdate {
   username: string,
   password: string,
   email: string,
-  descrpition: string,
+  description: string,
   isPrivate: boolean
 
 }

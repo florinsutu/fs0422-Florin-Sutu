@@ -49,8 +49,7 @@ export class ChatComponent implements OnInit {
         .subscribe(res => this.textedUser = res as User)
 
       this.messageSvc.getAllMessagesOf(this.loggedUser.id + "", textedUserId).subscribe(
-        res => {this.messageList = res
-        console.log(this.messageList)}
+        res => this.messageList = res
       )
     }
   }

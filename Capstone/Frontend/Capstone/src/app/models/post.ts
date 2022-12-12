@@ -8,6 +8,7 @@ export class Post {
   edited!:boolean;
   image!:any;
   likes!:User[];
+  comments!:Comment[];
   date!:Date;
 
   /* constructor(title:string, content:string) {

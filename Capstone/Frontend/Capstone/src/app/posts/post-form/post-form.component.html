@@ -1,7 +1,7 @@
-<mat-card class="mat-elevation-z10">
+<mat-card class="mat-elevation-z10 post-form">
   <mat-card-content>
 
-    <form class="post-form" autocomplete="off">
+    <form autocomplete="off">
 
       <mat-form-field class="form-field" appearance="outline">
         <mat-label>Post Title</mat-label>
@@ -25,8 +25,10 @@
 
     </form>
 
-    <button *ngIf=" formAction == 'create' " mat-raised-button (click)="sendPost()">Create Post</button>
-    <button *ngIf=" formAction == 'edit' " mat-raised-button (click)="editPost()">Edit Post</button>
+    <button *ngIf=" formAction == 'create' " [disabled]="isInvalid()" mat-raised-button (click)="sendPost()">Create
+      Post</button>
+    <button *ngIf=" formAction == 'edit' " [disabled]="isInvalid()" mat-raised-button (click)="editPost()">Edit
+      Post</button>
 
   </mat-card-content>
 </mat-card>

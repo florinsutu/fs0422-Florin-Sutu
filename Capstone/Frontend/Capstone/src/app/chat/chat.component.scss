@@ -46,7 +46,7 @@ section {
 
     .receiver {
       display: flex;
-      justify-content: start;
+      justify-content: flex-start;
 
       span{
         margin:5px 0;
@@ -58,7 +58,7 @@ section {
 
     .sender {
       display: flex;
-      justify-content: end;
+      justify-content: flex-end;
 
       span{
         margin:5px 0;
