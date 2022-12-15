@@ -12,9 +12,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
@@ -48,6 +50,10 @@ public class Post {
     
     @OneToOne(cascade= CascadeType.ALL)
     private Image image;
+    
+    @OneToMany(cascade= CascadeType.REMOVE, orphanRemoval = true, mappedBy = "post")
+    @JsonBackReference
+    private Set<Comment> comments;
     
     @ManyToMany
     @JoinTable(

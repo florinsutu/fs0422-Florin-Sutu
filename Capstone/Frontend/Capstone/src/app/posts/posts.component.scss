@@ -1,3 +1,11 @@
+*{
+  box-sizing: border-box;
+}
+
+:host {
+  width: 100%;
+}
+
 .opener{
   position: fixed;
   bottom: 20px;
@@ -6,9 +14,22 @@
 }
 
 app-post-form{
+  display: flex;
+  justify-content: center;
   position:sticky;
   z-index: 1;
   top:0;
+}
+
+app-post-list{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-content: center;
+}
+
+app-post-comments{
+  width:100%;
 }
 
 

@@ -38,8 +38,9 @@ public class PostService {
         return post.get();
     }
 
-    public void deleteById(Long id) {
+    public String deleteById(Long id) {
         repository.deleteById(id);
+        return("Post deleted successfully");
     }
     
     @Transactional
@@ -73,9 +74,5 @@ public class PostService {
 		for(Post p : userPosts) {
 			repository.deleteById(p.getId());
 		}
-		
-	}
-	
-	
-	
+	}	
 }

@@ -1,0 +1,42 @@
+<!-- <div class="desktop-only">
+
+
+  <div class="post-header">
+       <img [src]="findAuthor(post.author.id).image.url" alt="user profile image">
+      <p class="username">{{post.author.username}}</p>
+    </div>
+
+    <img class="post-image" [src]="post.image.url" alt="">
+
+    <div class="post-content">
+
+      <mat-icon>thumb_up</mat-icon>
+
+</div> -->
+
+<section>
+
+
+
+
+<div>
+
+  <div class="comments" *ngFor="let comment of comments">
+
+    <img *ngIf="comment.sender.image" [src]="comment.sender.image.url" alt="user profile image">
+    <p class="username">{{comment.sender.username}}</p>
+    <span>{{comment.text}}</span>
+
+  </div>
+
+</div>
+
+<div class="comment">
+  <input type="text" class="comment-input" placeholder="Add a comment" [(ngModel)]="commentText">
+  <button mat-raised-button *ngIf="commentText!=null && commentText!='' " (click)="sendComment(commentText, post.id)">
+    <mat-icon>send</mat-icon>
+  </button>
+</div>
+
+
+</section>

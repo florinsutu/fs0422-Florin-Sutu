@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -25,6 +26,9 @@ export class ProfileComponent implements OnInit {
   currentUser: User = new User();
   userPosts: Post[] = [];
   showForm: boolean = false;
+  userFollowers: User[] = [];
+  userFollowed: User[] = [];
+  isFollowing: boolean = false;
 
   isOwner() {
     if (this.currentUser && this.loggedUser)
@@ -45,6 +49,9 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.loggedUser = this.authSvc.getAccessData()
     let currentUserId = this.route.snapshot.paramMap.get('id')
+
+    // Ricavo l'utente della pagina di profilo
+
     if (currentUserId) {
       this.userSvc.getUserById(currentUserId)
         .pipe(
@@ -53,6 +60,39 @@ export class ProfileComponent implements OnInit {
         .subscribe({
           next: res => {
             this.currentUser = res as User
+
+            // Ricavo la lista di followers
+
+            this.userSvc.getFollowers(this.currentUser).pipe(
+              map((p: User[], i) => p.map((post: User) => this.imgSvc.createImages(post)))
+            )
+              .subscribe(
+                {
+                  next: res => {
+                    this.userFollowers = res as User[]
+
+                    for (let user of this.userFollowers) {
+                      if (user.id == this.loggedUser.id)
+                        this.isFollowing = true
+                    }
+                  },
+                  error: error => console.log(error)
+                }
+              )
+
+            // Ricavo la lista di followed
+
+            this.userSvc.getFollowed(this.currentUser).pipe(
+              map((p: User[], i) => p.map((post: User) => this.imgSvc.createImages(post)))
+            )
+              .subscribe(
+                {
+                  next: res => this.userFollowed = res as User[],
+                  error: error => console.log(error)
+                }
+              )
+
+            // Ricavo la lista di post dell' utente
 
             this.postSvc.getAllPostsByAuthorId(this.currentUser.id)
               .pipe(
@@ -183,7 +223,35 @@ export class ProfileComponent implements OnInit {
     this.showForm = !this.showForm;
   }
 
-  followUser(){
-    
+  // Follow
+
+  followUser() {
+    this.userSvc.follow(this.currentUser.id, this.loggedUser.id).subscribe(
+      res => {
+
+        if (!this.isFollowing) {
+          this.userFollowers.push(res)
+          this.isFollowing = true
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Now Following',
+            showConfirmButton: false,
+            timer: 2000
+          })
+        } else {
+          let index = this.userFollowers.findIndex((u: User) => u.id == this.loggedUser.id)
+          this.userFollowers.splice(index, 1)
+          this.isFollowing = false
+          Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: 'Unfollowing',
+            showConfirmButton: false,
+            timer: 2000
+          })
+        }
+      }
+    );
   }
 }

@@ -1,7 +1,7 @@
 <div class="post" *ngFor="let post of postList, let i = index">
 
   <div class="post-header">
-    <img [src]="findAuthor(post.author.id).image.url" alt="user profile image">
+    <img *ngIf="findAuthor(post.author.id).image" [src]="findAuthor(post.author.id).image.url" routerLink="/site/profile/{{post.author.id}}">
     <p class="username">{{post.author.username}}</p>
   </div>
 
@@ -18,11 +18,11 @@
           <mat-icon>delete_outline</mat-icon>
         </button>
 
-        <button mat-button *ngIf="currentUser != null" (click)="like(post)">
-          <mat-icon>favorite_border</mat-icon>
+        <button mat-button *ngIf="currentUser != null" (click)="like(post.id)">
+          <mat-icon [ngClass]="{'liked': isLiked(post.likes)}">favorite_border</mat-icon>
         </button>
 
-        <button mat-button *ngIf="currentUser != null">
+        <button mat-button *ngIf="currentUser != null" (click)="openComments(post)">
           <mat-icon>insert_comment</mat-icon>
         </button>
       </div>
@@ -30,14 +30,14 @@
     </div>
 
     <p class="description"><span>{{post.title}}</span> {{post.text}}</p>
-    <p class="post-time">{{post.date}}</p>
+    <p class="post-time">{{calculateTime(post.date)}}</p>
 
   </div>
 
   <div class="post-comment" *ngIf="currentUser != null">
 
-    <input type="text" class="comment-input" placeholder="Add a comment">
-    <button mat-raised-button>Send</button>
+    <input type="text" class="comment-input" [(ngModel)]="commentText" placeholder="Add a comment">
+    <button mat-raised-button *ngIf="commentText!=null && commentText!='' "  (click)="sendComment(commentText, post.id)">Send</button>
 
   </div>
 

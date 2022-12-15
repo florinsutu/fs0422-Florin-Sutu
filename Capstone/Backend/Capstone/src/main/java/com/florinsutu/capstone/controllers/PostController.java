@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.florinsutu.capstone.dto.PostDTO;
+import com.florinsutu.capstone.models.Comment;
 import com.florinsutu.capstone.models.Image;
 import com.florinsutu.capstone.models.Post;
 import com.florinsutu.capstone.models.Post;
@@ -80,9 +81,9 @@ public class PostController {
         return postService.getById(id);
     }
     
-    @GetMapping("/author_name/{author}")
-    public Page<Post> getPostById(@PathVariable("author") String author, Pageable p) {
-        return postService.getByAuthorAndPaginate(author, p);
+    @GetMapping("/author/{authorId}")
+    public List<Post> getPostByAuthorId(@PathVariable("authorId")Long id) {
+        return postService.getByAuthorId(id);
     }
     
     @GetMapping("{id}/likers")
@@ -107,6 +108,7 @@ public class PostController {
         		.likes(new HashSet<User>())
         		.edited(false)
         		.image(postImage)
+        		.comments(new HashSet<Comment>())
         		.build();
         		
         return postService.save(post);
@@ -143,7 +145,7 @@ public class PostController {
     
 	@PutMapping("/{id}/like")
     public Post like(@PathVariable("id") Long likedId, @RequestBody Long likerId){
-    	
+		
     	Post liked = postService.getById(likedId);
     	User liker = userService.getById(likerId);
     	
@@ -162,9 +164,10 @@ public class PostController {
 
     @DeleteMapping("/{id}")
 //    @PreAuthorize("hasRole('ADMIN')")
-    public String deletePostById(@PathVariable("id") Long id) {
-        postService.deleteById(id);
-        return "post deleted successfully";
+    public void deletePostById(@PathVariable("id") Long id) { 
+    	
+    	postService.deleteById(id);
+
     }
 	
 }

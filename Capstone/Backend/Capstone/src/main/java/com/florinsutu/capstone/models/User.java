@@ -18,6 +18,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -73,8 +74,11 @@ public class User {
     private LocalDateTime registration;
     
     @OneToOne(cascade= CascadeType.ALL)
-    
     private Image image;
+    
+    @OneToMany(cascade= CascadeType.REMOVE, orphanRemoval = true, mappedBy = "sender")
+    @JsonBackReference
+    private Set<Comment> comments;
     
     @ManyToMany
     @JsonBackReference

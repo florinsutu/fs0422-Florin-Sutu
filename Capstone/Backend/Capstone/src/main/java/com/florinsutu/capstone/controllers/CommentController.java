@@ -62,8 +62,8 @@ public class CommentController {
     }
     
     @GetMapping("post_id/{id}")
-    public Page<Comment> getCommentsByPost(@PathVariable("id") Long id, Pageable p) {
-        return commentService.getByPostAndPaginate(id, p);
+    public List<Comment> getCommentsByPost(@PathVariable("id") Long id) {
+        return commentService.getAllCommentsByPost(id);
     }
     
     @GetMapping("sender_id/{id}")
@@ -126,9 +126,9 @@ public class CommentController {
 
     @DeleteMapping("/{id}")
 //    @PreAuthorize("hasRole('ADMIN')")
-    public String deleteCommentById(@PathVariable("id") Long id) {
+    public void deleteCommentById(@PathVariable("id") Long id) {
         commentService.deleteById(id);
-        return "comment deleted successfully";
+
     }
 	
 }

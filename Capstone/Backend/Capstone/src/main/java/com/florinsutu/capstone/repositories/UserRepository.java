@@ -4,6 +4,7 @@ package com.florinsutu.capstone.repositories;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -28,5 +29,17 @@ public interface UserRepository extends JpaRepository<User, Long> {
     
     @Query( value = "SELECT u.followed FROM User u WHERE u.id = :id" )
     List<User> getFollowed(Long id);
+    
+    @Modifying
+    @Query(nativeQuery = true, value = "DELETE FROM posts_likers c WHERE liker_id = :id ")
+    void removePostLikesByUserId(Long id);
+    
+    @Modifying
+    @Query(nativeQuery = true, value = "DELETE FROM comments_likers c WHERE liker_id = :id ")
+    void removeCommentLikesByUserId(Long id);
+
+    @Modifying
+    @Query(nativeQuery = true, value = "DELETE FROM users_followed c WHERE followed_id = :id ")
+	void removeFollowersByUserId(Long id);
     
 }

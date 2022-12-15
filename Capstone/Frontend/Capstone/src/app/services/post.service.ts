@@ -8,13 +8,16 @@ import { PostDto } from '../models/postDto';
   providedIn: 'root'
 })
 export class PostService {
-
   constructor(private http: HttpClient) { }
 
   apiUrl:string = 'http://localhost:8080/api/posts'
 
   getAllPosts():Observable<Post[]>{
     return this.http.get<Post[]>(this.apiUrl)
+  }
+
+  getPostById(id:string):Observable<Post>{
+    return this.http.get<Post>(this.apiUrl+ '/' + id)
   }
 
   getAllPostsByAuthorId(id:number):Observable<Post[]>{
@@ -25,11 +28,15 @@ export class PostService {
     return this.http.post<Post>(this.apiUrl, post)
   }
 
+  likePost(postId: string, likerId: number) {
+    return this.http.put<Post>(this.apiUrl+"/"+postId+"/like", likerId)
+  }
+
   editPost(post:Post):Observable<Post>{
     return this.http.patch<Post>(this.apiUrl + '/' + post.id, post)
   }
 
-  deletePost(post:Post):Observable<Post>{
+  deletePost(post:Post){
     return this.http.delete<Post>(this.apiUrl + '/' + post.id)
   }
 }

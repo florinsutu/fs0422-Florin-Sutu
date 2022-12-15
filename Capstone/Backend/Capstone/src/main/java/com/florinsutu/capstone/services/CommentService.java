@@ -20,8 +20,8 @@ public class CommentService {
     @Autowired
     private CommentRepository repository;
 
-    public Comment save(Comment x) {
-        return repository.save(x);
+    public Comment save(Comment comment) {
+        return repository.save(comment);
     }
 
     public List<Comment> getAll() {
@@ -61,6 +61,10 @@ public class CommentService {
 	
 	public List<User> getCommentLikers(Long id){
 		return repository.getCommentLikers(id);
+	}
+
+	public List<Comment> getAllCommentsByPost(Long id) {
+		return repository.findAllByPostId(id);
 	}
 	
 }

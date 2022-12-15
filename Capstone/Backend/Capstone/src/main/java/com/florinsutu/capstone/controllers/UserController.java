@@ -8,7 +8,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -56,7 +54,7 @@ public class UserController {
 
 	@Autowired
 	private RoleService roleService;
-	
+
 	@Autowired
 	private PostService postService;
 
@@ -76,7 +74,7 @@ public class UserController {
 			return new ResponseEntity<>(res, HttpStatus.OK);
 		}
 	}
-	
+
 	@GetMapping
 	public ResponseEntity<List<User>> getUserList() {
 
@@ -109,17 +107,9 @@ public class UserController {
 	@PostMapping("/register")
 	public User registerUser(@RequestBody RegisterDTO dto) {
 
-		User user = User.builder()
-				.username(dto.getUsername())
-				.email(dto.getEmail())
-				.password(encoder.encode(dto.getPassword()))
-				.active(true)
-				.isOnline(false)
-				.isPrivate(false)
-				.registration(LocalDateTime.now())
-				.roles(new HashSet<Role>())
-				.followed(new HashSet<User>())
-				.build();
+		User user = User.builder().username(dto.getUsername()).email(dto.getEmail())
+				.password(encoder.encode(dto.getPassword())).active(true).isOnline(false).isPrivate(false)
+				.registration(LocalDateTime.now()).roles(new HashSet<Role>()).followed(new HashSet<User>()).build();
 
 		user.addRole(roleService.getByRole(RoleType.ROLE_USER));
 
@@ -144,55 +134,60 @@ public class UserController {
 
 		User user = userService.getById(id);
 
-		if (update.getName() != null) user.setName(update.getName());
-		if (update.getLastname() != null) user.setLastname(update.getLastname());
-		if (update.getUsername() != null) user.setUsername(update.getUsername());
-		if (update.getEmail() != null) user.setEmail(update.getEmail());
-		if (update.getPassword() != null) user.setPassword(update.getPassword());
-		if (update.getDescription() != null) user.setDescription(update.getDescription());
-		if (update.getIsPrivate() != null) user.setIsPrivate(update.getIsPrivate());
+		if (update.getName() != null)
+			user.setName(update.getName());
+		if (update.getLastname() != null)
+			user.setLastname(update.getLastname());
+		if (update.getUsername() != null)
+			user.setUsername(update.getUsername());
+		if (update.getEmail() != null)
+			user.setEmail(update.getEmail());
+		if (update.getPassword() != null)
+			user.setPassword(update.getPassword());
+		if (update.getDescription() != null)
+			user.setDescription(update.getDescription());
+		if (update.getIsPrivate() != null)
+			user.setIsPrivate(update.getIsPrivate());
 
 		userService.save(user);
 		return user;
 	}
-	
-	@PutMapping(value="/{id}/updateProfilePic", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+
+	@PutMapping(value = "/{id}/updateProfilePic", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
 	public User updateProfilePic(@PathVariable("id") Long id, @RequestPart("imageFile") MultipartFile file) {
-		
+
 		Image postImage = uploadImage(file);
-    	imageService.save(postImage);
-    	
-    	User user = userService.getById(id);
-    	user.setImage(postImage);
+		imageService.save(postImage);
+
+		User user = userService.getById(id);
+		user.setImage(postImage);
 		userService.save(user);
-		
-    	return user;
+
+		return user;
 	}
-	
-    public Image uploadImage(MultipartFile file) {
-    	
-    	try {
-			Image img = Image.builder()
-					.name(file.getOriginalFilename())
-					.type(file.getContentType())
-					.imgBytes(file.getBytes())
-					.build();
+
+	public Image uploadImage(MultipartFile file) {
+
+		try {
+			Image img = Image.builder().name(file.getOriginalFilename()).type(file.getContentType())
+					.imgBytes(file.getBytes()).build();
 			return img;
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
 		}
-    	
-    }
+
+	}
 
 	@PutMapping("/{id}/follow") // TODO non dovresti poter seguir te stesso
-	public User follow(@PathVariable("id") Long followerId, @RequestBody Long followedId) {
+	public User follow(@PathVariable("id") Long followedId, @RequestBody Long followerId) {
 
 		User follower = userService.getById(followerId);
 		User followed = userService.getById(followedId);
 
 		if (follower.getFollowed().contains(followed))
 			follower.unfollow(followed);
+
 		else
 			follower.follow(followed);
 
@@ -208,9 +203,12 @@ public class UserController {
 //    @PreAuthorize("hasRole('ADMIN')")
 	public void deleteUserById(@PathVariable("id") Long id) {
 		List<Post> userPosts = postService.getByAuthorId(id);
+
+		userService.removeRelationsByUserId(id);
+
 		postService.deletePostList(userPosts);
+
 		userService.deleteById(id);
-//		return "User deleted successfully";
 	}
 
 	// ---------------------------- Tests --------------------------

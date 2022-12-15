@@ -20,6 +20,7 @@ import com.florinsutu.gestionedispositivi.entities.Laptop;
 import com.florinsutu.gestionedispositivi.entities.Smartphone;
 import com.florinsutu.gestionedispositivi.entities.Status;
 import com.florinsutu.gestionedispositivi.entities.Tablet;
+import com.florinsutu.gestionedispositivi.exceptions.DeviceNotFoundException;
 import com.florinsutu.gestionedispositivi.services.DeviceService;
 import com.florinsutu.gestionedispositivi.services.UserService;
 
@@ -80,7 +81,9 @@ public class DeviceController {
 	@GetMapping("/{id}")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
 	public Device getDeviceById(@PathVariable("id") Long id) {
-		return deviceService.getById(id);
+	
+			return deviceService.getById(id);
+	
 	}
 
 // ---------------------- Update Devices ---------------------------	

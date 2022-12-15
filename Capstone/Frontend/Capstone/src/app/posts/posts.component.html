@@ -1,18 +1,35 @@
-<app-post-form *ngIf="loggedUser && showForm"
- (onNewPostCreated)="addPost($event)" (onEditPost)="editPost($event)"
- [currentPost]="currentPost"
- [formAction]="formAction">
- [currentUser]="loggedUser"
-</app-post-form>
+<section id="posts" *ngIf="!showComments">
 
-<app-post-list (onAddToEdit)="addToEdit($event)"
-  (onDelete)="deletePost($event)" [postList]="posts" [currentUser]="loggedUser" [userList]="userList">
-</app-post-list>
+  <app-post-form *ngIf="loggedUser && showForm"
+   (onNewPostCreated)="addPost($event)" (onEditPost)="editPost($event)"
+   [currentPost]="currentPost"
+   [formAction]="formAction">
+   [currentUser]="loggedUser"
+  </app-post-form>
 
+  <app-post-list  (onAddToEdit)="addToEdit($event)" (onSendComment)="sendComment($event)" (onOpenComments)="openComments($event)"
+    (onDelete)="deletePost($event)" (onLike)="likePost($event)" [postList]="posts" [currentUser]="loggedUser" [userList]="userList">
+  </app-post-list>
 
   <button class="opener" mat-fab (click)="toggleCreatePost()">
     <mat-icon>add</mat-icon>
   </button>
+
+</section>
+
+<section id="post-comments" *ngIf="showComments">
+
+  <app-post-comments  [post]="currentPost" [currentUser]="loggedUser" (onSendComment)="sendComment($event)"></app-post-comments>
+
+  <button class="opener" mat-fab (click)="toogleOpenComments()">
+    <mat-icon>undo</mat-icon>
+  </button>
+
+</section>
+
+
+
+
 
 
 

@@ -9,6 +9,7 @@ import { UserUpdate } from '../models/user-update';
 })
 export class UserService {
 
+
   editProfilePic(id:number, userPic: FormData) {
     return this.http.put<User>(this.apiUrl+"/"+id+"/updateProfilePic", userPic)
   }
@@ -28,8 +29,19 @@ export class UserService {
  // non serve un post in questo caso: equivale al register in authService
 
   editUser(user:UserUpdate):Observable<User>{
-    console.log(user)
     return this.http.put<User>(this.apiUrl + '/' + user.id, user)
+  }
+
+  follow(followedId:number, followerId:number):Observable<User> {
+    return this.http.put<User>(this.apiUrl + '/' + followedId +"/follow", followerId)
+  }
+
+  getFollowers(user: User) {
+    return this.http.get<User[]>(this.apiUrl+"/"+user.id+"/followers")
+  }
+
+  getFollowed(user: User) {
+    return this.http.get<User[]>(this.apiUrl+"/"+user.id+"/followed")
   }
 
   deleteUser(user:User){

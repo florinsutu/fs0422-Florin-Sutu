@@ -103,9 +103,8 @@ public class MessageController {
 
     @DeleteMapping("/{id}")
 //    @PreAuthorize("hasRole('ADMIN')")
-    public String deleteMessageById(@PathVariable("id") Long id) {
+    public void deleteMessageById(@PathVariable("id") Long id) {
         messageService.deleteById(id);
-        return "message deleted successfully";
     }
 	
 }

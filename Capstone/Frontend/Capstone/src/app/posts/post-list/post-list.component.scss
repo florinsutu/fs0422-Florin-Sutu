@@ -49,6 +49,10 @@
       font-size: 30px;
     }
 
+    .liked{
+      color:red;
+    }
+
     .likes{
       margin-top:10px;
       font-weight: bold;
@@ -97,7 +101,6 @@
     }
   }
 }
-
 
 @media screen and (min-width:576px){
 .post{

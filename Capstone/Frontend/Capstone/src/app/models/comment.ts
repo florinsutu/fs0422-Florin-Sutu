@@ -1,4 +1,13 @@
-export class Comment {
+import { Post } from "./post"
+import { User } from "./user"
 
-  id!: number
+export class Comment {
+  [x: string]: any
+
+  id!:number
+  text!: string
+  sender!: User
+  post!: Post
+  date!: Date
+  edited!: boolean
 }

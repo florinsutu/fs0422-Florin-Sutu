@@ -3,7 +3,7 @@ import { User } from "./user";
 
 export interface PostDto {
 
-  authorId?:number|null;
+  authorId?:number;
   title:string;
   text:string;
   image?: File;

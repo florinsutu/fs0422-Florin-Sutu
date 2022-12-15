@@ -1,18 +1,14 @@
 import { User } from "./user";
 
 export class Post {
-  id:number | undefined;
+
+  id!:number;
   author!:User
   title!:string;
   text!:string;
   edited!:boolean;
   image!:any;
   likes!:User[];
-  comments!:Comment[];
   date!:Date;
 
-  /* constructor(title:string, content:string) {
-    this.title = title;
-    this.text = content;
-  } */
 }
