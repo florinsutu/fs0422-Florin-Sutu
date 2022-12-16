@@ -15,15 +15,19 @@ import { CommentDto } from 'src/app/models/commentDto';
 })
 export class PostCommentsComponent implements OnInit {
 
-  constructor(private postSvc: PostService, private commentSvc: CommentService, private imgSvc: ImageProcessingService) { }
+  constructor(
+    private postSvc: PostService,
+    private commentSvc: CommentService,
+    private imgSvc: ImageProcessingService
+  ) { }
 
   ngOnInit(): void {
 
     this.commentSvc.getCommentsOfPost(this.post).subscribe({
-      next: res =>{
+      next: res => {
         this.comments = res
         this.comments.map((comment: Comment) => this.imgSvc.createImages(comment.sender))
-      } ,
+      },
       error: error => console.log(error)
     })
   }
@@ -35,8 +39,8 @@ export class PostCommentsComponent implements OnInit {
   @Input() currentUser!: AuthResponse
   @Output() onSendComment = new EventEmitter()
 
-  updateComments(comment: Comment){
-    comment.sender = this.imgSvc.createImages(comment.sender)as User
+  updateComments(comment: Comment) {
+    comment.sender = this.imgSvc.createImages(comment.sender) as User
     this.comments.push(comment)
   }
 

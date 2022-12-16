@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { map } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { AuthResponse } from '../models/auth-response';
@@ -14,6 +15,9 @@ import { ImageProcessingService } from '../services/image-processing.service';
 import { PostService } from '../services/post.service';
 import { UserService } from '../services/user.service';
 import { PostCommentsComponent } from './post-comments/post-comments.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-posts',
@@ -29,13 +33,15 @@ export class PostsComponent implements OnInit {
   showForm: boolean = false;
   posts: Post[] = [];
 
-
   constructor(
     private postSvc: PostService,
     private authSvc: AuthService,
     private userSvc: UserService,
     private commentSvc: CommentService,
     private imgSvc: ImageProcessingService,
+    private route: ActivatedRoute,
+    private router: Router,
+    @Inject(MAT_DIALOG_DATA) public data: Post
   ) { }
 
   checkLog(): boolean {
@@ -43,6 +49,37 @@ export class PostsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.checkLog())
+      this.loggedUser = this.authSvc.getAccessData()
+
+    if (this.data.id) {
+      this.posts.push(this.data)
+    } else {
+
+      if (this.router.url == "/site") {
+        this.postSvc.getAllPostsOfFollowedUsers(this.loggedUser.id)
+          .pipe(
+            map((p: Post[], i) => p.map((post: Post) => this.imgSvc.createImages(post)))
+          )
+          .subscribe(
+            {
+              next: res => this.posts = res as Post[],
+              error: error => console.log(error)
+            }
+          )
+      } else if (this.router.url == "/site/explore") {
+        this.postSvc.getAllPostsOfUnfollowedUsers(this.loggedUser.id)
+          .pipe(
+            map((p: Post[], i) => p.map((post: Post) => this.imgSvc.createImages(post)))
+          )
+          .subscribe(
+            {
+              next: res => this.posts = res as Post[],
+              error: error => console.log(error)
+            }
+          )
+      }
+    }
 
     this.userSvc.getAllUsers()
       .pipe(
@@ -54,21 +91,6 @@ export class PostsComponent implements OnInit {
           error: error => console.log(error)
         }
       )
-
-    if (this.checkLog())
-      this.loggedUser = this.authSvc.getAccessData()
-
-    this.postSvc.getAllPosts()
-      .pipe(
-        map((p: Post[], i) => p.map((post: Post) => this.imgSvc.createImages(post)))
-      )
-      .subscribe(
-        {
-          next: res => this.posts = res as Post[],
-          error: error => console.log(error)
-        }
-      )
-
   }
 
   //-------------- POSTS METHODS --------------------
@@ -203,7 +225,7 @@ export class PostsComponent implements OnInit {
     this.commentSvc.addComment(comment)
       .subscribe(res => {
 
-        if(this.currentPost.id) // per disambiguare se il commento arriva dal child PostComments o no
+        if (this.currentPost.id) // per disambiguare se il commento arriva dal child PostComments o no
           this.child.updateComments(res)
 
         Swal.fire({

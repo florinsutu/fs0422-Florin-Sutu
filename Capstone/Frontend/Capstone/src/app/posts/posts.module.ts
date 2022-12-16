@@ -8,7 +8,8 @@ import { NgMaterialModule } from '../ng-material/ng-material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PostListComponent } from './post-list/post-list.component';
 import { PostCommentsComponent } from './post-comments/post-comments.component';
-import { ProvaComponent } from './prova/prova.component';
+import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 
 
 @NgModule({
@@ -17,14 +18,17 @@ import { ProvaComponent } from './prova/prova.component';
     PostFormComponent,
     PostListComponent,
     PostCommentsComponent,
-    ProvaComponent
   ],
   imports: [
     CommonModule,
     PostsRoutingModule,
     FormsModule,
     NgMaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule
+  ],
+  providers: [
+    { provide: MAT_DIALOG_DATA, useValue: {} }
   ]
 })
 export class PostsModule { }

@@ -12,17 +12,21 @@ const routes: Routes = [
         loadChildren: () => import('../posts/posts.module').then(m => m.PostsModule),
       },
       {
+        path: 'explore',
+        loadChildren: () => import('../posts/posts.module').then(m => m.PostsModule),
+      },
+      {
         path: 'users',
-         loadChildren: () => import('../users/users.module').then(m => m.UsersModule),
+        loadChildren: () => import('../users/users.module').then(m => m.UsersModule),
       },
       {
-         path: 'profile/:id',
-       loadChildren: () => import('../profile/profile.module').then(m => m.ProfileModule)
+        path: 'profile/:id',
+        loadChildren: () => import('../profile/profile.module').then(m => m.ProfileModule)
       },
       {
-        path: 'chat/:id',
-         loadChildren: () => import('../chat/chat.module').then(m => m.ChatModule)
-         }
+        path: 'chat',
+        loadChildren: () => import('../chat/chat.module').then(m => m.ChatModule)
+      }
     ]
   }
 ];

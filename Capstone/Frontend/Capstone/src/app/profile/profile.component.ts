@@ -13,6 +13,10 @@ import { AuthService } from '../services/auth.service';
 import { ImageProcessingService } from '../services/image-processing.service';
 import { PostService } from '../services/post.service';
 import { UserService } from '../services/user.service';
+import { PostsComponent } from '../posts/posts.component';
+import { MatDialog } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-profile',
@@ -30,6 +34,14 @@ export class ProfileComponent implements OnInit {
   userFollowed: User[] = [];
   isFollowing: boolean = false;
 
+  isPostClicked: boolean = false;
+  clickedPostId: number = 0;
+
+  openDialog(post: Post) {
+    this.dialog.open(PostsComponent, { data: post });
+  }
+
+
   isOwner() {
     if (this.currentUser && this.loggedUser)
       return this.currentUser.id == this.loggedUser.id;
@@ -43,71 +55,81 @@ export class ProfileComponent implements OnInit {
     private router: Router,
     private imgSvc: ImageProcessingService,
     private sanitizer: DomSanitizer,
-    private postSvc: PostService
-  ) { }
+    private postSvc: PostService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.loggedUser = this.authSvc.getAccessData()
-    let currentUserId = this.route.snapshot.paramMap.get('id')
 
-    // Ricavo l'utente della pagina di profilo
+    this.route.paramMap.subscribe({
+      next: res => {
+        let currentUserId = res.get('id');
 
-    if (currentUserId) {
-      this.userSvc.getUserById(currentUserId)
-        .pipe(
-          map((u: User, i) => this.imgSvc.createImages(u))
-        )
-        .subscribe({
-          next: res => {
-            this.currentUser = res as User
-
-            // Ricavo la lista di followers
-
-            this.userSvc.getFollowers(this.currentUser).pipe(
-              map((p: User[], i) => p.map((post: User) => this.imgSvc.createImages(post)))
+        if (currentUserId) {
+          this.userSvc.getUserById(currentUserId)
+            .pipe(
+              map((u: User, i) => this.imgSvc.createImages(u))
             )
-              .subscribe(
-                {
-                  next: res => {
-                    this.userFollowers = res as User[]
+            .subscribe({
+              next: res => {
+                this.currentUser = res as User
 
-                    for (let user of this.userFollowers) {
-                      if (user.id == this.loggedUser.id)
-                        this.isFollowing = true
+                // Ricavo la lista di followers
+
+                this.userSvc.getFollowers(this.currentUser).pipe(
+                  map((p: User[], i) => p.map((post: User) => this.imgSvc.createImages(post)))
+                )
+                  .subscribe(
+                    {
+                      next: res => {
+                        this.userFollowers = res as User[]
+
+                        for (let user of this.userFollowers) {
+                          if (user.id == this.loggedUser.id)
+                            this.isFollowing = true
+                        }
+                      },
+                      error: error => console.log(error)
                     }
-                  },
-                  error: error => console.log(error)
-                }
-              )
+                  )
 
-            // Ricavo la lista di followed
+                // Ricavo la lista di followed
 
-            this.userSvc.getFollowed(this.currentUser).pipe(
-              map((p: User[], i) => p.map((post: User) => this.imgSvc.createImages(post)))
-            )
-              .subscribe(
-                {
-                  next: res => this.userFollowed = res as User[],
-                  error: error => console.log(error)
-                }
-              )
+                this.userSvc.getFollowed(this.currentUser).pipe(
+                  map((p: User[], i) => p.map((post: User) => this.imgSvc.createImages(post)))
+                )
+                  .subscribe(
+                    {
+                      next: res => this.userFollowed = res as User[],
+                      error: error => console.log(error)
+                    }
+                  )
 
-            // Ricavo la lista di post dell' utente
+                // Ricavo la lista di post dell' utente
 
-            this.postSvc.getAllPostsByAuthorId(this.currentUser.id)
-              .pipe(
-                map((p: Post[], i) => p.map((post: Post) => this.imgSvc.createImages(post)))
-              )
-              .subscribe(
-                {
-                  next: res => this.userPosts = res as Post[],
-                  error: error => console.log(error)
-                }
-              )
-          },
-          error: () => (console.log("user not found")),
-        });
+                this.postSvc.getAllPostsByAuthorId(this.currentUser.id)
+                  .pipe(
+                    map((p: Post[], i) => p.map((post: Post) => this.imgSvc.createImages(post)))
+                  )
+                  .subscribe(
+                    {
+                      next: res => this.userPosts = res as Post[],
+                      error: error => console.log(error)
+                    }
+                  )
+              },
+              error: () => (console.log("user not found")),
+            });
+        }
+
+
+
+      },
+      error: () => (console.log("user not found"))
     }
+    )
+
   }
 
   onFileSelected(event: Event): void {

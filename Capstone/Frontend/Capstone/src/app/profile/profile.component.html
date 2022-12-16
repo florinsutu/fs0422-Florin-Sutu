@@ -35,12 +35,12 @@
 
   <div class="gallery">
     <div class="gallery-item" *ngFor="let post of userPosts, let i = index">
-      <img [src]="post.image.url" class="gallery-image" alt="">
+      <img [src]="post.image.url" class="gallery-image" alt="" (click)="openDialog(post)">
+
     </div>
   </div>
 
 </section>
-
 
 
 <!-- ------------ Profile Update Form ------------- -->

@@ -8,6 +8,8 @@ import { PostDto } from '../models/postDto';
   providedIn: 'root'
 })
 export class PostService {
+
+
   constructor(private http: HttpClient) { }
 
   apiUrl:string = 'http://localhost:8080/api/posts'
@@ -15,6 +17,16 @@ export class PostService {
   getAllPosts():Observable<Post[]>{
     return this.http.get<Post[]>(this.apiUrl)
   }
+
+  getAllPostsOfFollowedUsers(id: number) {
+    return this.http.get<Post[]>(this.apiUrl+"/"+id+"/followed")
+  }
+
+  getAllPostsOfUnfollowedUsers(id: number) {
+    return this.http.get<Post[]>(this.apiUrl+"/"+id+"/explore")
+  }
+
+
 
   getPostById(id:string):Observable<Post>{
     return this.http.get<Post>(this.apiUrl+ '/' + id)

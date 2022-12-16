@@ -1,0 +1,24 @@
+<section>
+
+  <div class="header">
+    <img *ngIf="textedUser.image" [src]="textedUser.image.url" alt="user profile image">
+    <p class="username">{{textedUser.username}}</p>
+  </div>
+
+
+  <div class="messages" *ngFor="let message of messageList">
+    <div [ngClass]="{'receiver': assignRole(message.sender.id), 'sender': assignRole(message.receiver.id)}">
+      <span>{{message.text}}</span>
+    </div>
+  </div>
+
+  <div class="comment">
+<!--     <textarea matInput appearance="standard" [(ngModel)]="currentMessage.text" type="text" name="content"
+    placeholder="Content"></textarea>
+    <button mat-raised-button (click)="sendMessage()">Send</button> -->
+
+    <input type="text" class="comment-input" placeholder="Add a comment" [(ngModel)]="currentMessage.text">
+    <button mat-raised-button *ngIf="currentMessage.text!=null && currentMessage.text!='' " (click)="sendMessage()"><mat-icon>send</mat-icon></button>
+  </div>
+
+</section>
