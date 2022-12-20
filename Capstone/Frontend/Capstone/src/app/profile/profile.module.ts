@@ -7,13 +7,14 @@ import { NgMaterialModule } from '../ng-material/ng-material.module';
 import { FormsModule } from '@angular/forms';
 import { PostsComponent } from '../posts/posts.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { UsersComponent } from '../users/users.component';
 
 
 @NgModule({
   declarations: [
     ProfileComponent
   ],
-  entryComponents: [PostsComponent],
+  entryComponents: [PostsComponent, UsersComponent],
   imports: [
     CommonModule,
     ProfileRoutingModule,

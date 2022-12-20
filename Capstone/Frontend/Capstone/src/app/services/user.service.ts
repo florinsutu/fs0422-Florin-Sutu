@@ -9,11 +9,6 @@ import { UserUpdate } from '../models/user-update';
 })
 export class UserService {
 
-
-  editProfilePic(id:number, userPic: FormData) {
-    return this.http.put<User>(this.apiUrl+"/"+id+"/updateProfilePic", userPic)
-  }
-
   constructor(private http:HttpClient) { }
 
   apiUrl:string = 'http://localhost:8080/api/users'
@@ -26,10 +21,26 @@ export class UserService {
     return this.http.get<User[]>(this.apiUrl)
   }
 
+  getTextedUsers(id: number) {
+    return this.http.get<User[]>(this.apiUrl + '/chat_users/' + id)
+  }
+
+  getAllEmails(){
+    return this.http.get<string[]>(this.apiUrl+"/get_emails")
+  }
+
+  getAllUsernames(){
+    return this.http.get<string[]>(this.apiUrl+"/get_usernames")
+  }
+
  // non serve un post in questo caso: equivale al register in authService
 
   editUser(user:UserUpdate):Observable<User>{
     return this.http.put<User>(this.apiUrl + '/' + user.id, user)
+  }
+
+  editProfilePic(id:number, userPic: FormData) {
+    return this.http.put<User>(this.apiUrl+"/"+id+"/updateProfilePic", userPic)
   }
 
   follow(followedId:number, followerId:number):Observable<User> {

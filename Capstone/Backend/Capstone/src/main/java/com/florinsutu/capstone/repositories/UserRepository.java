@@ -42,4 +42,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(nativeQuery = true, value = "DELETE FROM users_followed c WHERE followed_id = :id ")
 	void removeFollowersByUserId(Long id);
     
+    @Query(value = "SELECT u.username FROM User u")
+    List<String> getAllUsernames();
+    
+    @Query(value = "SELECT u.email FROM User u")
+    List<String> getAllEmails();
 }

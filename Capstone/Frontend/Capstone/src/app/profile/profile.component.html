@@ -10,8 +10,8 @@
   <div class="profile-stats">
     <ul>
       <li><span class="profile-stat-count">{{userPosts.length}}</span> posts</li>
-      <li><span class="profile-stat-count">{{userFollowers.length}}</span> followers</li>
-      <li><span class="profile-stat-count">{{userFollowed.length}}</span> following</li>
+      <li><span (click)="openFollowersDialog()" class="profile-stat-count">{{userFollowers.length}}</span> followers</li>
+      <li><span (click)="openFollowedDialog()" class="profile-stat-count">{{userFollowed.length}}</span> following</li>
     </ul>
   </div>
 
@@ -35,7 +35,7 @@
 
   <div class="gallery">
     <div class="gallery-item" *ngFor="let post of userPosts, let i = index">
-      <img [src]="post.image.url" class="gallery-image" alt="" (click)="openDialog(post)">
+      <img [src]="post.image.url" class="gallery-image" alt="" (click)="openPostDialog(post)">
 
     </div>
   </div>
@@ -50,7 +50,7 @@
     <mat-card-content>
 
       <label class="custom-file-upload">
-        <span>Immagine</span>
+        <span>Image</span>
         <div class="preview" *ngIf="imgPreview">
           <img [src]="imgPreview.url">
         </div>

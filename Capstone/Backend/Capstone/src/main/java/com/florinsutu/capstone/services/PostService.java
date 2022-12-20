@@ -28,6 +28,14 @@ public class PostService {
         return repository.findAll();
     }
 
+    public List<Post> getAllFollowedPostsByUserId(Long id){
+    	return repository.getPostsOfFollowed(id);
+    }
+    
+    public List<Post> getAllUnfollowedPostsByUserId(Long id){
+    	return repository.getPostsOfUnfollowed(id).stream().filter(p -> p.getAuthor().getId() != id).toList();
+    }
+    
     public Post getById(Long id) {
 
         Optional<Post> post = repository.findById(id);

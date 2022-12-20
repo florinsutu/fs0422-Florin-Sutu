@@ -21,90 +21,84 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.florinsutu.capstone.dto.MessageDTO;
 import com.florinsutu.capstone.models.Message;
+import com.florinsutu.capstone.models.User;
 import com.florinsutu.capstone.services.MessageService;
 import com.florinsutu.capstone.services.UserService;
 
 @RestController
-@RequestMapping("/api/messages") 
+@RequestMapping("/api/messages")
 @CrossOrigin(origins = "http://localhost:4200/")
 public class MessageController {
-	
+
 	@Autowired
 	MessageService messageService;
-	
+
 	@Autowired
 	UserService userService;
 
 //---------------------------- Get ---------------------------------
-    
-    @GetMapping
-    public ResponseEntity<Page<Message>> getMessageList(Pageable p) {
-    	
-    	Page<Message> res = messageService.getAllAndPaginate(p);
-        
-    	 if (res.isEmpty()){
-             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-         } else{
-             return new ResponseEntity<>(res, HttpStatus.OK);
-         }
-    }
 
-    @GetMapping("{id}")
-    public Message getMessageById(@PathVariable("id") Long id) {
-        return messageService.getById(id);
-    }
-    
-    @GetMapping("/sender_id/{id}")
-    public Page<Message> getBySenderAndPaginate(@PathVariable("id") Long id, Pageable p) {
-        return messageService.getBySenderAndPaginate(id, p);
-    }
-    
-    @GetMapping("/receiver_id/{id}")
-    public Page<Message> getByReceiverAndPaginate(@PathVariable("id") Long id, Pageable p) {
-        return messageService.getByReceiverAndPaginate(id, p);
-    }
-    
-    @GetMapping("/chat/{id}/{id2}")
-    public List<Message> getMessagesByChat(
-    		@PathVariable("id") Long user1Id,
-    		@PathVariable("id2") Long user2Id
-    		){
-    	return messageService.getByChat(user1Id,user2Id);
-    }
+	@GetMapping
+	public ResponseEntity<Page<Message>> getMessageList(Pageable p) {
+
+		Page<Message> res = messageService.getAllAndPaginate(p);
+
+		if (res.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<>(res, HttpStatus.OK);
+		}
+	}
+
+	@GetMapping("{id}")
+	public Message getMessageById(@PathVariable("id") Long id) {
+		return messageService.getById(id);
+	}
+
+	@GetMapping("/sender_id/{id}")
+	public Page<Message> getBySenderAndPaginate(@PathVariable("id") Long id, Pageable p) {
+		return messageService.getBySenderAndPaginate(id, p);
+	}
+
+	@GetMapping("/receiver_id/{id}")
+	public Page<Message> getByReceiverAndPaginate(@PathVariable("id") Long id, Pageable p) {
+		return messageService.getByReceiverAndPaginate(id, p);
+	}
+
+	@GetMapping("/chat/{id}/{id2}")
+	public List<Message> getMessagesByChat(@PathVariable("id") Long user1Id, @PathVariable("id2") Long user2Id) {
+		return messageService.getByChat(user1Id, user2Id);
+	}
+
 //---------------------------- Post --------------------------------
 
-    @PostMapping("")
-    public Message saveMessage( @RequestBody MessageDTO dto ) {
-    	
-        Message message = Message.builder()
-        		.text(dto.getText())
-        		.sender(userService.getById(dto.getSenderId()))
-        		.receiver(userService.getById(dto.getReceiverId()))
-        		.date(LocalDateTime.now())
-        		.edited(false)
-        		.build();
-        		
-        return messageService.save(message);
-    }
-    
-  //---------------------------- Put ---------------------------------
-    
-      @PutMapping("/{id}")
-      public Message updateMessage(@PathVariable("id") Long id, @RequestBody String text ) {
+	@PostMapping("")
+	public Message saveMessage(@RequestBody MessageDTO dto) {
 
-          Message message = messageService.getById(id);
-          message.setText(text);
-          message.setEdited(true);
-          		
-          return messageService.save(message);
-      }
-    
- // -------------------------- Delete -------------------------------
+		Message message = Message.builder().text(dto.getText()).sender(userService.getById(dto.getSenderId()))
+				.receiver(userService.getById(dto.getReceiverId())).date(LocalDateTime.now()).edited(false).build();
 
-    @DeleteMapping("/{id}")
+		return messageService.save(message);
+	}
+
+	// ---------------------------- Put ---------------------------------
+
+	@PutMapping("/{id}")
+	public Message updateMessage(@PathVariable("id") Long id, @RequestBody String text) {
+
+		Message message = messageService.getById(id);
+		message.setText(text);
+		message.setEdited(true);
+
+		return messageService.save(message);
+	}
+
+	// -------------------------- Delete -------------------------------
+
+	@DeleteMapping("/{id}")
 //    @PreAuthorize("hasRole('ADMIN')")
-    public void deleteMessageById(@PathVariable("id") Long id) {
-        messageService.deleteById(id);
-    }
-	
+	public void deleteMessageById(@PathVariable("id") Long id) {
+		messageService.deleteById(id);
+	}
+
 }

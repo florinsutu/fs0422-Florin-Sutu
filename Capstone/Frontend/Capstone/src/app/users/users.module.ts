@@ -5,6 +5,7 @@ import { UsersRoutingModule } from './users-routing.module';
 import { UsersComponent } from './users.component';
 import { NgMaterialModule } from '../ng-material/ng-material.module';
 import { FormsModule } from '@angular/forms';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -16,6 +17,9 @@ import { FormsModule } from '@angular/forms';
     UsersRoutingModule,
     NgMaterialModule,
     FormsModule
+  ],
+  providers: [
+    { provide: MAT_DIALOG_DATA, useValue: {} }
   ]
 })
 export class UsersModule { }

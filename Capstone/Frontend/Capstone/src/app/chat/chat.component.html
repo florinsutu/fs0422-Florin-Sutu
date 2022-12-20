@@ -1,7 +1,42 @@
+<section [ngClass]="mode" class="chat">
+  <div *ngIf="showSidenav" class="chat-history">
 
+    <div class="search-bar">
+      <label class="input-search" for="">
+        <input type="text" (input)="filterOptionUser(searched)" [(ngModel)]="searched" placeholder="Search">
+        <div class="search-menu">
+          <div class="search-related">
+            <a *ngFor="let option of searchedUsers"  routerLink="/site/chat/{{ option.id }}" (click)="reset()">
+              <span>{{option.username}}</span>
+            </a>
+          </div>
+        </div>
+      </label>
+    </div>
 
-<div>ciao</div>
+    <div class="list">
+      <div class="user" *ngFor="let user of userList" routerLink="/site/chat/{{ user.id }}" (click)="navigate()">
+        <img
+          *ngIf="user.image"
+          [src]="user.image.url"
+          alt="user profile image"
+        />
+        <p class="username">{{ user.username }}</p>
+      </div>
+    </div>
+  </div>
 
+  <div class="chat-messages">
+    <router-outlet></router-outlet>
 
-
-
+    <button
+      *ngIf="showButton"
+      class="opener"
+      mat-fab
+      routerLink="/site/chat"
+      (click)="show()"
+    >
+      <mat-icon>undo</mat-icon>
+    </button>
+  </div>
+</section>

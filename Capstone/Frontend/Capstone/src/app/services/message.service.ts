@@ -11,6 +11,7 @@ import { MessageDto } from '../models/messageDto';
 })
 export class MessageService {
 
+
   apiUrl: string = 'http://localhost:8080/api/messages'
 
   constructor(private http: HttpClient) { }
@@ -22,4 +23,7 @@ export class MessageService {
   addMessage(message: MessageDto) {
     return this.http.post<Message>(this.apiUrl, message)
   }
+  
+
+
 }

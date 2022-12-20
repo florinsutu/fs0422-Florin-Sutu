@@ -7,11 +7,14 @@
    [currentUser]="loggedUser"
   </app-post-form>
 
-  <app-post-list  (onAddToEdit)="addToEdit($event)" (onSendComment)="sendComment($event)" (onOpenComments)="openComments($event)"
+
+  <app-post-list *ngIf="  !showForm "  (onAddToEdit)="addToEdit($event)" (onSendComment)="sendComment($event)" (onOpenComments)="openComments($event)"
     (onDelete)="deletePost($event)" (onLike)="likePost($event)" [postList]="posts" [currentUser]="loggedUser" [userList]="userList">
   </app-post-list>
 
-  <button class="opener" mat-fab (click)="toggleCreatePost()">
+
+
+  <button *ngIf="create && !showForm" class="opener" mat-fab (click)="toggleCreatePost()">
     <mat-icon>add</mat-icon>
   </button>
 
@@ -21,9 +24,11 @@
 
   <app-post-comments  [post]="currentPost" [currentUser]="loggedUser" (onSendComment)="sendComment($event)"></app-post-comments>
 
-  <button class="opener" mat-fab (click)="toogleOpenComments()">
+  <button class="comment-opener" mat-fab (click)="toogleOpenComments()">
     <mat-icon>undo</mat-icon>
   </button>
+
+
 
 </section>
 

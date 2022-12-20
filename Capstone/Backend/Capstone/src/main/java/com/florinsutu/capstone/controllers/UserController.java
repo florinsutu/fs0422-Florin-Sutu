@@ -35,6 +35,7 @@ import com.florinsutu.capstone.models.Role;
 import com.florinsutu.capstone.models.RoleType;
 import com.florinsutu.capstone.models.User;
 import com.florinsutu.capstone.services.ImageService;
+import com.florinsutu.capstone.services.MessageService;
 import com.florinsutu.capstone.services.PostService;
 import com.florinsutu.capstone.services.RoleService;
 import com.florinsutu.capstone.services.UserService;
@@ -57,6 +58,9 @@ public class UserController {
 
 	@Autowired
 	private PostService postService;
+	
+	@Autowired
+	private MessageService messageService;
 
 	@Autowired
 	private ImageService imageService;
@@ -100,6 +104,21 @@ public class UserController {
 	@GetMapping("{id}/followed")
 	public List<User> getFollowed(@PathVariable("id") Long id) {
 		return userService.getAllFollowed(id);
+	}
+	
+	@GetMapping("/chat_users/{id}")
+	public List<User> getUsersOfChatByUserId(@PathVariable("id") Long id) {
+		return messageService.getUsersOfChatByUserId(id);
+	}
+	
+	@GetMapping("/get_usernames")
+	public List<String> getAllUsernames(){
+		return userService.getAllUsernames();
+	}
+	
+	@GetMapping("/get_emails")
+	public List<String> getAllEmails(){
+		return userService.getAllEmails();
 	}
 
 //---------------------------- Post --------------------------------
@@ -207,6 +226,8 @@ public class UserController {
 		userService.removeRelationsByUserId(id);
 
 		postService.deletePostList(userPosts);
+		
+		messageService.deleteChat(id);
 
 		userService.deleteById(id);
 	}

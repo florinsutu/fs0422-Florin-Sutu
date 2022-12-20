@@ -1,5 +1,6 @@
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { AuthResponse } from '../models/auth-response';
 import { Message } from '../models/message';
@@ -11,21 +12,21 @@ import { MessageService } from '../services/message.service';
 import { UserService } from '../services/user.service';
 
 type Chat = {
-  senderId: number,
-  receiverId: number
-}
+  senderId: number;
+  receiverId: number;
+};
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.scss']
+  styleUrls: ['./chat.component.scss'],
 })
 export class ChatComponent implements OnInit {
-
-  loggedUser!: AuthResponse
+  loggedUser!: AuthResponse;
   textedUser: User = new User();
   messageList: Message[] = [];
-  currentMessage: Message = new Message()
+  currentMessage: Message = new Message();
+  userList: User[] = [];
 
   constructor(
     private authSvc: AuthService,
@@ -33,67 +34,88 @@ export class ChatComponent implements OnInit {
     private route: ActivatedRoute,
     private messageSvc: MessageService,
     private imgSvc: ImageProcessingService,
-  ) { }
-
-
-  ngOnInit(): void {
-
-    let textedUserId = this.route.snapshot.paramMap.get('id')
-
-    if (this.checkLog() && textedUserId) {
-
-      this.loggedUser = this.authSvc.getAccessData()
-      this.userSvc.getUserById(textedUserId).pipe(
-        map((u: User, i) => this.imgSvc.createImages(u))
-      )
-        .subscribe(res => this.textedUser = res as User)
-
-      this.messageSvc.getAllMessagesOf(this.loggedUser.id + "", textedUserId).subscribe(
-        res => this.messageList = res
-      )
-    }
-  }
-
-  sendMessage() {
-    let message: MessageDto = {
-      text: this.currentMessage.text,
-      senderId: this.loggedUser.id,
-      receiverId: this.textedUser.id
-    }
-
-    this.messageSvc.addMessage(message).subscribe(res => {
-      this.messageList.push(res)
-      this.currentMessage = new Message()
-    })
-  }
-
-  addPost(): void {
-
-    let message: MessageDto = {
-      text: this.currentMessage.text,
-      senderId: this.loggedUser.id,
-      receiverId: this.textedUser.id
-    }
-
-    this.messageSvc.addMessage(message).subscribe(res => {
-      this.messageList.push(res)
-      this.currentMessage = new Message()
-      /*       Swal.fire({
-              position: 'top-end',
-              icon: 'success',
-              title: 'New Post Created',
-              showConfirmButton: false,
-              timer: 2000
-            }) */
-    })
-  }
+    private observer: BreakpointObserver,
+    private router: Router
+  ) {}
 
   checkLog(): boolean {
-    return this.authSvc.isUserLogged()
+    return this.authSvc.isUserLogged();
   }
 
-  assignRole(id: number): boolean {
-    return this.textedUser.id == id;
+  ngOnInit(): void {
+    if (this.checkLog()) {
+      this.loggedUser = this.authSvc.getAccessData();
+    }
+
+    this.userSvc
+      .getTextedUsers(this.loggedUser.id)
+      .pipe(
+        map((p: User[], i) =>
+          p.map((post: User) => this.imgSvc.createImages(post))
+        )
+      )
+      .subscribe({
+        next: (res) => (this.userList = res as User[]),
+        error: (error) => console.log(error),
+      });
   }
 
+  // View Management
+
+  mode!: string;
+  showButton!: boolean;
+  showSidenav!: boolean;
+
+  ngAfterViewInit() {
+    this.observer.observe(['(max-width: 768px)']).subscribe((res) => {
+      if (res.matches) {
+        this.mode = 'mobile';
+
+        if (this.router.url != '/site/chat') {
+          this.showSidenav = false;
+          this.showButton = true;
+        } else {
+          this.showSidenav = true;
+          this.showButton = false;
+        }
+      } else {
+        this.mode = 'desktop';
+        this.showButton = false;
+        this.showSidenav = true;
+      }
+    });
+  }
+
+  show() {
+    this.showSidenav = true;
+    this.showButton = false;
+  }
+
+  navigate() {
+    if (this.mode == 'mobile') {
+      this.showSidenav = false;
+      this.showButton = true;
+    }
+  }
+
+  // Search Users
+
+  searched!: string;
+  searchedUsers: User[] = [];
+
+  filterOptionUser(searched: string) {
+    if (searched.length !== 0) {
+      let search: string = searched.toLowerCase();
+      this.searchedUsers = this.userList.filter((user) =>
+        user.username.toLowerCase().includes(search)
+      );
+    } else {
+      this.searchedUsers = [];
+    }
+  }
+
+  reset() {
+    this.searched = '';
+    this.searchedUsers = [];
+  }
 }

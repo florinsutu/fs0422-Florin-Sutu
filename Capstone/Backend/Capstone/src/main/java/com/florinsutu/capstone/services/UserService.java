@@ -69,4 +69,12 @@ public class UserService {
     	repository.removeFollowersByUserId(id);
     }
     
+    public List<String> getAllEmails(){
+    	return repository.getAllEmails();
+    }
+    
+    public List<String> getAllUsernames(){
+    	return repository.getAllUsernames();
+    }
+    
 }

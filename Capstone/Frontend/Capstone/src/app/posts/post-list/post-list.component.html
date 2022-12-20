@@ -36,16 +36,19 @@
 
   <div class="post-comment" *ngIf="currentUser != null">
 
+    <img *ngIf="findAuthor(currentUser.id).image" [src]="findAuthor(currentUser.id).image.url" routerLink="/site/profile/{{post.author.id}}">
     <input type="text" class="comment-input" [(ngModel)]="commentText" placeholder="Add a comment">
-    <button mat-raised-button *ngIf="commentText!=null && commentText!='' "  (click)="sendComment(commentText, post.id)">Send</button>
-
+    <button mat-mini-fab [disabled]="(commentText==null || commentText=='')? true : null " (click)="sendComment(commentText, post.id)"><mat-icon>send</mat-icon></button>
+<!--     *ngIf="commentText!=null && commentText!='' " -->
   </div>
 
 </div>
 
-<div *ngIf="postList.length == 0">
+<div class="notYet" *ngIf="postList.length == 0">
 
-  <span>No posts yet</span>
+  <span >No posts yet</span>
+
+  
 
 </div>
 

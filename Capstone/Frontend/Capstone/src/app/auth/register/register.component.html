@@ -13,6 +13,7 @@
             <input matInput type="text" formControlName="username" placeholder="Your username">
             <mat-icon matSuffix>person</mat-icon>
             <mat-error *ngIf="form.controls['username'].errors?.['required']">Name is required</mat-error>
+            <mat-error *ngIf="registerFormControl['username'].touched && registerFormControl['username'].errors?.['userNameNotAvailable']">Name is required</mat-error>
           </mat-form-field>
         </div>
 

@@ -23,6 +23,10 @@ export class PostCommentsComponent implements OnInit {
 
   ngOnInit(): void {
 
+    console.log(this.post)
+
+/*     this.post.author = this.imgSvc.createImages(this.post.author) as User */
+
     this.commentSvc.getCommentsOfPost(this.post).subscribe({
       next: res => {
         this.comments = res

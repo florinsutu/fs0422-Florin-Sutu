@@ -1,27 +1,36 @@
+<section *ngIf="mode == 'explore'">
+  <mat-form-field *ngIf="mode == 'explore'" class="searchbar" appearance="fill">
+    <mat-label>Search users by name</mat-label>
+    <input
+      (input)="filterOptionUser(searched)"
+      matInput
+      [(ngModel)]="searched"
+    />
+    <mat-icon matPrefix>search</mat-icon>
+  </mat-form-field>
 
-<div class="search-bar">
-  <label class="input-search" for="">
-    <input type="text" (input)="filterOptionUser(searched)" [(ngModel)]="searched" placeholder="Find new friends!">
-    <div class="search-menu">
-      <div class="search-related">
-        <a *ngFor="let option of searchedUsers"  [routerLink]="['/site/profile/'+option.id]">
-          <span>{{option.username}}</span>
-        </a>
-      </div>
-    </div>
-  </label>
-</div>
+  <div class="users">
+    <mat-card
+      class="user"
+      *ngFor="let user of searchedUsers; let i = index"
+      routerLink="/site/profile/{{ user.id }}"
+    >
+      <mat-card-header>
+        <mat-card-title>{{ user.username }}</mat-card-title>
+        <mat-card-subtitle>email: {{ user.email }}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image [src]="user.image.url" alt="Profile Photo" />
+    </mat-card>
+  </div>
+</section>
 
-
-<div class="users">
-  <mat-card class="user" *ngFor="let user of users; let i = index" routerLink="/site/profile/{{user.id}}">
-    <mat-card-header>
-      <mat-card-title>{{user.username}}</mat-card-title>
-      <mat-card-subtitle>email: {{user.email}}</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image [src]="user.image.url" alt="Profile Photo">
-  </mat-card>
-</div>
-
-
-
+<section [ngClass]="mode" *ngIf="mode == 'followList'">
+  <div
+    *ngFor="let user of searchedUsers; let i = index"
+    routerLink="/site/profile/{{ user.id }}"
+  >
+    <img [src]="user.image.url" alt="" />
+    <span>{{ user.username }}</span>
+    <button>Unfollow</button>
+  </div>
+</section>

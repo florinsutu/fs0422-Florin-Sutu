@@ -63,10 +63,23 @@ public class PostController {
          }
     }
 
-    @GetMapping
-    public List<Post> getPostList() {
+    @GetMapping("{id}/followed")
+    public List<Post> getFollowedPostList(@PathVariable("id") Long id) {
     	
-    	return postService.getAll();
+    	return postService.getAllFollowedPostsByUserId(id);
+        
+    	//TODO
+//    	 if (res.isEmpty()){
+//             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//         } else{
+//             return new ResponseEntity<>(res, HttpStatus.OK);
+//         }
+    }
+    
+    @GetMapping("{id}/explore")
+    public List<Post> getUnfollowedPostList(@PathVariable("id") Long id) {
+    	
+    	return postService.getAllUnfollowedPostsByUserId(id);
         
     	//TODO
 //    	 if (res.isEmpty()){

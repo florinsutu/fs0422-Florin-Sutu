@@ -32,6 +32,7 @@ export class PostsComponent implements OnInit {
   userList: User[] = [];
   showForm: boolean = false;
   posts: Post[] = [];
+  create: boolean = false;
 
   constructor(
     private postSvc: PostService,
@@ -48,12 +49,15 @@ export class PostsComponent implements OnInit {
     return this.authSvc.isUserLogged()
   }
 
+  isDialog:boolean = false;
+
   ngOnInit(): void {
     if (this.checkLog())
       this.loggedUser = this.authSvc.getAccessData()
 
     if (this.data.id) {
       this.posts.push(this.data)
+      this.isDialog = true;
     } else {
 
       if (this.router.url == "/site") {
@@ -78,6 +82,9 @@ export class PostsComponent implements OnInit {
               error: error => console.log(error)
             }
           )
+      } else if (this.router.url == "/site/create") {
+        this.showForm=true;
+        this.create=true;
       }
     }
 
